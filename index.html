@@ -3,15 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>Manni · Liquid Glass</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#FF9500">
+  <title>OmniHub · Liquid Glass</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    :root {
+      --primary: #FF9500;
+      --primary-dark: #E68600;
+      --secondary: #FF6B35;
+      --background: #F8F9FA;
+      --surface: #FFFFFF;
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B7280;
+      --border: #E5E7EB;
+      --success: #10B981;
+      --danger: #EF4444;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
     }
 
     html, body {
@@ -21,6 +44,7 @@
       padding: 0;
       overflow: hidden;
       background: #e0e7ff;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     body {
@@ -64,6 +88,10 @@
       align-items: center;
       padding: 1.2rem 1.5rem 0.8rem;
       flex-shrink: 0;
+      background: var(--primary);
+      color: white;
+      padding-top: calc(1.2rem + env(safe-area-inset-top));
+      box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
     }
 
     .brand {
@@ -73,7 +101,7 @@
     }
 
     .brand-icon {
-      background: rgba(30, 64, 175, 0.85);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       color: white;
@@ -84,16 +112,16 @@
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
-      box-shadow: 0 8px 16px -4px rgba(30, 64, 175, 0.3);
+      box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .brand-name {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.5rem;
       letter-spacing: -0.5px;
-      color: #1e293b;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .header-actions {
@@ -104,7 +132,7 @@
 
     .notif-btn,
     .account-btn {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       width: 40px;
@@ -113,24 +141,37 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #334155;
+      color: white;
       font-size: 1.1rem;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       transition: 0.2s;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
     }
 
     .notif-btn:hover,
     .account-btn:hover {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
     }
 
-    .account-btn {
-      background: rgba(30, 64, 175, 0.15);
-      color: #1e40af;
-      border: 1px solid rgba(30, 64, 175, 0.2);
+    .badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--secondary);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      border: 2px solid var(--primary);
     }
 
     /* Search */
@@ -140,7 +181,7 @@
     }
 
     .search-box {
-      background: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 24px;
@@ -148,7 +189,7 @@
       display: flex;
       align-items: center;
       gap: 0.7rem;
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.8);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     }
 
@@ -164,6 +205,7 @@
       font-size: 0.9rem;
       outline: none;
       color: #0f172a;
+      font-family: 'Outfit', sans-serif;
     }
 
     .search-box input::placeholder {
@@ -197,7 +239,6 @@
       font-weight: 700;
       color: #1e293b;
       letter-spacing: -0.3px;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
     }
 
     /* Service grid */
@@ -209,7 +250,7 @@
     }
 
     .service-card {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 18px;
@@ -226,11 +267,15 @@
 
     .service-card:hover {
       transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .service-card:active {
+      transform: scale(0.97);
     }
 
     .card-icon {
-      background: rgba(30, 64, 175, 0.12);
+      background: rgba(255, 149, 0, 0.15);
       width: 42px;
       height: 42px;
       border-radius: 14px;
@@ -238,8 +283,8 @@
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
-      color: #1e40af;
-      border: 1px solid rgba(30, 64, 175, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(255, 149, 0, 0.15);
     }
 
     .service-card h4 {
@@ -256,7 +301,7 @@
 
     /* Ticket highlight */
     .ticket-highlight {
-      background: rgba(15, 23, 42, 0.75);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-radius: 20px;
@@ -272,7 +317,12 @@
     }
 
     .ticket-highlight:hover {
-      background: rgba(15, 23, 42, 0.85);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 149, 0, 0.3);
+    }
+
+    .ticket-highlight:active {
+      transform: scale(0.97);
     }
 
     .ticket-info h4 {
@@ -281,13 +331,13 @@
     }
 
     .ticket-info p {
-      color: #cbd5e1;
+      color: rgba(255, 255, 255, 0.85);
       font-size: 0.75rem;
       margin-top: 0.2rem;
     }
 
     .ticket-date {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 0.45rem 0.8rem;
@@ -300,7 +350,7 @@
 
     /* Professional services */
     .professional-service {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 18px;
@@ -316,12 +366,16 @@
     }
 
     .professional-service:hover {
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.85);
       transform: translateY(-2px);
     }
 
+    .professional-service:active {
+      transform: scale(0.97);
+    }
+
     .professional-icon {
-      background: rgba(30, 64, 175, 0.12);
+      background: rgba(255, 149, 0, 0.15);
       width: 44px;
       height: 44px;
       border-radius: 14px;
@@ -329,9 +383,9 @@
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      color: #1e40af;
+      color: var(--primary);
       flex-shrink: 0;
-      border: 1px solid rgba(30, 64, 175, 0.15);
+      border: 1px solid rgba(255, 149, 0, 0.15);
     }
 
     .professional-info {
@@ -358,7 +412,7 @@
 
     /* Signup banner */
     .signup-banner {
-      background: rgba(30, 64, 175, 0.12);
+      background: rgba(255, 149, 0, 0.15);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 18px;
@@ -367,8 +421,17 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      border: 1px solid rgba(30, 64, 175, 0.2);
+      border: 1px solid rgba(255, 149, 0, 0.25);
       flex-shrink: 0;
+      transition: 0.2s;
+    }
+
+    .signup-banner:hover {
+      background: rgba(255, 149, 0, 0.2);
+    }
+
+    .signup-banner:active {
+      transform: scale(0.97);
     }
 
     .signup-banner .banner-left {
@@ -378,14 +441,14 @@
     }
 
     .signup-banner .banner-icon {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.8);
       width: 36px;
       height: 36px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1e40af;
+      color: var(--primary);
       font-size: 1.1rem;
       border: 1px solid rgba(255, 255, 255, 0.7);
     }
@@ -406,7 +469,7 @@
     .bottom-nav {
       display: flex;
       justify-content: space-around;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-top: 1px solid rgba(255, 255, 255, 0.6);
@@ -427,11 +490,36 @@
     }
 
     .nav-item.active {
-      color: #1e40af;
+      color: var(--primary);
     }
 
     .nav-item i {
       font-size: 1.2rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1a1a2e;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      max-width: 80%;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* Desktop fullscreen */
@@ -457,11 +545,12 @@
       <div class="header">
         <div class="brand">
           <div class="brand-icon"><i class="fas fa-layer-group"></i></div>
-          <span class="brand-name">Manni</span>
+          <span class="brand-name">OmniHub</span>
         </div>
         <div class="header-actions">
           <div class="notif-btn">
             <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
           </div>
           <div class="account-btn">
             <i class="fas fa-user"></i>
@@ -473,7 +562,7 @@
       <div class="search-area">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search services...">
+          <input type="text" placeholder="Search services..." id="mainSearchInput">
         </div>
       </div>
 
@@ -485,22 +574,22 @@
         </div>
 
         <div class="service-grid">
-          <div class="service-card">
+          <div class="service-card" data-service="food">
             <div class="card-icon"><i class="fas fa-utensils"></i></div>
             <h4>Food</h4>
             <p>Menus & prices</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-service="ride">
             <div class="card-icon"><i class="fas fa-taxi"></i></div>
             <h4>Ride</h4>
             <p>Taxi, Pragia, Truck</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-service="gadgets">
             <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
             <h4>Gadgets</h4>
             <p>Latest products</p>
           </div>
-          <div class="service-card">
+          <div class="service-card" data-service="hotels">
             <div class="card-icon"><i class="fas fa-hotel"></i></div>
             <h4>Hotels</h4>
             <p>Rooms & availability</p>
@@ -539,21 +628,21 @@
               <small>Username, phone & email only</small>
             </div>
           </div>
-          <i class="fas fa-arrow-right" style="color: #1e40af;"></i>
+          <i class="fas fa-arrow-right" style="color: var(--primary);"></i>
         </div>
       </div>
 
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
-        <div class="nav-item active">
+        <div class="nav-item active" data-page="home">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" data-page="orders">
           <i class="fas fa-shopping-bag"></i>
           <span>Orders</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" data-page="discover">
           <i class="fas fa-search"></i>
           <span>Discover</span>
         </div>
@@ -561,61 +650,163 @@
     </div>
   </div>
 
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
   <script>
     (function() {
-      // Interactive service cards
+      // ========== TOAST FUNCTION ==========
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      // ========== INTERACTIVE SERVICE CARDS ==========
       const serviceCards = document.querySelectorAll('.service-card');
       serviceCards.forEach(card => {
         card.addEventListener('click', function() {
           const title = this.querySelector('h4')?.innerText || 'Service';
-          console.log(`👆 Client tapped: ${title}`);
+          const service = this.dataset.service || 'unknown';
+          console.log(`👆 Client tapped: ${title} (${service})`);
+          showToast(`Selected: ${title}`);
         });
       });
 
-      // Professional services button
+      // ========== PROFESSIONAL SERVICES ==========
       const professionalService = document.querySelector('.professional-service');
       if (professionalService) {
         professionalService.addEventListener('click', () => {
           console.log('🔧 Professional Services – plumbers, painters, electricians');
+          showToast('Professional Services coming soon!');
         });
       }
 
-      // Ticket highlight
+      // ========== TICKET HIGHLIGHT ==========
       const ticketCard = document.querySelector('.ticket-highlight');
       if (ticketCard) {
         ticketCard.addEventListener('click', () => {
           console.log('🎟️ Buy tickets – event timing & availability');
+          showToast('🎟️ Ticket booking: 20–24 AUG');
         });
       }
 
-      // Signup banner
+      // ========== SIGNUP BANNER ==========
       const signupBanner = document.querySelector('.signup-banner');
       if (signupBanner) {
         signupBanner.addEventListener('click', () => {
-          alert('Easy client signup: username, phone number, and email.\nNo approval needed.');
+          const message = 'Easy client signup: username, phone number, and email.\nNo approval needed.';
+          console.log('📝 Signup clicked');
+          alert(message);
         });
       }
 
-      // Header buttons
+      // ========== HEADER BUTTONS ==========
       const notifBtn = document.querySelector('.notif-btn');
       if (notifBtn) {
-        notifBtn.addEventListener('click', () => console.log('🔔 Notifications clicked'));
+        notifBtn.addEventListener('click', () => {
+          console.log('🔔 Notifications clicked');
+          showToast('🔔 3 new notifications');
+        });
       }
+      
       const accountBtn = document.querySelector('.account-btn');
       if (accountBtn) {
-        accountBtn.addEventListener('click', () => console.log('👤 Account clicked'));
+        accountBtn.addEventListener('click', () => {
+          console.log('👤 Account clicked');
+          showToast('👤 Account settings');
+        });
       }
 
-      // Bottom nav items (visual active state)
+      // ========== BOTTOM NAVIGATION ==========
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => {
         item.addEventListener('click', function() {
           navItems.forEach(n => n.classList.remove('active'));
           this.classList.add('active');
           const label = this.querySelector('span')?.innerText || 'Nav';
-          console.log(`🧭 Navigated to: ${label}`);
+          const page = this.dataset.page || 'unknown';
+          console.log(`🧭 Navigated to: ${label} (${page})`);
+          showToast(`📱 ${label}`);
         });
       });
+
+      // ========== SEARCH FUNCTIONALITY ==========
+      const searchInput = document.getElementById('mainSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            const query = this.value.trim();
+            if (query) {
+              console.log(`🔍 Search: "${query}"`);
+              showToast(`🔍 Searching for "${query}"`);
+            }
+          }
+        });
+        
+        searchInput.addEventListener('input', function() {
+          const query = this.value.trim();
+          if (query.length > 2) {
+            console.log(`🔍 Live search: "${query}"`);
+          }
+        });
+      }
+
+      // ========== DEMO DATA FOR OMNIUBH ==========
+      console.log('🚀 OmniHub · Liquid Glass initialized');
+      console.log('📱 Features: Service Cards, Tickets, Professional Services, Signup');
+      console.log('💡 Click on any card to see interaction');
+
+      // ========== KEYBOARD SHORTCUTS ==========
+      document.addEventListener('keydown', function(e) {
+        // Escape key closes any active state
+        if (e.key === 'Escape') {
+          console.log('⏹️ Escape pressed');
+        }
+        
+        // Ctrl+K or Cmd+K for search focus
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          const searchInput = document.getElementById('mainSearchInput');
+          if (searchInput) {
+            searchInput.focus();
+            searchInput.select();
+          }
+        }
+      });
+
+      // ========== SERVICE COUNTER ==========
+      // Simple counter to show service usage
+      let serviceCounts = {
+        food: 0,
+        ride: 0,
+        gadgets: 0,
+        hotels: 0
+      };
+
+      serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const service = this.dataset.service || 'unknown';
+          if (serviceCounts[service] !== undefined) {
+            serviceCounts[service]++;
+            console.log(`📊 ${service} used ${serviceCounts[service]} times`);
+          }
+        });
+      });
+
+      // ========== PERIODIC STATUS CHECK ==========
+      setInterval(() => {
+        // Simple heartbeat
+        const totalUses = Object.values(serviceCounts).reduce((a, b) => a + b, 0);
+        if (totalUses > 0) {
+          console.log(`💓 OmniHub active | Total service uses: ${totalUses}`);
+        }
+      }, 30000);
+
+      console.log('✅ OmniHub ready!');
     })();
   </script>
 </body>
