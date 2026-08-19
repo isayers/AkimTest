@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,9 +136,21 @@
       border: 1px solid rgba(255, 69, 0, 0.3);
     }
 
+    /* Page Navigation Logic */
+    .page {
+      display: none;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    .page.active-page {
+      display: flex;
+    }
+
     /* Search */
     .search-area {
-      padding: 0.5rem 1.5rem 1rem;
+      padding: 0.5rem 1.5rem 0.5rem;
       flex-shrink: 0;
     }
 
@@ -232,7 +243,6 @@
       background-position: center;
     }
 
-    /* Background Images for the 4 Cards */
     .service-card.food-card {
       background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80');
     }
@@ -249,7 +259,6 @@
       background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80');
     }
 
-    /* Dark Overlay for contrast */
     .service-card::before {
       content: '';
       position: absolute;
@@ -268,7 +277,6 @@
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.75) 100%);
     }
 
-    /* Floating content layers above overlay */
     .service-card > * {
       position: relative;
       z-index: 2;
@@ -464,6 +472,213 @@
       font-size: 0.7rem;
     }
 
+    /* --- ORDERS PAGE STYLES --- */
+    .orders-filter {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.08);
+      color: #a3a3a3;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.2s;
+    }
+
+    .filter-chip.active {
+      background: #ff4500;
+      color: #ffffff;
+      border-color: #ff6b00;
+    }
+
+    .order-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      padding: 1rem;
+      border: 2px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-title {
+      font-weight: 900;
+      font-size: 1rem;
+      color: #121212;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .order-status {
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .status-active {
+      background: rgba(255, 69, 0, 0.15);
+      color: #d00000;
+      border: 1px solid rgba(210, 0, 0, 0.4);
+    }
+
+    .status-completed {
+      background: rgba(34, 197, 94, 0.15);
+      color: #15803d;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .order-details {
+      font-size: 0.75rem;
+      color: #4a4a4a;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #d1d5db;
+      padding-top: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .order-price {
+      font-weight: 900;
+      color: #121212;
+      font-size: 1.05rem;
+    }
+
+    .action-btn-sm {
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* --- DISCOVER PAGE STYLES --- */
+    .discover-banner {
+      background: linear-gradient(135deg, #ff4500 0%, #a80000 100%);
+      border-radius: 12px;
+      padding: 1.2rem;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 69, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .discover-banner h3 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.2rem;
+    }
+
+    .discover-banner p {
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .trending-scroll {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 0.4rem;
+    }
+
+    .trending-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trending-card {
+      min-width: 140px;
+      background: #e8e8e8;
+      border-radius: 10px;
+      border: 2px solid #1a1a1a;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .trending-img {
+      height: 90px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .trending-info {
+      padding: 0.6rem;
+    }
+
+    .trending-info h5 {
+      font-weight: 900;
+      color: #121212;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .trending-info span {
+      font-size: 0.68rem;
+      color: #666666;
+      font-weight: 700;
+    }
+
+    .feed-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .feed-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid #ff4500;
+      flex-shrink: 0;
+    }
+
+    .feed-text h4 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .feed-text p {
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+    }
+
     /* Bottom navigation */
     .bottom-nav {
       display: flex;
@@ -535,87 +750,216 @@
       <div class="search-area">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search services...">
+          <input type="text" id="searchInput" placeholder="Search services...">
         </div>
       </div>
 
-      <!-- Main Content -->
+      <!-- Main Content Container -->
       <div class="main-content">
-        <!-- Core services grid -->
-        <div class="section-header">
-          <h2>Order something</h2>
-        </div>
 
-        <div class="service-grid">
-          <div class="service-card food-card">
-            <div class="card-icon"><i class="fas fa-utensils"></i></div>
-            <h4>Food</h4>
-            <p>Menus & prices</p>
+        <!-- ================= HOME PAGE ================= -->
+        <div id="homePage" class="page active-page">
+          <div class="section-header">
+            <h2>Order something</h2>
           </div>
-          <div class="service-card ride-card">
-            <div class="card-icon"><i class="fas fa-taxi"></i></div>
-            <h4>Ride</h4>
-            <p>Taxi, Pragia, Truck</p>
-          </div>
-          <div class="service-card gadgets-card">
-            <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
-            <h4>Gadgets</h4>
-            <p>Latest products</p>
-          </div>
-          <div class="service-card hotels-card">
-            <div class="card-icon"><i class="fas fa-hotel"></i></div>
-            <h4>Hotels</h4>
-            <p>Rooms & availability</p>
-          </div>
-        </div>
 
-        <!-- Ticket highlight -->
-        <div class="ticket-highlight">
-          <div class="ticket-info">
-            <h4><i class="fas fa-ticket-alt"></i> Buy tickets</h4>
-            <p>Events with start & end dates</p>
-          </div>
-          <div class="ticket-date">
-            <i class="far fa-calendar-alt"></i> 20–24 AUG
-          </div>
-        </div>
-
-        <!-- Professional services -->
-        <div class="professional-service">
-          <div class="professional-icon">
-            <i class="fas fa-tools"></i>
-          </div>
-          <div class="professional-info">
-            <h4>Professional Services</h4>
-            <p>Plumbers, painters, electricians & more</p>
-          </div>
-          <i class="fas fa-chevron-right professional-arrow"></i>
-        </div>
-
-        <!-- Client signup CTA -->
-        <div class="signup-banner">
-          <div class="banner-left">
-            <div class="banner-icon"><i class="fas fa-user-plus"></i></div>
-            <div class="banner-text">
-              <strong>Easy sign up</strong>
-              <small>Username, phone & email only</small>
+          <div class="service-grid">
+            <div class="service-card food-card">
+              <div class="card-icon"><i class="fas fa-utensils"></i></div>
+              <h4>Food</h4>
+              <p>Menus & prices</p>
+            </div>
+            <div class="service-card ride-card">
+              <div class="card-icon"><i class="fas fa-taxi"></i></div>
+              <h4>Ride</h4>
+              <p>Taxi, Pragia, Truck</p>
+            </div>
+            <div class="service-card gadgets-card">
+              <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+              <h4>Gadgets</h4>
+              <p>Latest products</p>
+            </div>
+            <div class="service-card hotels-card">
+              <div class="card-icon"><i class="fas fa-hotel"></i></div>
+              <h4>Hotels</h4>
+              <p>Rooms & availability</p>
             </div>
           </div>
-          <i class="fas fa-arrow-right" style="color: #ff6b00;"></i>
+
+          <!-- Ticket highlight -->
+          <div class="ticket-highlight">
+            <div class="ticket-info">
+              <h4><i class="fas fa-ticket-alt"></i> Buy tickets</h4>
+              <p>Events with start & end dates</p>
+            </div>
+            <div class="ticket-date">
+              <i class="far fa-calendar-alt"></i> 20–24 AUG
+            </div>
+          </div>
+
+          <!-- Professional services -->
+          <div class="professional-service">
+            <div class="professional-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <div class="professional-info">
+              <h4>Professional Services</h4>
+              <p>Plumbers, painters, electricians & more</p>
+            </div>
+            <i class="fas fa-chevron-right professional-arrow"></i>
+          </div>
+
+          <!-- Client signup CTA -->
+          <div class="signup-banner">
+            <div class="banner-left">
+              <div class="banner-icon"><i class="fas fa-user-plus"></i></div>
+              <div class="banner-text">
+                <strong>Easy sign up</strong>
+                <small>Username, phone & email only</small>
+              </div>
+            </div>
+            <i class="fas fa-arrow-right" style="color: #ff6b00;"></i>
+          </div>
         </div>
+
+        <!-- ================= ORDERS PAGE ================= -->
+        <div id="ordersPage" class="page">
+          <div class="section-header">
+            <h2>My Orders</h2>
+          </div>
+
+          <div class="orders-filter">
+            <div class="filter-chip active">All</div>
+            <div class="filter-chip">In Progress</div>
+            <div class="filter-chip">Completed</div>
+          </div>
+
+          <!-- Active Order Card -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-title"><i class="fas fa-utensils" style="color: #ff4500;"></i> Jollof Special</span>
+              <span class="order-status status-active">On the way</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-8842</span>
+              <span>ETA: 15 mins</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">$18.50</span>
+              <button class="action-btn-sm">Track Order</button>
+            </div>
+          </div>
+
+          <!-- Completed Order 1 -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-title"><i class="fas fa-taxi" style="color: #ff4500;"></i> City Taxi Ride</span>
+              <span class="order-status status-completed">Completed</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-7210</span>
+              <span>Aug 18, 2026</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">$12.00</span>
+              <button class="action-btn-sm">Receipt</button>
+            </div>
+          </div>
+
+          <!-- Completed Order 2 -->
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-title"><i class="fas fa-tools" style="color: #ff4500;"></i> Plumbing Repair</span>
+              <span class="order-status status-completed">Completed</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-6091</span>
+              <span>Aug 12, 2026</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">$45.00</span>
+              <button class="action-btn-sm">Rebook</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= DISCOVER PAGE ================= -->
+        <div id="discoverPage" class="page">
+          <div class="section-header">
+            <h2>Discover</h2>
+          </div>
+
+          <!-- Featured Banner -->
+          <div class="discover-banner">
+            <h3>Amerado Live</h3>
+            <p>Grab early bird tickets for the Abronoma concert series!</p>
+          </div>
+
+          <div class="section-header">
+            <h2 style="font-size: 1.05rem;">Trending Venues</h2>
+          </div>
+
+          <!-- Horizontal Trending Carousel -->
+          <div class="trending-scroll">
+            <div class="trending-card">
+              <div class="trending-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="trending-info">
+                <h5>Lava Lounge</h5>
+                <span>★ 4.9 · Grill & Bar</span>
+              </div>
+            </div>
+            <div class="trending-card">
+              <div class="trending-img" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="trending-info">
+                <h5>The Summit</h5>
+                <span>★ 4.8 · Nightclub</span>
+              </div>
+            </div>
+            <div class="trending-card">
+              <div class="trending-img" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="trending-info">
+                <h5>Metro Eats</h5>
+                <span>★ 4.7 · Diner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <h2 style="font-size: 1.05rem;">Recommended Masters</h2>
+          </div>
+
+          <!-- Feed item 1 -->
+          <div class="feed-card">
+            <div class="feed-avatar" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80');"></div>
+            <div class="feed-text">
+              <h4>Kwame's Auto Workshop</h4>
+              <p>Certified mobile mechanic · Available in 20 mins</p>
+            </div>
+          </div>
+
+          <!-- Feed item 2 -->
+          <div class="feed-card">
+            <div class="feed-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80');"></div>
+            <div class="feed-text">
+              <h4>Sarah's Tech Hub</h4>
+              <p>Gadget repair & original accessories</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
-        <div class="nav-item active">
+        <div class="nav-item active" data-target="homePage">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" data-target="ordersPage">
           <i class="fas fa-shopping-bag"></i>
           <span>Orders</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" data-target="discoverPage">
           <i class="fas fa-search"></i>
           <span>Discover</span>
         </div>
@@ -625,12 +969,48 @@
 
   <script>
     (function() {
+      // Dynamic Page Navigation
+      const navItems = document.querySelectorAll('.nav-item');
+      const pages = document.querySelectorAll('.page');
+      const searchInput = document.getElementById('searchInput');
+
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+
+          // Update active navigation tab
+          navItems.forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+
+          // Switch active page
+          pages.forEach(page => {
+            if (page.id === targetId) {
+              page.classList.add('active-page');
+            } else {
+              page.classList.remove('active-page');
+            }
+          });
+
+          // Update search placeholder based on page
+          if (targetId === 'ordersPage') {
+            searchInput.placeholder = 'Search my orders...';
+          } else if (targetId === 'discoverPage') {
+            searchInput.placeholder = 'Discover spots, events, pros...';
+          } else {
+            searchInput.placeholder = 'Search services...';
+          }
+
+          const label = this.querySelector('span')?.innerText || 'Nav';
+          console.log(`🧭 Navigated to: ${label}`);
+        });
+      });
+
       // Interactive service cards
       const serviceCards = document.querySelectorAll('.service-card');
       serviceCards.forEach(card => {
         card.addEventListener('click', function() {
           const title = this.querySelector('h4')?.innerText || 'Service';
-          console.log(`👆 Client tapped: ${title}`);
+          console.log(`👆 Client tapped service: ${title}`);
         });
       });
 
@@ -668,14 +1048,12 @@
         accountBtn.addEventListener('click', () => console.log('👤 Account clicked'));
       }
 
-      // Bottom nav items (visual active state)
-      const navItems = document.querySelectorAll('.nav-item');
-      navItems.forEach(item => {
-        item.addEventListener('click', function() {
-          navItems.forEach(n => n.classList.remove('active'));
+      // Order Filter chips
+      const filterChips = document.querySelectorAll('.filter-chip');
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          filterChips.forEach(c => c.classList.remove('active'));
           this.classList.add('active');
-          const label = this.querySelector('span')?.innerText || 'Nav';
-          console.log(`🧭 Navigated to: ${label}`);
         });
       });
     })();
