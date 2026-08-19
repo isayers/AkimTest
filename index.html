@@ -692,6 +692,151 @@
       margin-top: 0.2rem;
     }
 
+    /* --- AUTH MODAL STYLES --- */
+    .auth-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .auth-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .auth-modal {
+      width: 100%;
+      background: #18181b;
+      border-top: 2px solid #ff4500;
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem;
+      box-shadow: 0 -10px 30px rgba(255, 69, 0, 0.25);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .auth-modal-overlay.active .auth-modal {
+      transform: translateY(0);
+    }
+
+    .auth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .auth-header h3 {
+      font-family: 'Permanent Marker', cursive;
+      color: #ffffff;
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+    }
+
+    .close-auth-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e5e5e5;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 0.3rem;
+      gap: 0.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: #a3a3a3;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .auth-tab.active {
+      background: #ff4500;
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(255, 69, 0, 0.4);
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .auth-input-group label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .auth-input-group input {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      color: #121212;
+      font-weight: 700;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .auth-submit-btn {
+      background: linear-gradient(135deg, #ff6b00 0%, #d00000 100%);
+      color: #ffffff;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+      margin-top: 0.4rem;
+      transition: 0.2s;
+    }
+
+    .auth-submit-btn:hover {
+      transform: translateY(-1px);
+    }
+
     /* Bottom navigation */
     .bottom-nav {
       display: flex;
@@ -753,7 +898,7 @@
           <div class="notif-btn">
             <i class="fas fa-bell"></i>
           </div>
-          <div class="account-btn">
+          <div class="account-btn" id="headerAccountBtn">
             <i class="fas fa-user"></i>
           </div>
         </div>
@@ -823,7 +968,7 @@
           </div>
 
           <!-- Client signup CTA -->
-          <div class="signup-banner">
+          <div class="signup-banner" id="easySignupBanner">
             <div class="banner-left">
               <div class="banner-icon"><i class="fas fa-user-plus"></i></div>
               <div class="banner-text">
@@ -971,6 +1116,51 @@
 
       </div>
 
+      <!-- ================= AUTH MODAL ================= -->
+      <div id="authModalOverlay" class="auth-modal-overlay">
+        <div class="auth-modal">
+          <div class="auth-header">
+            <h3 id="authModalTitle">Join Manni</h3>
+            <button class="close-auth-btn" id="closeAuthBtn"><i class="fas fa-times"></i></button>
+          </div>
+
+          <div class="auth-tabs">
+            <div class="auth-tab active" id="tabSignUp">Sign Up</div>
+            <div class="auth-tab" id="tabSignIn">Sign In</div>
+          </div>
+
+          <!-- Sign Up Form -->
+          <form class="auth-form" id="signUpForm" onsubmit="event.preventDefault();">
+            <div class="auth-input-group">
+              <label>Username</label>
+              <input type="text" placeholder="e.g. Alex23" required>
+            </div>
+            <div class="auth-input-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+233 XX XXX XXXX" required>
+            </div>
+            <div class="auth-input-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="alex@example.com" required>
+            </div>
+            <button type="submit" class="auth-submit-btn" id="signUpSubmitBtn">Create Account</button>
+          </form>
+
+          <!-- Sign In Form (Hidden by default) -->
+          <form class="auth-form" id="signInForm" style="display: none;" onsubmit="event.preventDefault();">
+            <div class="auth-input-group">
+              <label>Email or Phone</label>
+              <input type="text" placeholder="Enter your email or phone" required>
+            </div>
+            <div class="auth-input-group">
+              <label>Password</label>
+              <input type="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="auth-submit-btn" id="signInSubmitBtn">Sign In</button>
+          </form>
+        </div>
+      </div>
+
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-item active" data-target="homePage">
@@ -1027,6 +1217,68 @@
         });
       });
 
+      // --- Auth Modal Logic ---
+      const authOverlay = document.getElementById('authModalOverlay');
+      const closeAuthBtn = document.getElementById('closeAuthBtn');
+      const easySignupBanner = document.getElementById('easySignupBanner');
+      const headerAccountBtn = document.getElementById('headerAccountBtn');
+      
+      const tabSignUp = document.getElementById('tabSignUp');
+      const tabSignIn = document.getElementById('tabSignIn');
+      const signUpForm = document.getElementById('signUpForm');
+      const signInForm = document.getElementById('signInForm');
+      const authModalTitle = document.getElementById('authModalTitle');
+
+      function openAuthModal(defaultTab = 'signup') {
+        authOverlay.classList.add('active');
+        if (defaultTab === 'signup') {
+          switchToSignUp();
+        } else {
+          switchToSignIn();
+        }
+      }
+
+      function closeAuthModal() {
+        authOverlay.classList.remove('active');
+      }
+
+      function switchToSignUp() {
+        tabSignUp.classList.add('active');
+        tabSignIn.classList.remove('active');
+        signUpForm.style.display = 'flex';
+        signInForm.style.display = 'none';
+        authModalTitle.innerText = 'Join Manni';
+      }
+
+      function switchToSignIn() {
+        tabSignIn.classList.add('active');
+        tabSignUp.classList.remove('active');
+        signInForm.style.display = 'flex';
+        signUpForm.style.display = 'none';
+        authModalTitle.innerText = 'Welcome Back';
+      }
+
+      easySignupBanner.addEventListener('click', () => openAuthModal('signup'));
+      headerAccountBtn.addEventListener('click', () => openAuthModal('signin'));
+      closeAuthBtn.addEventListener('click', closeAuthModal);
+
+      authOverlay.addEventListener('click', (e) => {
+        if (e.target === authOverlay) closeAuthModal();
+      });
+
+      tabSignUp.addEventListener('click', switchToSignUp);
+      tabSignIn.addEventListener('click', switchToSignIn);
+
+      document.getElementById('signUpSubmitBtn').addEventListener('click', () => {
+        alert('Account Created Successfully!');
+        closeAuthModal();
+      });
+
+      document.getElementById('signInSubmitBtn').addEventListener('click', () => {
+        alert('Signed In Successfully!');
+        closeAuthModal();
+      });
+
       // Interactive service cards
       const serviceCards = document.querySelectorAll('.service-card');
       serviceCards.forEach(card => {
@@ -1052,22 +1304,10 @@
         });
       }
 
-      // Signup banner
-      const signupBanner = document.querySelector('.signup-banner');
-      if (signupBanner) {
-        signupBanner.addEventListener('click', () => {
-          alert('Easy client signup: username, phone number, and email.\nNo approval needed.');
-        });
-      }
-
-      // Header buttons
+      // Header notification button
       const notifBtn = document.querySelector('.notif-btn');
       if (notifBtn) {
         notifBtn.addEventListener('click', () => console.log('🔔 Notifications clicked'));
-      }
-      const accountBtn = document.querySelector('.account-btn');
-      if (accountBtn) {
-        accountBtn.addEventListener('click', () => console.log('👤 Account clicked'));
       }
 
       // Order Filter chips
