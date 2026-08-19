@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>OmniHub · Liquid Glass</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #e0e7ff;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .client-app {
+      width: 100%;
+      max-width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      box-shadow: none;
+      overflow: hidden;
+      position: relative;
+      border: none;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.5rem 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-icon {
+      background: rgba(30, 64, 175, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 8px 16px -4px rgba(30, 64, 175, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      color: #1e293b;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .notif-btn,
+    .account-btn {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #334155;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .notif-btn:hover,
+    .account-btn:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .account-btn {
+      background: rgba(30, 64, 175, 0.15);
+      color: #1e40af;
+      border: 1px solid rgba(30, 64, 175, 0.2);
+    }
+
+    /* Search */
+    .search-area {
+      padding: 0.5rem 1.5rem 1rem;
+      flex-shrink: 0;
+    }
+
+    .search-box {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 0.75rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .search-box i {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.9rem;
+      outline: none;
+      color: #0f172a;
+    }
+
+    .search-box input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Main content - scrollable */
+    .main-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      scrollbar-width: none;
+    }
+
+    .main-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      letter-spacing: -0.3px;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Service grid */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 18px;
+      padding: 1.1rem 0.9rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .card-icon {
+      background: rgba(30, 64, 175, 0.12);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #1e40af;
+      border: 1px solid rgba(30, 64, 175, 0.15);
+    }
+
+    .service-card h4 {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 1rem;
+    }
+
+    .service-card p {
+      color: #475569;
+      font-size: 0.7rem;
+      line-height: 1.3;
+    }
+
+    /* Ticket highlight */
+    .ticket-highlight {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 20px;
+      padding: 1.2rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .ticket-highlight:hover {
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .ticket-info h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .ticket-info p {
+      color: #cbd5e1;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+    }
+
+    .ticket-date {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.45rem 0.8rem;
+      border-radius: 24px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Professional services */
+    .professional-service {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 18px;
+      padding: 1.1rem 1rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+
+    .professional-service:hover {
+      background: rgba(255, 255, 255, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .professional-icon {
+      background: rgba(30, 64, 175, 0.12);
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #1e40af;
+      flex-shrink: 0;
+      border: 1px solid rgba(30, 64, 175, 0.15);
+    }
+
+    .professional-info {
+      flex: 1;
+    }
+
+    .professional-info h4 {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 1rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .professional-info p {
+      color: #475569;
+      font-size: 0.75rem;
+    }
+
+    .professional-arrow {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* Signup banner */
+    .signup-banner {
+      background: rgba(30, 64, 175, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 18px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      border: 1px solid rgba(30, 64, 175, 0.2);
+      flex-shrink: 0;
+    }
+
+    .signup-banner .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .signup-banner .banner-icon {
+      background: rgba(255, 255, 255, 0.6);
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e40af;
+      font-size: 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .signup-banner .banner-text strong {
+      display: block;
+      font-size: 0.9rem;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .signup-banner .banner-text small {
+      color: #475569;
+      font-size: 0.68rem;
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 0.7rem 0.8rem 1rem;
+      flex-shrink: 0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      color: #64748b;
+      font-size: 0.65rem;
+      font-weight: 500;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: #1e40af;
+    }
+
+    .nav-item i {
+      font-size: 1.2rem;
+    }
+
+    /* Desktop fullscreen */
+    @media (min-width: 480px) {
+      body {
+        padding: 0;
+        background: #dbeafe;
+      }
+      .client-app {
+        max-width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="client-app">
+    <div class="app-body">
+      <!-- Header -->
+      <div class="header">
+        <div class="brand">
+          <div class="brand-icon"><i class="fas fa-layer-group"></i></div>
+          <span class="brand-name">OmniHub</span>
+        </div>
+        <div class="header-actions">
+          <div class="notif-btn">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="account-btn">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-area">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search services...">
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Core services grid -->
+        <div class="section-header">
+          <h2>Order something</h2>
+        </div>
+
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="card-icon"><i class="fas fa-utensils"></i></div>
+            <h4>Food</h4>
+            <p>Menus & prices</p>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><i class="fas fa-taxi"></i></div>
+            <h4>Ride</h4>
+            <p>Taxi, Pragia, Truck</p>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h4>Gadgets</h4>
+            <p>Latest products</p>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><i class="fas fa-hotel"></i></div>
+            <h4>Hotels</h4>
+            <p>Rooms & availability</p>
+          </div>
+        </div>
+
+        <!-- Ticket highlight -->
+        <div class="ticket-highlight">
+          <div class="ticket-info">
+            <h4><i class="fas fa-ticket-alt"></i> Buy tickets</h4>
+            <p>Events with start & end dates</p>
+          </div>
+          <div class="ticket-date">
+            <i class="far fa-calendar-alt"></i> 20–24 AUG
+          </div>
+        </div>
+
+        <!-- Professional services -->
+        <div class="professional-service">
+          <div class="professional-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="professional-info">
+            <h4>Professional Services</h4>
+            <p>Plumbers, painters, electricians & more</p>
+          </div>
+          <i class="fas fa-chevron-right professional-arrow"></i>
+        </div>
+
+        <!-- Client signup CTA -->
+        <div class="signup-banner">
+          <div class="banner-left">
+            <div class="banner-icon"><i class="fas fa-user-plus"></i></div>
+            <div class="banner-text">
+              <strong>Easy sign up</strong>
+              <small>Username, phone & email only</small>
+            </div>
+          </div>
+          <i class="fas fa-arrow-right" style="color: #1e40af;"></i>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-item active">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-search"></i>
+          <span>Discover</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Interactive service cards
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const title = this.querySelector('h4')?.innerText || 'Service';
+          console.log(`👆 Client tapped: ${title}`);
+        });
+      });
+
+      // Professional services button
+      const professionalService = document.querySelector('.professional-service');
+      if (professionalService) {
+        professionalService.addEventListener('click', () => {
+          console.log('🔧 Professional Services – plumbers, painters, electricians');
+        });
+      }
+
+      // Ticket highlight
+      const ticketCard = document.querySelector('.ticket-highlight');
+      if (ticketCard) {
+        ticketCard.addEventListener('click', () => {
+          console.log('🎟️ Buy tickets – event timing & availability');
+        });
+      }
+
+      // Signup banner
+      const signupBanner = document.querySelector('.signup-banner');
+      if (signupBanner) {
+        signupBanner.addEventListener('click', () => {
+          alert('Easy client signup: username, phone number, and email.\nNo approval needed.');
+        });
+      }
+
+      // Header buttons
+      const notifBtn = document.querySelector('.notif-btn');
+      if (notifBtn) {
+        notifBtn.addEventListener('click', () => console.log('🔔 Notifications clicked'));
+      }
+      const accountBtn = document.querySelector('.account-btn');
+      if (accountBtn) {
+        accountBtn.addEventListener('click', () => console.log('👤 Account clicked'));
+      }
+
+      // Bottom nav items (visual active state)
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          navItems.forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+          const label = this.querySelector('span')?.innerText || 'Nav';
+          console.log(`🧭 Navigated to: ${label}`);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
