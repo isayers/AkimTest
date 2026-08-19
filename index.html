@@ -1,4 +1,5 @@
-
+Here is the updated full single codebase.
+The light background card theme from the previous update has been preserved, while the 4 main service cards have been updated to feature background images with dark overlays so that the titles, text, and icons cleanly float over them:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -206,7 +207,7 @@
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
-    /* Service grid */
+    /* Service grid with Background Images */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -215,27 +216,69 @@
     }
 
     .service-card {
-      background: #e8e8e8;
+      position: relative;
       border-radius: 12px;
       padding: 1.1rem 0.9rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       border: 2px solid #1a1a1a;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform 0.2s, border-color 0.2s;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 0.4rem;
       cursor: pointer;
+      overflow: hidden;
+      min-height: 120px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Background Images for the 4 Cards */
+    .service-card.food-card {
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80');
+    }
+
+    .service-card.ride-card {
+      background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=500&q=80');
+    }
+
+    .service-card.gadgets-card {
+      background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=500&q=80');
+    }
+
+    .service-card.hotels-card {
+      background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80');
+    }
+
+    /* Dark Overlay for contrast */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%);
+      z-index: 1;
+      transition: background 0.2s;
     }
 
     .service-card:hover {
       transform: translateY(-3px);
-      background: #ffffff;
       border-color: #ff4500;
     }
 
+    .service-card:hover::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.75) 100%);
+    }
+
+    /* Floating content layers above overlay */
+    .service-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
     .card-icon {
-      background: #1a1a1a;
+      background: rgba(26, 26, 26, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       width: 40px;
       height: 40px;
       border-radius: 8px;
@@ -244,21 +287,26 @@
       justify-content: center;
       font-size: 1.2rem;
       color: #ff6b00;
+      border: 1px solid rgba(255, 107, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
     .service-card h4 {
       font-weight: 900;
-      color: #121212;
+      color: #ffffff;
       font-size: 1.05rem;
       text-transform: uppercase;
       letter-spacing: -0.3px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+      margin-top: auto;
     }
 
     .service-card p {
-      color: #4a4a4a;
+      color: #e2e8f0;
       font-size: 0.72rem;
       font-weight: 700;
       line-height: 1.2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
     }
 
     /* Ticket highlight */
@@ -500,22 +548,22 @@
         </div>
 
         <div class="service-grid">
-          <div class="service-card">
+          <div class="service-card food-card">
             <div class="card-icon"><i class="fas fa-utensils"></i></div>
             <h4>Food</h4>
             <p>Menus & prices</p>
           </div>
-          <div class="service-card">
+          <div class="service-card ride-card">
             <div class="card-icon"><i class="fas fa-taxi"></i></div>
             <h4>Ride</h4>
             <p>Taxi, Pragia, Truck</p>
           </div>
-          <div class="service-card">
+          <div class="service-card gadgets-card">
             <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
             <h4>Gadgets</h4>
             <p>Latest products</p>
           </div>
-          <div class="service-card">
+          <div class="service-card hotels-card">
             <div class="card-icon"><i class="fas fa-hotel"></i></div>
             <h4>Hotels</h4>
             <p>Rooms & availability</p>
