@@ -1621,59 +1621,62 @@
             <div class="filter-chip">Completed</div>
           </div>
 
-          <!-- Active Order Card -->
-          <div class="order-card">
-            <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80');"></div>
-            <div class="order-body">
-              <div class="order-header">
-                <span class="order-title">Jollof Special</span>
-                <span class="order-status status-active">On the way</span>
-              </div>
-              <div class="order-details">
-                <span>Order #MN-8842</span>
-                <span>ETA: 15 mins</span>
-              </div>
-              <div class="order-footer">
-                <span class="order-price">$18.50</span>
-                <button class="action-btn-sm">Track Order</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Completed Order 1 -->
-          <div class="order-card">
-            <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=300&q=80');"></div>
-            <div class="order-body">
-              <div class="order-header">
-                <span class="order-title">City Taxi Ride</span>
-                <span class="order-status status-completed">Completed</span>
-              </div>
-              <div class="order-details">
-                <span>Order #MN-7210</span>
-                <span>Aug 18, 2026</span>
-              </div>
-              <div class="order-footer">
-                <span class="order-price">$12.00</span>
-                <button class="action-btn-sm">Receipt</button>
+          <!-- Dynamic Rides & Food Orders List -->
+          <div id="ordersListContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+            <!-- Active Food Order Card -->
+            <div class="order-card">
+              <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="order-body">
+                <div class="order-header">
+                  <span class="order-title">Jollof Special</span>
+                  <span class="order-status status-active">On the way</span>
+                </div>
+                <div class="order-details">
+                  <span>Order #MN-8842</span>
+                  <span>ETA: 15 mins</span>
+                </div>
+                <div class="order-footer">
+                  <span class="order-price">$18.50</span>
+                  <button class="action-btn-sm">Track Order</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Completed Order 2 -->
-          <div class="order-card">
-            <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=300&q=80');"></div>
-            <div class="order-body">
-              <div class="order-header">
-                <span class="order-title">Plumbing Repair</span>
-                <span class="order-status status-completed">Completed</span>
+            <!-- Completed Order 1 -->
+            <div class="order-card">
+              <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="order-body">
+                <div class="order-header">
+                  <span class="order-title">City Taxi Ride</span>
+                  <span class="order-status status-completed">Completed</span>
+                </div>
+                <div class="order-details">
+                  <span>Order #MN-7210</span>
+                  <span>Aug 18, 2026</span>
+                </div>
+                <div class="order-footer">
+                  <span class="order-price">$12.00</span>
+                  <button class="action-btn-sm">Receipt</button>
+                </div>
               </div>
-              <div class="order-details">
-                <span>Order #MN-6091</span>
-                <span>Aug 12, 2026</span>
-              </div>
-              <div class="order-footer">
-                <span class="order-price">$45.00</span>
-                <button class="action-btn-sm">Rebook</button>
+            </div>
+
+            <!-- Completed Order 2 -->
+            <div class="order-card">
+              <div class="order-img" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=300&q=80');"></div>
+              <div class="order-body">
+                <div class="order-header">
+                  <span class="order-title">Plumbing Repair</span>
+                  <span class="order-status status-completed">Completed</span>
+                </div>
+                <div class="order-details">
+                  <span>Order #MN-6091</span>
+                  <span>Aug 12, 2026</span>
+                </div>
+                <div class="order-footer">
+                  <span class="order-price">$45.00</span>
+                  <button class="action-btn-sm">Rebook</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1837,6 +1840,10 @@
 
   <script>
     (function() {
+      // Global Stores for Active Sessions
+      const chatHistories = {}; // Stores message logs per driver ID
+      let currentDriverId = null;
+
       // Dynamic Page Navigation
       const navItems = document.querySelectorAll('.nav-item');
       const pages = document.querySelectorAll('.page');
@@ -1909,7 +1916,7 @@
         restaurantsView.style.display = 'flex';
       });
 
-      // --- RIDE PAGE & CHAT OVERLAY LOGIC ---
+      // --- RIDE PAGE & PERSISTENT CHAT LOGIC ---
       const rideCardTrigger = document.getElementById('rideCardTrigger');
       const rideBackBtn = document.getElementById('rideBackBtn');
       const rideOptions = document.querySelectorAll('.ride-option');
@@ -1918,6 +1925,7 @@
       const nearestRidersSection = document.getElementById('nearestRidersSection');
       const ridersList = document.getElementById('ridersList');
       const driversHeaderTitle = document.getElementById('driversHeaderTitle');
+      const ordersListContainer = document.getElementById('ordersListContainer');
 
       // Chat Modal elements
       const chatModalOverlay = document.getElementById('chatModalOverlay');
@@ -1948,15 +1956,15 @@
 
       const driverDatabase = {
         Taxi: [
-          { name: 'Kofi Mensah', rating: '4.9', dist: '2 mins away', vehicle: 'Toyota Vitz (GT-8842)', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80', fare: '$8.50' },
-          { name: 'Emmanuel Osei', rating: '4.8', dist: '4 mins away', vehicle: 'Hyundai Elantra (GX-3110)', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80', fare: '$9.20' }
+          { id: 'drv-1', name: 'Kofi Mensah', rating: '4.9', dist: '2 mins away', vehicle: 'Toyota Vitz (GT-8842)', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80', fare: '$8.50' },
+          { id: 'drv-2', name: 'Emmanuel Osei', rating: '4.8', dist: '4 mins away', vehicle: 'Hyundai Elantra (GX-3110)', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80', fare: '$9.20' }
         ],
         Pragia: [
-          { name: 'Yaw Addo', rating: '4.9', dist: '1 min away', vehicle: 'Yellow Tricycle (M-21-39)', img: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=200&q=80', fare: '$3.50' },
-          { name: 'Ibrahim Sanni', rating: '4.7', dist: '3 mins away', vehicle: 'Red Tricycle (M-20-88)', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80', fare: '$4.00' }
+          { id: 'drv-3', name: 'Yaw Addo', rating: '4.9', dist: '1 min away', vehicle: 'Yellow Tricycle (M-21-39)', img: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=200&q=80', fare: '$3.50' },
+          { id: 'drv-4', name: 'Ibrahim Sanni', rating: '4.7', dist: '3 mins away', vehicle: 'Red Tricycle (M-20-88)', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80', fare: '$4.00' }
         ],
         Truck: [
-          { name: 'Samuel Owusu', rating: '5.0', dist: '8 mins away', vehicle: 'Kia Rhino Flatbed (GE-4019)', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80', fare: '$35.00' }
+          { id: 'drv-5', name: 'Samuel Owusu', rating: '5.0', dist: '8 mins away', vehicle: 'Kia Rhino Flatbed (GE-4019)', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80', fare: '$35.00' }
         ]
       };
 
@@ -1989,6 +1997,7 @@
             `;
 
             card.querySelector('.send-req-btn').addEventListener('click', () => {
+              addBookingToOrders(driver, dest);
               openDriverChat(driver);
             });
 
@@ -1999,39 +2008,86 @@
         });
       }
 
+      function addBookingToOrders(driver, destination) {
+        // Prevent duplicate order entry if already booking with the same driver
+        const existingOrder = document.getElementById(`order-card-${driver.id}`);
+        if (existingOrder) return;
+
+        const orderNum = Math.floor(1000 + Math.random() * 9000);
+        const newOrderCard = document.createElement('div');
+        newOrderCard.className = 'order-card';
+        newOrderCard.id = `order-card-${driver.id}`;
+        newOrderCard.innerHTML = `
+          <div class="order-img" style="background-image: url('${driver.img}');"></div>
+          <div class="order-body">
+            <div class="order-header">
+              <span class="order-title">${driver.name} (${selectedRideType})</span>
+              <span class="order-status status-active">On the way</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-${orderNum}</span>
+              <span>Dest: ${destination}</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">${driver.fare}</span>
+              <button class="action-btn-sm open-chat-from-orders-btn">Chat Driver</button>
+            </div>
+          </div>
+        `;
+
+        newOrderCard.querySelector('.open-chat-from-orders-btn').addEventListener('click', () => {
+          openDriverChat(driver);
+        });
+
+        // Insert at the top of orders list
+        ordersListContainer.insertBefore(newOrderCard, ordersListContainer.firstChild);
+      }
+
       function openDriverChat(driver) {
+        currentDriverId = driver.id;
         chatDriverName.innerText = driver.name;
         chatDriverAvatar.style.backgroundImage = `url('${driver.img}')`;
-        chatBody.innerHTML = '';
 
-        // Add initial driver response message
-        const driverBubble = document.createElement('div');
-        driverBubble.className = 'chat-bubble driver';
-        driverBubble.innerText = `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.`;
-        chatBody.appendChild(driverBubble);
+        // Initialize chat history if empty
+        if (!chatHistories[driver.id]) {
+          chatHistories[driver.id] = [
+            { sender: 'driver', text: `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.` }
+          ];
+        }
 
+        renderChatMessages();
         chatModalOverlay.classList.add('active');
+      }
+
+      function renderChatMessages() {
+        chatBody.innerHTML = '';
+        const messages = chatHistories[currentDriverId] || [];
+
+        messages.forEach(msg => {
+          const bubble = document.createElement('div');
+          bubble.className = `chat-bubble ${msg.sender}`;
+          bubble.innerText = msg.text;
+          chatBody.appendChild(bubble);
+        });
+
+        chatBody.scrollTop = chatBody.scrollHeight;
       }
 
       function sendUserMessage() {
         const text = chatMsgInput.value.trim();
-        if (!text) return;
+        if (!text || !currentDriverId) return;
 
-        const userBubble = document.createElement('div');
-        userBubble.className = 'chat-bubble user';
-        userBubble.innerText = text;
-        chatBody.appendChild(userBubble);
-        
+        // Save user message
+        chatHistories[currentDriverId].push({ sender: 'user', text: text });
         chatMsgInput.value = '';
-        chatBody.scrollTop = chatBody.scrollHeight;
+        renderChatMessages();
 
         // Auto-reply simulation from driver after 1.5 seconds
         setTimeout(() => {
-          const autoReply = document.createElement('div');
-          autoReply.className = 'chat-bubble driver';
-          autoReply.innerText = `Got it, thanks for the feedback! See you shortly.`;
-          chatBody.appendChild(autoReply);
-          chatBody.scrollTop = chatBody.scrollHeight;
+          if (chatHistories[currentDriverId]) {
+            chatHistories[currentDriverId].push({ sender: 'driver', text: `Got it, thanks for the update! See you shortly.` });
+            renderChatMessages();
+          }
         }, 1500);
       }
 
