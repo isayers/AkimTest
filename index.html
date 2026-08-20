@@ -270,8 +270,8 @@
       background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=500&q=80');
     }
 
-    .service-card.gadgets-card {
-      background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=500&q=80');
+    .service-card.shop-card {
+      background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=500&q=80');
     }
 
     .service-card.hotels-card {
@@ -661,6 +661,132 @@
       font-weight: 700;
       display: flex;
       gap: 0.8rem;
+    }
+
+    /* --- SHOP PAGE STYLES --- */
+    .shop-categories-scroll {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 0.3rem;
+    }
+
+    .shop-categories-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .shop-cat-chip {
+      background: rgba(255, 255, 255, 0.08);
+      color: #a3a3a3;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: 0.2s;
+    }
+
+    .shop-cat-chip.active {
+      background: #ff4500;
+      color: #ffffff;
+      border-color: #ff6b00;
+      box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+    }
+
+    .shop-products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+
+    .shop-product-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      border: 2px solid #1a1a1a;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .shop-product-img {
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #ff4500;
+      color: #ffffff;
+      font-size: 0.6rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .shop-product-info {
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+    }
+
+    .product-title {
+      font-weight: 900;
+      font-size: 0.88rem;
+      color: #121212;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .product-rating {
+      font-size: 0.7rem;
+      color: #555555;
+      font-weight: 700;
+    }
+
+    .product-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 0.4rem;
+    }
+
+    .product-price {
+      font-weight: 900;
+      color: #d00000;
+      font-size: 0.95rem;
+    }
+
+    .shop-add-btn {
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+
+    .shop-add-btn:hover {
+      background: #ff4500;
+      color: #ffffff;
     }
 
     /* --- RIDE PAGE STYLES --- */
@@ -1420,10 +1546,10 @@
               <h4>Ride</h4>
               <p>Taxi, Pragia, Truck</p>
             </div>
-            <div class="service-card gadgets-card">
-              <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
-              <h4>Gadgets</h4>
-              <p>Latest products</p>
+            <div class="service-card shop-card" id="shopCardTrigger">
+              <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
+              <h4>Shop</h4>
+              <p>Electronics & goods</p>
             </div>
             <div class="service-card hotels-card">
               <div class="card-icon"><i class="fas fa-hotel"></i></div>
@@ -1465,6 +1591,82 @@
               </div>
             </div>
             <i class="fas fa-arrow-right" style="color: #ff6b00;"></i>
+          </div>
+        </div>
+
+        <!-- ================= SHOP PAGE ================= -->
+        <div id="shopPage" class="page">
+          <div class="section-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <button class="back-btn" id="shopBackBtn"><i class="fas fa-arrow-left"></i></button>
+              <h2>Manni Store</h2>
+            </div>
+          </div>
+
+          <!-- Category Chips -->
+          <div class="shop-categories-scroll">
+            <div class="shop-cat-chip active">All Products</div>
+            <div class="shop-cat-chip">Gadgets</div>
+            <div class="shop-cat-chip">Fashion</div>
+            <div class="shop-cat-chip">Home & Living</div>
+            <div class="shop-cat-chip">Accessories</div>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="shop-products-grid">
+            <div class="shop-product-card">
+              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80');">
+                <span class="product-badge">Hot</span>
+              </div>
+              <div class="shop-product-info">
+                <span class="product-title">Wireless Headphones</span>
+                <span class="product-rating">★ 4.8 (120)</span>
+                <div class="product-price-row">
+                  <span class="product-price">$89.99</span>
+                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-card">
+              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80');">
+              </div>
+              <div class="shop-product-info">
+                <span class="product-title">Smart Watch Pro</span>
+                <span class="product-rating">★ 4.7 (85)</span>
+                <div class="product-price-row">
+                  <span class="product-price">$149.00</span>
+                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-card">
+              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80');">
+                <span class="product-badge">New</span>
+              </div>
+              <div class="shop-product-info">
+                <span class="product-title">Urban Sneakers</span>
+                <span class="product-rating">★ 4.9 (210)</span>
+                <div class="product-price-row">
+                  <span class="product-price">$110.00</span>
+                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-card">
+              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=300&q=80');">
+              </div>
+              <div class="shop-product-info">
+                <span class="product-title">Leather Bag</span>
+                <span class="product-rating">★ 4.6 (64)</span>
+                <div class="product-price-row">
+                  <span class="product-price">$65.50</span>
+                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1872,6 +2074,8 @@
           searchInput.placeholder = 'Discover spots, events, pros...';
         } else if (targetId === 'foodPage') {
           searchInput.placeholder = 'Search dishes or restaurants...';
+        } else if (targetId === 'shopPage') {
+          searchInput.placeholder = 'Search store products...';
         } else if (targetId === 'ridePage') {
           searchInput.placeholder = 'Search ride locations...';
         } else {
@@ -1883,6 +2087,26 @@
         item.addEventListener('click', function() {
           const targetId = this.getAttribute('data-target');
           switchMainPage(targetId);
+        });
+      });
+
+      // --- Shop Page Navigation & Sub-Tabs ---
+      const shopCardTrigger = document.getElementById('shopCardTrigger');
+      const shopBackBtn = document.getElementById('shopBackBtn');
+      const shopChips = document.querySelectorAll('.shop-cat-chip');
+
+      if (shopCardTrigger) {
+        shopCardTrigger.addEventListener('click', () => switchMainPage('shopPage'));
+      }
+
+      if (shopBackBtn) {
+        shopBackBtn.addEventListener('click', () => switchMainPage('homePage'));
+      }
+
+      shopChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          shopChips.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
         });
       });
 
