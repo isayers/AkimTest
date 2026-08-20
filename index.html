@@ -491,6 +491,186 @@
       font-size: 0.7rem;
     }
 
+    /* --- HOTEL PAGE STYLES --- */
+    .hotel-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      border: 2px solid #1a1a1a;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-2px);
+      border-color: #ff4500;
+    }
+
+    .hotel-img {
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .hotel-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.85);
+      color: #ff6b00;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 107, 0, 0.4);
+      text-transform: uppercase;
+    }
+
+    .hotel-info {
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .hotel-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hotel-name {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: #121212;
+      text-transform: uppercase;
+    }
+
+    .hotel-rating {
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: #121212;
+      background: #fbbf24;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+    }
+
+    .hotel-meta {
+      font-size: 0.75rem;
+      color: #555555;
+      font-weight: 700;
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .hotel-price-tag {
+      font-weight: 900;
+      color: #d00000;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    /* Hotel Detail Modal Container / Sub-view */
+    .hotel-detail-header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hotel-detail-header h3 {
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .hotel-detail-header p {
+      color: #a3a3a3;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .room-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      padding: 0.9rem;
+      border: 2px solid #1a1a1a;
+      display: flex;
+      gap: 0.9rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      align-items: center;
+    }
+
+    .room-img {
+      width: 85px;
+      height: 85px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      border: 1.5px solid #1a1a1a;
+      flex-shrink: 0;
+    }
+
+    .room-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .room-title {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #121212;
+      text-transform: uppercase;
+    }
+
+    .room-desc {
+      font-size: 0.72rem;
+      color: #555555;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .room-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    .room-price {
+      font-weight: 900;
+      color: #d00000;
+      font-size: 1.05rem;
+    }
+
+    .book-room-btn {
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .book-room-btn:hover {
+      background: #ff4500;
+      color: #ffffff;
+    }
+
     /* --- FOOD PAGE STYLES --- */
     .sub-tabs {
       display: flex;
@@ -1551,7 +1731,7 @@
               <h4>Shop</h4>
               <p>Electronics & goods</p>
             </div>
-            <div class="service-card hotels-card">
+            <div class="service-card hotels-card" id="hotelsCardTrigger">
               <div class="card-icon"><i class="fas fa-hotel"></i></div>
               <h4>Hotels</h4>
               <p>Rooms & availability</p>
@@ -1591,6 +1771,89 @@
               </div>
             </div>
             <i class="fas fa-arrow-right" style="color: #ff6b00;"></i>
+          </div>
+        </div>
+
+        <!-- ================= HOTELS PAGE ================= -->
+        <div id="hotelsPage" class="page">
+          <div class="section-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <button class="back-btn" id="hotelsBackBtn"><i class="fas fa-arrow-left"></i></button>
+              <h2 id="hotelsPageTitle">Hotels & Stays</h2>
+            </div>
+          </div>
+
+          <!-- HOTELS LIST VIEW -->
+          <div id="hotelsListView" style="display: flex; flex-direction: column; gap: 0.9rem;">
+            <div class="hotel-card" data-hotel-id="hotel-1">
+              <div class="hotel-img" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80');">
+                <span class="hotel-badge">Available Now</span>
+              </div>
+              <div class="hotel-info">
+                <div class="hotel-header-row">
+                  <span class="hotel-name">Volcano Palms Resort</span>
+                  <span class="hotel-rating">★ 4.9</span>
+                </div>
+                <div class="hotel-meta">
+                  <span>Luxury Suites · Pool & Spa</span>
+                  <span>•</span>
+                  <span>Downtown</span>
+                </div>
+                <span class="hotel-price-tag">From $120 / night</span>
+              </div>
+            </div>
+
+            <div class="hotel-card" data-hotel-id="hotel-2">
+              <div class="hotel-img" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=500&q=80');">
+                <span class="hotel-badge">Popular</span>
+              </div>
+              <div class="hotel-info">
+                <div class="hotel-header-row">
+                  <span class="hotel-name">The Obsidian Grand</span>
+                  <span class="hotel-rating">★ 4.8</span>
+                </div>
+                <div class="hotel-meta">
+                  <span>Executive Stay · Ocean View</span>
+                  <span>•</span>
+                  <span>Beachside</span>
+                </div>
+                <span class="hotel-price-tag">From $180 / night</span>
+              </div>
+            </div>
+
+            <div class="hotel-card" data-hotel-id="hotel-3">
+              <div class="hotel-img" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=500&q=80');">
+                <span class="hotel-badge">Top Rated</span>
+              </div>
+              <div class="hotel-info">
+                <div class="hotel-header-row">
+                  <span class="hotel-name">Manni Heights Boutique</span>
+                  <span class="hotel-rating">★ 4.7</span>
+                </div>
+                <div class="hotel-meta">
+                  <span>Boutique Hotel · Free Breakfast</span>
+                  <span>•</span>
+                  <span>City Center</span>
+                </div>
+                <span class="hotel-price-tag">From $95 / night</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOTEL DETAILS & ROOM AVAILABILITY VIEW (DYNAMIC) -->
+          <div id="hotelDetailView" style="display: none; flex-direction: column; gap: 0.9rem;">
+            <div class="hotel-detail-header">
+              <h3 id="detailHotelName">Hotel Name</h3>
+              <p id="detailHotelDesc">Hotel details & description</p>
+            </div>
+            
+            <div class="section-header">
+              <h2 style="font-size: 1.05rem;">Available Rooms</h2>
+            </div>
+
+            <div id="roomsListContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <!-- Dynamic Room cards rendered here -->
+            </div>
           </div>
         </div>
 
@@ -1823,7 +2086,7 @@
             <div class="filter-chip">Completed</div>
           </div>
 
-          <!-- Dynamic Rides & Food Orders List -->
+          <!-- Dynamic Rides, Food & Hotel Bookings List -->
           <div id="ordersListContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
             <!-- Active Food Order Card -->
             <div class="order-card">
@@ -2076,6 +2339,8 @@
           searchInput.placeholder = 'Search dishes or restaurants...';
         } else if (targetId === 'shopPage') {
           searchInput.placeholder = 'Search store products...';
+        } else if (targetId === 'hotelsPage') {
+          searchInput.placeholder = 'Search hotels or rooms...';
         } else if (targetId === 'ridePage') {
           searchInput.placeholder = 'Search ride locations...';
         } else {
@@ -2087,6 +2352,135 @@
         item.addEventListener('click', function() {
           const targetId = this.getAttribute('data-target');
           switchMainPage(targetId);
+        });
+      });
+
+      // --- HOTELS PAGE NAVIGATION & ROOM AVAILABILITY LOGIC ---
+      const hotelsCardTrigger = document.getElementById('hotelsCardTrigger');
+      const hotelsBackBtn = document.getElementById('hotelsBackBtn');
+      const hotelsListView = document.getElementById('hotelsListView');
+      const hotelDetailView = document.getElementById('hotelDetailView');
+      const hotelsPageTitle = document.getElementById('hotelsPageTitle');
+      const detailHotelName = document.getElementById('detailHotelName');
+      const detailHotelDesc = document.getElementById('detailHotelDesc');
+      const roomsListContainer = document.getElementById('roomsListContainer');
+
+      const hotelDatabase = {
+        'hotel-1': {
+          name: 'Volcano Palms Resort',
+          desc: 'Luxury resort located downtown featuring rooftop pools, full spa services & complimentary Wi-Fi.',
+          rooms: [
+            { id: 'rm-101', title: 'Deluxe King Suite', desc: '1 King Bed · City View · Free Breakfast · Air-conditioned', price: '$120 / night', img: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80' },
+            { id: 'rm-102', title: 'Executive Ocean Suite', desc: '1 King Bed · Private Balcony · Jacuzzi · Free Spa Access', price: '$210 / night', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80' },
+            { id: 'rm-103', title: 'Standard Twin Room', desc: '2 Single Beds · Garden View · Work Desk', price: '$95 / night', img: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=80' }
+          ]
+        },
+        'hotel-2': {
+          name: 'The Obsidian Grand',
+          desc: '5-star beachfront property with private shorelines, gourmet dining and 24/7 butler service.',
+          rooms: [
+            { id: 'rm-201', title: 'Oceanfront Villa', desc: '1 Super King · Infinity Pool Access · Oceanfront Deck', price: '$280 / night', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=300&q=80' },
+            { id: 'rm-202', title: 'Presidential Suite', desc: '2 Bedrooms · Private Dining Lounge · Beachfront', price: '$450 / night', img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=300&q=80' }
+          ]
+        },
+        'hotel-3': {
+          name: 'Manni Heights Boutique',
+          desc: 'Modern boutique hotel situated in the heart of the city with artisan coffee bars and fast connectivity.',
+          rooms: [
+            { id: 'rm-301', title: 'Urban Queen Studio', desc: '1 Queen Bed · City skyline views · Workstation', price: '$95 / night', img: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=300&q=80' },
+            { id: 'rm-302', title: 'Penthouse Loft', desc: '1 King Bed · Terrace lounge · Cocktail bar', price: '$190 / night', img: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=300&q=80' }
+          ]
+        }
+      };
+
+      let activeHotelView = 'list'; // 'list' or 'detail'
+
+      if (hotelsCardTrigger) {
+        hotelsCardTrigger.addEventListener('click', () => {
+          showHotelsList();
+          switchMainPage('hotelsPage');
+        });
+      }
+
+      if (hotelsBackBtn) {
+        hotelsBackBtn.addEventListener('click', () => {
+          if (activeHotelView === 'detail') {
+            showHotelsList();
+          } else {
+            switchMainPage('homePage');
+          }
+        });
+      }
+
+      function showHotelsList() {
+        activeHotelView = 'list';
+        hotelsPageTitle.innerText = 'Hotels & Stays';
+        hotelsListView.style.display = 'flex';
+        hotelDetailView.style.display = 'none';
+      }
+
+      function openHotelDetail(hotelId) {
+        const hotel = hotelDatabase[hotelId];
+        if (!hotel) return;
+
+        activeHotelView = 'detail';
+        hotelsPageTitle.innerText = 'Hotel Rooms';
+        detailHotelName.innerText = hotel.name;
+        detailHotelDesc.innerText = hotel.desc;
+
+        roomsListContainer.innerHTML = '';
+        hotel.rooms.forEach(room => {
+          const roomCard = document.createElement('div');
+          roomCard.className = 'room-card';
+          roomCard.innerHTML = `
+            <div class="room-img" style="background-image: url('${room.img}');"></div>
+            <div class="room-details">
+              <span class="room-title">${room.title}</span>
+              <span class="room-desc">${room.desc}</span>
+              <div class="room-bottom">
+                <span class="room-price">${room.price}</span>
+                <button class="book-room-btn">Book Room</button>
+              </div>
+            </div>
+          `;
+
+          roomCard.querySelector('.book-room-btn').addEventListener('click', () => {
+            alert(`Room "${room.title}" at ${hotel.name} booked successfully!`);
+            // Optionally add booking to Orders tab
+            const orderNum = Math.floor(1000 + Math.random() * 9000);
+            const orderCard = document.createElement('div');
+            orderCard.className = 'order-card';
+            orderCard.innerHTML = `
+              <div class="order-img" style="background-image: url('${room.img}');"></div>
+              <div class="order-body">
+                <div class="order-header">
+                  <span class="order-title">${hotel.name}</span>
+                  <span class="order-status status-active">Reserved</span>
+                </div>
+                <div class="order-details">
+                  <span>Order #MN-${orderNum}</span>
+                  <span>${room.title}</span>
+                </div>
+                <div class="order-footer">
+                  <span class="order-price">${room.price}</span>
+                  <button class="action-btn-sm">View Pass</button>
+                </div>
+              </div>
+            `;
+            ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+          });
+
+          roomsListContainer.appendChild(roomCard);
+        });
+
+        hotelsListView.style.display = 'none';
+        hotelDetailView.style.display = 'flex';
+      }
+
+      document.querySelectorAll('.hotel-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const hotelId = this.getAttribute('data-hotel-id');
+          openHotelDetail(hotelId);
         });
       });
 
@@ -2233,7 +2627,6 @@
       }
 
       function addBookingToOrders(driver, destination) {
-        // Prevent duplicate order entry if already booking with the same driver
         const existingOrder = document.getElementById(`order-card-${driver.id}`);
         if (existingOrder) return;
 
@@ -2263,7 +2656,6 @@
           openDriverChat(driver);
         });
 
-        // Insert at the top of orders list
         ordersListContainer.insertBefore(newOrderCard, ordersListContainer.firstChild);
       }
 
@@ -2272,7 +2664,6 @@
         chatDriverName.innerText = driver.name;
         chatDriverAvatar.style.backgroundImage = `url('${driver.img}')`;
 
-        // Initialize chat history if empty
         if (!chatHistories[driver.id]) {
           chatHistories[driver.id] = [
             { sender: 'driver', text: `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.` }
@@ -2301,12 +2692,10 @@
         const text = chatMsgInput.value.trim();
         if (!text || !currentDriverId) return;
 
-        // Save user message
         chatHistories[currentDriverId].push({ sender: 'user', text: text });
         chatMsgInput.value = '';
         renderChatMessages();
 
-        // Auto-reply simulation from driver after 1.5 seconds
         setTimeout(() => {
           if (chatHistories[currentDriverId]) {
             chatHistories[currentDriverId].push({ sender: 'driver', text: `Got it, thanks for the update! See you shortly.` });
