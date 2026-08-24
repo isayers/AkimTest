@@ -48,6 +48,9 @@
       border-radius: 0;
       display: flex;
       flex-direction: column;
+
+      /* Added dynamic island padding & safe-area inset support */
+      padding-top: max(24px, env(safe-area-inset-top));
     }
 
     .app-body {
@@ -59,52 +62,14 @@
       -webkit-backdrop-filter: blur(16px);
     }
 
-    /* Header */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 1.5rem 0.8rem;
-      flex-shrink: 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .brand-icon {
-      background: #ff4500;
-      background: linear-gradient(135deg, #ff6b00 0%, #d00000 100%);
-      color: #ffffff;
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 20px rgba(255, 69, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .brand-name {
-      font-family: 'Permanent Marker', cursive, sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-      color: #ffffff;
-      text-transform: uppercase;
-      text-shadow: 2px 2px 0px #000;
-    }
-
     .header-actions {
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      flex-shrink: 0;
     }
 
+    .search-btn,
     .notif-btn,
     .account-btn {
       background: rgba(255, 255, 255, 0.08);
@@ -123,6 +88,7 @@
       transition: 0.2s;
     }
 
+    .search-btn:hover,
     .notif-btn:hover,
     .account-btn:hover {
       background: rgba(255, 255, 255, 0.18);
@@ -148,48 +114,11 @@
       display: flex;
     }
 
-    /* Search */
-    .search-area {
-      padding: 0.5rem 1.5rem 0.5rem;
-      flex-shrink: 0;
-    }
-
-    .search-box {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 0.75rem 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .search-box i {
-      color: #1a1a1a;
-      font-size: 0.9rem;
-    }
-
-    .search-box input {
-      border: none;
-      background: transparent;
-      width: 100%;
-      font-size: 0.9rem;
-      font-weight: 700;
-      outline: none;
-      color: #1a1a1a;
-    }
-
-    .search-box input::placeholder {
-      color: #666666;
-      font-weight: 500;
-    }
-
     /* Main content - scrollable */
     .main-content {
       flex: 1;
       overflow-y: auto;
-      padding: 0 1.5rem 1.5rem;
+      padding: 1.5rem 1.5rem 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
@@ -205,6 +134,7 @@
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
+      width: 100%;
     }
 
     .section-header h2 {
@@ -1266,6 +1196,73 @@
       cursor: pointer;
     }
 
+    /* --- SEARCH MODAL OVERLAY --- */
+    .search-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 120;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      /* Added dynamic safe area spacing for top modal */
+      padding-top: calc(2rem + max(0px, env(safe-area-inset-top)));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .search-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .search-modal {
+      width: 90%;
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .search-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .search-modal-box {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .search-modal-box i {
+      color: #1a1a1a;
+      font-size: 0.9rem;
+    }
+
+    .search-modal-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      outline: none;
+      color: #1a1a1a;
+    }
+
     /* --- ORDERS PAGE STYLES --- */
     .orders-filter {
       display: flex;
@@ -1457,7 +1454,7 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem;
+      padding: 1.0rem;
       display: flex;
       gap: 0.9rem;
       align-items: center;
@@ -1637,7 +1634,9 @@
       justify-content: space-around;
       background: #121212;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.8rem 0.8rem 1.1rem;
+
+      /* Added dynamic inset for bottom navigation bar */
+      padding: 0.8rem 0.8rem max(1.1rem, calc(0.5rem + env(safe-area-inset-bottom)));
       flex-shrink: 0;
     }
 
@@ -1682,29 +1681,6 @@
 <body>
   <div class="client-app">
     <div class="app-body">
-      <!-- Header -->
-      <div class="header">
-        <div class="brand">
-          <div class="brand-icon"><i class="fas fa-layer-group"></i></div>
-          <span class="brand-name">Manni</span>
-        </div>
-        <div class="header-actions">
-          <div class="notif-btn">
-            <i class="fas fa-bell"></i>
-          </div>
-          <div class="account-btn" id="headerAccountBtn">
-            <i class="fas fa-user"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- Search -->
-      <div class="search-area">
-        <div class="search-box">
-          <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Search services...">
-        </div>
-      </div>
 
       <!-- Main Content Container -->
       <div class="main-content">
@@ -1713,6 +1689,17 @@
         <div id="homePage" class="page active-page">
           <div class="section-header">
             <h2>Order something</h2>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
           </div>
 
           <div class="service-grid">
@@ -1780,6 +1767,17 @@
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <button class="back-btn" id="hotelsBackBtn"><i class="fas fa-arrow-left"></i></button>
               <h2 id="hotelsPageTitle">Hotels & Stays</h2>
+            </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
           </div>
 
@@ -1864,6 +1862,17 @@
               <button class="back-btn" id="shopBackBtn"><i class="fas fa-arrow-left"></i></button>
               <h2>Manni Store</h2>
             </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
           </div>
 
           <!-- Category Chips -->
@@ -1939,6 +1948,17 @@
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <button class="back-btn" id="foodBackBtn"><i class="fas fa-arrow-left"></i></button>
               <h2>Food & Dining</h2>
+            </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
             </div>
           </div>
 
@@ -2032,6 +2052,17 @@
               <button class="back-btn" id="rideBackBtn"><i class="fas fa-arrow-left"></i></button>
               <h2>Book a Ride</h2>
             </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
           </div>
 
           <!-- 1. Ride Type Selection -->
@@ -2078,6 +2109,17 @@
         <div id="ordersPage" class="page">
           <div class="section-header">
             <h2>My Orders</h2>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
           </div>
 
           <div class="orders-filter">
@@ -2151,6 +2193,17 @@
         <div id="discoverPage" class="page">
           <div class="section-header">
             <h2>Discover</h2>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
           </div>
 
           <!-- Featured Banner -->
@@ -2213,6 +2266,19 @@
 
       </div>
 
+      <!-- ================= SEARCH MODAL ================= -->
+      <div id="searchModalOverlay" class="search-modal-overlay">
+        <div class="search-modal">
+          <div class="search-modal-header">
+            <div class="search-modal-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="modalSearchInput" placeholder="Search services...">
+            </div>
+            <button class="close-auth-btn" id="closeSearchBtn"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+
       <!-- ================= RIDER CHAT / FEEDBACK MODAL ================= -->
       <div id="chatModalOverlay" class="chat-modal-overlay">
         <div class="chat-modal">
@@ -2244,7 +2310,7 @@
       <div id="authModalOverlay" class="auth-modal-overlay">
         <div class="auth-modal">
           <div class="auth-header">
-            <h3 id="authModalTitle">Join Manni</h3>
+            <h3 id="authModalTitle">Join App</h3>
             <button class="close-auth-btn" id="closeAuthBtn"><i class="fas fa-times"></i></button>
           </div>
 
@@ -2312,7 +2378,7 @@
       // Dynamic Page Navigation
       const navItems = document.querySelectorAll('.nav-item');
       const pages = document.querySelectorAll('.page');
-      const searchInput = document.getElementById('searchInput');
+      const modalSearchInput = document.getElementById('modalSearchInput');
 
       function switchMainPage(targetId) {
         navItems.forEach(n => {
@@ -2331,20 +2397,22 @@
           }
         });
 
-        if (targetId === 'ordersPage') {
-          searchInput.placeholder = 'Search my orders...';
-        } else if (targetId === 'discoverPage') {
-          searchInput.placeholder = 'Discover spots, events, pros...';
-        } else if (targetId === 'foodPage') {
-          searchInput.placeholder = 'Search dishes or restaurants...';
-        } else if (targetId === 'shopPage') {
-          searchInput.placeholder = 'Search store products...';
-        } else if (targetId === 'hotelsPage') {
-          searchInput.placeholder = 'Search hotels or rooms...';
-        } else if (targetId === 'ridePage') {
-          searchInput.placeholder = 'Search ride locations...';
-        } else {
-          searchInput.placeholder = 'Search services...';
+        if (modalSearchInput) {
+          if (targetId === 'ordersPage') {
+            modalSearchInput.placeholder = 'Search my orders...';
+          } else if (targetId === 'discoverPage') {
+            modalSearchInput.placeholder = 'Discover spots, events, pros...';
+          } else if (targetId === 'foodPage') {
+            modalSearchInput.placeholder = 'Search dishes or restaurants...';
+          } else if (targetId === 'shopPage') {
+            modalSearchInput.placeholder = 'Search store products...';
+          } else if (targetId === 'hotelsPage') {
+            modalSearchInput.placeholder = 'Search hotels or rooms...';
+          } else if (targetId === 'ridePage') {
+            modalSearchInput.placeholder = 'Search ride locations...';
+          } else {
+            modalSearchInput.placeholder = 'Search services...';
+          }
         }
       }
 
@@ -2353,6 +2421,30 @@
           const targetId = this.getAttribute('data-target');
           switchMainPage(targetId);
         });
+      });
+
+      // --- SEARCH MODAL LOGIC ---
+      const searchModalOverlay = document.getElementById('searchModalOverlay');
+      const closeSearchBtn = document.getElementById('closeSearchBtn');
+      const headerSearchBtns = document.querySelectorAll('.headerSearchBtn');
+
+      headerSearchBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          searchModalOverlay.classList.add('active');
+          modalSearchInput.focus();
+        });
+      });
+
+      if (closeSearchBtn) {
+        closeSearchBtn.addEventListener('click', () => {
+          searchModalOverlay.classList.remove('active');
+        });
+      }
+
+      searchModalOverlay.addEventListener('click', (e) => {
+        if (e.target === searchModalOverlay) {
+          searchModalOverlay.classList.remove('active');
+        }
       });
 
       // --- HOTELS PAGE NAVIGATION & ROOM AVAILABILITY LOGIC ---
@@ -2724,7 +2816,7 @@
       const authOverlay = document.getElementById('authModalOverlay');
       const closeAuthBtn = document.getElementById('closeAuthBtn');
       const easySignupBanner = document.getElementById('easySignupBanner');
-      const headerAccountBtn = document.getElementById('headerAccountBtn');
+      const headerAccountBtns = document.querySelectorAll('.headerAccountBtn');
       
       const tabSignUp = document.getElementById('tabSignUp');
       const tabSignIn = document.getElementById('tabSignIn');
@@ -2750,7 +2842,7 @@
         tabSignIn.classList.remove('active');
         signUpForm.style.display = 'flex';
         signInForm.style.display = 'none';
-        authModalTitle.innerText = 'Join Manni';
+        authModalTitle.innerText = 'Join App';
       }
 
       function switchToSignIn() {
@@ -2762,7 +2854,9 @@
       }
 
       easySignupBanner.addEventListener('click', () => openAuthModal('signup'));
-      headerAccountBtn.addEventListener('click', () => openAuthModal('signin'));
+      headerAccountBtns.forEach(btn => {
+        btn.addEventListener('click', () => openAuthModal('signin'));
+      });
       closeAuthBtn.addEventListener('click', closeAuthModal);
 
       authOverlay.addEventListener('click', (e) => {
@@ -2799,10 +2893,10 @@
       }
 
       // Header notification button
-      const notifBtn = document.querySelector('.notif-btn');
-      if (notifBtn) {
-        notifBtn.addEventListener('click', () => console.log('🔔 Notifications clicked'));
-      }
+      const notifBtns = document.querySelectorAll('.notif-btn');
+      notifBtns.forEach(btn => {
+        btn.addEventListener('click', () => console.log('🔔 Notifications clicked'));
+      });
 
       // Order Filter chips
       const filterChips = document.querySelectorAll('.filter-chip');
