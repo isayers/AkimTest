@@ -421,7 +421,7 @@
     }
 
     /* --- HOTEL PAGE STYLES --- */
-    .hotel-card {
+    .hotel-card, .event-card {
       background: #e8e8e8;
       border-radius: 12px;
       border: 2px solid #1a1a1a;
@@ -433,19 +433,19 @@
       transition: transform 0.2s, border-color 0.2s;
     }
 
-    .hotel-card:hover {
+    .hotel-card:hover, .event-card:hover {
       transform: translateY(-2px);
       border-color: #ff4500;
     }
 
-    .hotel-img {
+    .hotel-img, .event-img {
       height: 130px;
       background-size: cover;
       background-position: center;
       position: relative;
     }
 
-    .hotel-badge {
+    .hotel-badge, .event-badge {
       position: absolute;
       top: 10px;
       right: 10px;
@@ -459,20 +459,20 @@
       text-transform: uppercase;
     }
 
-    .hotel-info {
+    .hotel-info, .event-info {
       padding: 0.9rem;
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
     }
 
-    .hotel-header-row {
+    .hotel-header-row, .event-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .hotel-name {
+    .hotel-name, .event-name {
       font-weight: 900;
       font-size: 1.05rem;
       color: #121212;
@@ -488,7 +488,7 @@
       border-radius: 5px;
     }
 
-    .hotel-meta {
+    .hotel-meta, .event-meta {
       font-size: 0.75rem;
       color: #555555;
       font-weight: 700;
@@ -496,7 +496,7 @@
       gap: 0.8rem;
     }
 
-    .hotel-price-tag {
+    .hotel-price-tag, .event-price-tag {
       font-weight: 900;
       color: #d00000;
       font-size: 0.9rem;
@@ -536,6 +536,13 @@
       gap: 0.9rem;
       box-shadow: 0 6px 16px rgba(0,0,0,0.4);
       align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .room-card:hover {
+      transform: translateY(-2px);
+      border-color: #ff4500;
     }
 
     .room-img {
@@ -665,6 +672,17 @@
       text-transform: uppercase;
     }
 
+    .food-item-restaurant {
+      font-size: 0.68rem;
+      color: #d00000;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
     .food-item-desc {
       font-size: 0.72rem;
       color: #555555;
@@ -703,6 +721,38 @@
       color: #ffffff;
     }
 
+    /* Food filter banner (shown when browsing a single restaurant's menu) */
+    .food-filter-banner {
+      background: rgba(255, 69, 0, 0.15);
+      border: 1px solid rgba(255, 69, 0, 0.4);
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .clear-filter-btn {
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .clear-filter-btn:hover {
+      background: #ff4500;
+      color: #ffffff;
+    }
+
     /* Restaurant Card Styles */
     .restaurant-card {
       background: #e8e8e8;
@@ -712,6 +762,13 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.4);
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-2px);
+      border-color: #ff4500;
     }
 
     .restaurant-banner {
@@ -820,13 +877,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .shop-product-card:hover {
-      transform: translateY(-2px);
-      border-color: #ff4500;
     }
 
     .shop-product-img {
@@ -905,35 +955,29 @@
       color: #ffffff;
     }
 
-    /* --- PRODUCT DETAIL PAGE STYLES --- */
+    /* Product Detail View */
     .product-gallery {
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
     }
 
-    .product-main-img {
-      width: 100%;
+    .product-gallery-main {
       height: 220px;
       border-radius: 12px;
       background-size: cover;
       background-position: center;
       border: 2px solid #1a1a1a;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: background-image 0.2s ease;
     }
 
-    .product-thumbnails {
+    .product-gallery-thumbs {
       display: flex;
       gap: 0.6rem;
-      overflow-x: auto;
-      scrollbar-width: none;
     }
 
-    .product-thumbnails::-webkit-scrollbar {
-      display: none;
-    }
-
-    .thumb-img {
+    .gallery-thumb {
       width: 60px;
       height: 60px;
       border-radius: 8px;
@@ -941,101 +985,192 @@
       background-position: center;
       border: 2px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
-      flex-shrink: 0;
       transition: 0.2s;
+      flex-shrink: 0;
     }
 
-    .thumb-img.active {
-      border-color: #ff4500;
-      box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    .gallery-thumb.active {
+      border-color: #ff6b00;
+      box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
     }
 
-    .product-meta-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      padding: 1rem;
+    .product-detail-info {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.35rem;
     }
 
-    .product-meta-title {
+    .product-detail-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .product-detail-title {
+      font-weight: 900;
+      font-size: 1.15rem;
       color: #ffffff;
-      font-size: 1.2rem;
-      font-weight: 900;
       text-transform: uppercase;
+      letter-spacing: -0.3px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
-    .product-meta-price {
-      font-size: 1.3rem;
+    .product-detail-price {
       font-weight: 900;
-      color: #ff6b00;
+      color: #ff7b00;
+      font-size: 1.3rem;
     }
 
-    .product-meta-desc {
+    .product-detail-desc {
       color: #a3a3a3;
-      font-size: 0.8rem;
-      line-height: 1.4;
+      font-size: 0.82rem;
       font-weight: 500;
+      line-height: 1.5;
     }
 
     .spec-group {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .spec-label {
-      color: #ffffff;
       font-size: 0.75rem;
       font-weight: 800;
+      color: #e5e5e5;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .spec-options {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
+      gap: 0.6rem;
     }
 
-    .spec-btn {
+    .spec-chip {
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
+      color: #e5e5e5;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
       transition: 0.2s;
     }
 
-    .spec-btn.active {
+    .spec-chip.active {
       background: #ff4500;
+      color: #ffffff;
       border-color: #ff6b00;
-      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+      box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
     }
 
-    .buy-now-btn {
+    .amenity-tag {
+      background: rgba(34, 197, 94, 0.12);
+      color: #f0fdf4;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border: 1.5px solid rgba(34, 197, 94, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .amenity-tag i {
+      color: #22c55e;
+      font-size: 0.7rem;
+    }
+
+    .color-swatch {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .color-swatch.active {
+      border-color: #ff6b00;
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.3);
+      transform: scale(1.08);
+    }
+
+    .qty-selector-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qty-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #e5e5e5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 0.35rem 0.6rem;
+    }
+
+    .qty-btn {
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: 0.2s;
+    }
+
+    .qty-btn:hover {
+      background: #ff4500;
+      color: #ffffff;
+    }
+
+    .qty-value {
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 0.95rem;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .add-to-cart-detail-btn {
       background: linear-gradient(135deg, #ff6b00 0%, #d00000 100%);
       color: #ffffff;
       border: none;
       padding: 0.9rem;
       border-radius: 10px;
       font-weight: 900;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
       transition: 0.2s;
-      width: 100%;
-      margin-top: 0.4rem;
+      flex-shrink: 0;
     }
 
-    .buy-now-btn:hover {
+    .add-to-cart-detail-btn:hover {
       transform: translateY(-1px);
     }
 
@@ -1195,6 +1330,277 @@
     .send-req-btn:hover {
       background: #ff4500;
       color: #ffffff;
+    }
+
+    /* --- PROFESSIONAL SERVICES PAGE STYLES --- */
+    .pro-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      padding: 0.9rem;
+      border: 2px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .pro-card:hover {
+      transform: translateY(-2px);
+      border-color: #ff4500;
+    }
+
+    .pro-card-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      border: 1.5px solid #1a1a1a;
+      flex-shrink: 0;
+    }
+
+    .pro-card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .pro-card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pro-card-name {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #121212;
+      text-transform: uppercase;
+    }
+
+    .pro-card-rating {
+      font-weight: 900;
+      font-size: 0.75rem;
+      color: #121212;
+      background: #fbbf24;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    .pro-card-title {
+      font-size: 0.72rem;
+      color: #555555;
+      font-weight: 700;
+    }
+
+    .pro-card-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.15rem;
+    }
+
+    .pro-card-rate {
+      font-weight: 900;
+      color: #d00000;
+      font-size: 0.9rem;
+    }
+
+    .pro-card-badge {
+      font-size: 0.62rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    .pro-card-badge.available {
+      background: rgba(34, 197, 94, 0.15);
+      color: #15803d;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .pro-card-badge.busy {
+      background: rgba(210, 0, 0, 0.12);
+      color: #b91c1c;
+      border: 1px solid rgba(185, 28, 28, 0.4);
+    }
+
+    .pro-card-arrow {
+      color: #1a1a1a;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .pro-profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pro-profile-avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 16px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #1a1a1a;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      flex-shrink: 0;
+    }
+
+    .pro-profile-basic {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 0;
+    }
+
+    .pro-profile-name {
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .pro-profile-title {
+      color: #a3a3a3;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .pro-profile-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.1rem;
+    }
+
+    .pro-profile-rating {
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: #121212;
+      background: #fbbf24;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+    }
+
+    .pro-profile-reviews {
+      color: #a3a3a3;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .pro-stats-row {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.8rem 0.5rem;
+    }
+
+    .pro-stat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pro-stat:last-child {
+      border-right: none;
+    }
+
+    .pro-stat-value {
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #ff7b00;
+    }
+
+    .pro-stat-label {
+      font-size: 0.65rem;
+      color: #a3a3a3;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .talk-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* --- BUY TICKETS PAGE STYLES --- */
+    .event-category-tag {
+      font-weight: 900;
+      font-size: 0.7rem;
+      color: #121212;
+      background: #fbbf24;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .event-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #e5e5e5;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .event-meta-item i {
+      color: #ff6b00;
+      width: 16px;
+      text-align: center;
+    }
+
+    .ticket-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 69, 0, 0.1);
+      border: 1px solid rgba(255, 69, 0, 0.3);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+    }
+
+    .ticket-total-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #e5e5e5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ticket-total-value {
+      font-weight: 900;
+      color: #ff7b00;
+      font-size: 1.2rem;
     }
 
     /* --- CHAT / FEEDBACK MODAL OVERLAY --- */
@@ -1991,6 +2397,31 @@
               <!-- Dynamic Room cards rendered here -->
             </div>
           </div>
+
+          <!-- ROOM DETAIL VIEW (DYNAMIC) -->
+          <div id="roomDetailView" style="display: none; flex-direction: column; gap: 1.1rem;">
+            <div class="product-gallery">
+              <div class="product-gallery-main" id="roomGalleryMain"></div>
+              <div class="product-gallery-thumbs" id="roomGalleryThumbs"></div>
+            </div>
+
+            <div class="product-detail-info">
+              <div class="product-detail-title-row">
+                <span class="product-detail-title" id="detailRoomTitle">Room Name</span>
+              </div>
+              <span class="product-detail-price" id="detailRoomPrice">$0 / night</span>
+              <p class="product-detail-desc" id="detailRoomDesc">Room description.</p>
+            </div>
+
+            <div class="spec-group">
+              <span class="spec-label">Amenities</span>
+              <div class="spec-options" id="roomAmenitiesContainer">
+                <!-- Dynamic amenity tags rendered here -->
+              </div>
+            </div>
+
+            <button class="add-to-cart-detail-btn" id="bookRoomDetailBtn">Book Room</button>
+          </div>
         </div>
 
         <!-- ================= SHOP PAGE ================= -->
@@ -2013,8 +2444,9 @@
             </div>
           </div>
 
-          <!-- PRODUCTS LIST CONTAINER -->
-          <div id="shopProductsView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+          <!-- SHOP LIST VIEW -->
+          <div id="shopListView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+
             <!-- Category Chips -->
             <div class="shop-categories-scroll">
               <div class="shop-cat-chip active">All Products</div>
@@ -2082,41 +2514,36 @@
             </div>
           </div>
 
-          <!-- PRODUCT DETAILS VIEW (DYNAMIC) -->
-          <div id="productDetailView" style="display: none; flex-direction: column; gap: 1rem;">
+          <!-- PRODUCT DETAIL VIEW (DYNAMIC) -->
+          <div id="shopDetailView" style="display: none; flex-direction: column; gap: 1.1rem;">
             <div class="product-gallery">
-              <div class="product-main-img" id="productMainImg"></div>
-              <div class="product-thumbnails" id="productThumbnails">
-                <!-- Dynamic thumbnails -->
+              <div class="product-gallery-main" id="productGalleryMain"></div>
+              <div class="product-gallery-thumbs" id="productGalleryThumbs"></div>
+            </div>
+
+            <div class="product-detail-info">
+              <div class="product-detail-title-row">
+                <span class="product-detail-title" id="detailProductTitle">Product Name</span>
+                <span class="product-rating" id="detailProductRating">★ 0.0 (0)</span>
+              </div>
+              <span class="product-detail-price" id="detailProductPrice">$0.00</span>
+              <p class="product-detail-desc" id="detailProductDesc">Product description.</p>
+            </div>
+
+            <div id="detailSpecsContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <!-- Dynamic spec groups (color, size, etc.) rendered here -->
+            </div>
+
+            <div class="qty-selector-row">
+              <span class="qty-label">Quantity</span>
+              <div class="qty-selector">
+                <button class="qty-btn" id="qtyDecreaseBtn"><i class="fas fa-minus"></i></button>
+                <span class="qty-value" id="qtyValue">1</span>
+                <button class="qty-btn" id="qtyIncreaseBtn"><i class="fas fa-plus"></i></button>
               </div>
             </div>
 
-            <div class="product-meta-card">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <h3 class="product-meta-title" id="productDetailTitle">Product Title</h3>
-                <span class="product-meta-price" id="productDetailPrice">$0.00</span>
-              </div>
-              <span class="product-rating" id="productDetailRating">★ 5.0 (0)</span>
-              <p class="product-meta-desc" id="productDetailDesc">Product description here.</p>
-
-              <!-- Color Specs -->
-              <div class="spec-group">
-                <span class="spec-label">Select Color</span>
-                <div class="spec-options" id="colorOptions">
-                  <!-- Dynamic color buttons -->
-                </div>
-              </div>
-
-              <!-- Size Specs -->
-              <div class="spec-group">
-                <span class="spec-label">Select Size</span>
-                <div class="spec-options" id="sizeOptions">
-                  <!-- Dynamic size buttons -->
-                </div>
-              </div>
-
-              <button class="buy-now-btn" id="buyProductBtn">Add To Order / Buy Now</button>
-            </div>
+            <button class="add-to-cart-detail-btn" id="addToCartDetailBtn">Add to Cart</button>
           </div>
         </div>
 
@@ -2148,46 +2575,18 @@
 
           <!-- FOOD ITEMS CONTAINER -->
           <div id="foodItemsView" style="display: flex; flex-direction: column; gap: 0.9rem;">
-            <div class="food-item-card">
-              <div class="food-item-img" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="food-item-details">
-                <span class="food-item-title">Assorted Jollof</span>
-                <span class="food-item-desc">Served with grilled chicken, kelewele & fried plantain.</span>
-                <div class="food-item-bottom">
-                  <span class="food-item-price">$12.50</span>
-                  <button class="add-cart-btn">Add +</button>
-                </div>
-              </div>
+            <div id="foodFilterBanner" class="food-filter-banner" style="display: none;">
+              <span id="foodFilterBannerText">Menu</span>
+              <button class="clear-filter-btn" id="clearFoodFilterBtn">View All</button>
             </div>
-
-            <div class="food-item-card">
-              <div class="food-item-img" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="food-item-details">
-                <span class="food-item-title">Smokey Burger</span>
-                <span class="food-item-desc">Double beef patty, cheddar, bacon jam & crisp fries.</span>
-                <div class="food-item-bottom">
-                  <span class="food-item-price">$15.00</span>
-                  <button class="add-cart-btn">Add +</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="food-item-card">
-              <div class="food-item-img" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="food-item-details">
-                <span class="food-item-title">Pepperoni Pizza</span>
-                <span class="food-item-desc">Wood-fired crust with spicy pepperoni & mozzarella.</span>
-                <div class="food-item-bottom">
-                  <span class="food-item-price">$18.00</span>
-                  <button class="add-cart-btn">Add +</button>
-                </div>
-              </div>
+            <div id="foodCardsContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <!-- Dynamic food item cards rendered here -->
             </div>
           </div>
 
           <!-- RESTAURANTS CONTAINER -->
           <div id="restaurantsView" style="display: none; flex-direction: column; gap: 0.9rem;">
-            <div class="restaurant-card">
+            <div class="restaurant-card" data-restaurant-id="rest-1">
               <div class="restaurant-banner" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80');">
                 <span class="restaurant-tag">20-30 min</span>
               </div>
@@ -2204,7 +2603,7 @@
               </div>
             </div>
 
-            <div class="restaurant-card">
+            <div class="restaurant-card" data-restaurant-id="rest-2">
               <div class="restaurant-banner" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80');">
                 <span class="restaurant-tag">15-25 min</span>
               </div>
@@ -2280,6 +2679,167 @@
             <div id="ridersList" style="display: flex; flex-direction: column; gap: 0.8rem;">
               <!-- Dynamic driver items will populate here -->
             </div>
+          </div>
+        </div>
+
+        <!-- ================= PROFESSIONAL SERVICES PAGE ================= -->
+        <div id="professionalsPage" class="page">
+          <div class="section-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <button class="back-btn" id="professionalsBackBtn"><i class="fas fa-arrow-left"></i></button>
+              <h2 id="professionalsPageTitle">Professional Services</h2>
+            </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROFESSIONALS LIST VIEW -->
+          <div id="professionalsListView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+            <div class="shop-categories-scroll" id="proCategoryScroll">
+              <div class="shop-cat-chip active" data-category="All">All Pros</div>
+              <div class="shop-cat-chip" data-category="Plumbers">Plumbers</div>
+              <div class="shop-cat-chip" data-category="Electricians">Electricians</div>
+              <div class="shop-cat-chip" data-category="Painters">Painters</div>
+              <div class="shop-cat-chip" data-category="Carpenters">Carpenters</div>
+              <div class="shop-cat-chip" data-category="Cleaners">Cleaners</div>
+              <div class="shop-cat-chip" data-category="Mechanics">Mechanics</div>
+            </div>
+
+            <div id="professionalsListContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <!-- Dynamic professional cards rendered here -->
+            </div>
+          </div>
+
+          <!-- PROFESSIONAL PROFILE VIEW (DYNAMIC) -->
+          <div id="professionalProfileView" style="display: none; flex-direction: column; gap: 1.1rem;">
+            <div class="pro-profile-header">
+              <div class="pro-profile-avatar" id="proProfileAvatar"></div>
+              <div class="pro-profile-basic">
+                <span class="pro-profile-name" id="proProfileName">Name</span>
+                <span class="pro-profile-title" id="proProfileTitle">Title</span>
+                <div class="pro-profile-meta-row">
+                  <span class="pro-profile-rating" id="proProfileRating">★ 0.0</span>
+                  <span class="pro-profile-reviews" id="proProfileReviews">(0 reviews)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pro-stats-row">
+              <div class="pro-stat">
+                <span class="pro-stat-value" id="proProfileRate">$0/hr</span>
+                <span class="pro-stat-label">Rate</span>
+              </div>
+              <div class="pro-stat">
+                <span class="pro-stat-value" id="proProfileExperience">0 yrs</span>
+                <span class="pro-stat-label">Experience</span>
+              </div>
+              <div class="pro-stat">
+                <span class="pro-stat-value" id="proProfileAvailability">-</span>
+                <span class="pro-stat-label">Status</span>
+              </div>
+            </div>
+
+            <p class="product-detail-desc" id="proProfileBio">Bio</p>
+
+            <div class="spec-group">
+              <span class="spec-label">Skills & Services</span>
+              <div class="spec-options" id="proProfileSkills">
+                <!-- Dynamic skill tags rendered here -->
+              </div>
+            </div>
+
+            <button class="add-to-cart-detail-btn talk-btn" id="talkToProBtn"><i class="fas fa-comment-dots"></i> Talk</button>
+          </div>
+        </div>
+
+        <!-- ================= BUY TICKETS PAGE ================= -->
+        <div id="ticketsPage" class="page">
+          <div class="section-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <button class="back-btn" id="ticketsBackBtn"><i class="fas fa-arrow-left"></i></button>
+              <h2 id="ticketsPageTitle">Buy Tickets</h2>
+            </div>
+            <div class="header-actions">
+              <div class="search-btn headerSearchBtn">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="notif-btn">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="account-btn headerAccountBtn">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVENTS LIST VIEW -->
+          <div id="ticketsListView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+            <div class="shop-categories-scroll" id="eventCategoryScroll">
+              <div class="shop-cat-chip active" data-category="All">All Events</div>
+              <div class="shop-cat-chip" data-category="Concerts">Concerts</div>
+              <div class="shop-cat-chip" data-category="Festivals">Festivals</div>
+              <div class="shop-cat-chip" data-category="Comedy">Comedy</div>
+              <div class="shop-cat-chip" data-category="Sports">Sports</div>
+              <div class="shop-cat-chip" data-category="Theatre">Theatre</div>
+            </div>
+
+            <div id="eventsListContainer" style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <!-- Dynamic event cards rendered here -->
+            </div>
+          </div>
+
+          <!-- EVENT DETAIL & TICKET PURCHASE VIEW (DYNAMIC) -->
+          <div id="eventDetailView" style="display: none; flex-direction: column; gap: 1.1rem;">
+            <div class="product-gallery">
+              <div class="product-gallery-main" id="eventGalleryMain"></div>
+              <div class="product-gallery-thumbs" id="eventGalleryThumbs"></div>
+            </div>
+
+            <div class="product-detail-info">
+              <div class="product-detail-title-row">
+                <span class="product-detail-title" id="detailEventTitle">Event Name</span>
+                <span class="event-category-tag" id="detailEventCategory">Category</span>
+              </div>
+              <p class="product-detail-desc" id="detailEventDesc">Event description.</p>
+            </div>
+
+            <div class="event-meta-row">
+              <div class="event-meta-item"><i class="far fa-calendar-alt"></i> <span id="detailEventDate">Date</span></div>
+              <div class="event-meta-item"><i class="far fa-clock"></i> <span id="detailEventTime">Time</span></div>
+              <div class="event-meta-item"><i class="fas fa-map-marker-alt"></i> <span id="detailEventVenue">Venue</span></div>
+            </div>
+
+            <div class="spec-group">
+              <span class="spec-label">Ticket Type</span>
+              <div class="spec-options" id="ticketTierOptions">
+                <!-- Dynamic ticket tier chips rendered here -->
+              </div>
+            </div>
+
+            <div class="qty-selector-row">
+              <span class="qty-label">Quantity</span>
+              <div class="qty-selector">
+                <button class="qty-btn" id="ticketQtyDecreaseBtn"><i class="fas fa-minus"></i></button>
+                <span class="qty-value" id="ticketQtyValue">1</span>
+                <button class="qty-btn" id="ticketQtyIncreaseBtn"><i class="fas fa-plus"></i></button>
+              </div>
+            </div>
+
+            <div class="ticket-total-row">
+              <span class="ticket-total-label">Total</span>
+              <span class="ticket-total-value" id="ticketTotalValue">$0.00</span>
+            </div>
+
+            <button class="add-to-cart-detail-btn" id="buyTicketsBtn">Buy Tickets</button>
           </div>
         </div>
 
@@ -2550,8 +3110,8 @@
   <script>
     (function() {
       // Global Stores for Active Sessions
-      const chatHistories = {}; // Stores message logs per driver ID
-      let currentDriverId = null;
+      const chatHistories = {}; // Stores message logs per chat contact ID (drivers, professionals, etc.)
+      let currentChatId = null;
 
       // Dynamic Page Navigation
       const navItems = document.querySelectorAll('.nav-item');
@@ -2588,6 +3148,10 @@
             modalSearchInput.placeholder = 'Search hotels or rooms...';
           } else if (targetId === 'ridePage') {
             modalSearchInput.placeholder = 'Search ride locations...';
+          } else if (targetId === 'professionalsPage') {
+            modalSearchInput.placeholder = 'Search plumbers, painters, pros...';
+          } else if (targetId === 'ticketsPage') {
+            modalSearchInput.placeholder = 'Search concerts, events, venues...';
           } else {
             modalSearchInput.placeholder = 'Search services...';
           }
@@ -2630,40 +3194,49 @@
       const hotelsBackBtn = document.getElementById('hotelsBackBtn');
       const hotelsListView = document.getElementById('hotelsListView');
       const hotelDetailView = document.getElementById('hotelDetailView');
+      const roomDetailView = document.getElementById('roomDetailView');
       const hotelsPageTitle = document.getElementById('hotelsPageTitle');
       const detailHotelName = document.getElementById('detailHotelName');
       const detailHotelDesc = document.getElementById('detailHotelDesc');
       const roomsListContainer = document.getElementById('roomsListContainer');
+      const roomGalleryMain = document.getElementById('roomGalleryMain');
+      const roomGalleryThumbs = document.getElementById('roomGalleryThumbs');
+      const detailRoomTitle = document.getElementById('detailRoomTitle');
+      const detailRoomPrice = document.getElementById('detailRoomPrice');
+      const detailRoomDesc = document.getElementById('detailRoomDesc');
+      const roomAmenitiesContainer = document.getElementById('roomAmenitiesContainer');
+      const bookRoomDetailBtn = document.getElementById('bookRoomDetailBtn');
 
       const hotelDatabase = {
         'hotel-1': {
           name: 'Volcano Palms Resort',
           desc: 'Luxury resort located downtown featuring rooftop pools, full spa services & complimentary Wi-Fi.',
           rooms: [
-            { id: 'rm-101', title: 'Deluxe King Suite', desc: '1 King Bed · City View · Free Breakfast · Air-conditioned', price: '$120 / night', img: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80' },
-            { id: 'rm-102', title: 'Executive Ocean Suite', desc: '1 King Bed · Private Balcony · Jacuzzi · Free Spa Access', price: '$210 / night', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80' },
-            { id: 'rm-103', title: 'Standard Twin Room', desc: '2 Single Beds · Garden View · Work Desk', price: '$95 / night', img: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=80' }
+            { id: 'rm-101', title: 'Deluxe King Suite', desc: '1 King Bed · City View · Free Breakfast · Air-conditioned', price: '$120 / night', img: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'Air Conditioning', 'Free Breakfast', 'City View', 'Flat-screen TV', 'Room Service'] },
+            { id: 'rm-102', title: 'Executive Ocean Suite', desc: '1 King Bed · Private Balcony · Jacuzzi · Free Spa Access', price: '$210 / night', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'Private Balcony', 'Jacuzzi', 'Free Spa Access', 'Air Conditioning', 'Ocean View'] },
+            { id: 'rm-103', title: 'Standard Twin Room', desc: '2 Single Beds · Garden View · Work Desk', price: '$95 / night', img: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'Garden View', 'Work Desk', 'Air Conditioning'] }
           ]
         },
         'hotel-2': {
           name: 'The Obsidian Grand',
           desc: '5-star beachfront property with private shorelines, gourmet dining and 24/7 butler service.',
           rooms: [
-            { id: 'rm-201', title: 'Oceanfront Villa', desc: '1 Super King · Infinity Pool Access · Oceanfront Deck', price: '$280 / night', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=300&q=80' },
-            { id: 'rm-202', title: 'Presidential Suite', desc: '2 Bedrooms · Private Dining Lounge · Beachfront', price: '$450 / night', img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=300&q=80' }
+            { id: 'rm-201', title: 'Oceanfront Villa', desc: '1 Super King · Infinity Pool Access · Oceanfront Deck', price: '$280 / night', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'Infinity Pool Access', 'Oceanfront Deck', 'Air Conditioning', 'Mini Bar'] },
+            { id: 'rm-202', title: 'Presidential Suite', desc: '2 Bedrooms · Private Dining Lounge · Beachfront', price: '$450 / night', img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', '2 Bedrooms', 'Private Dining Lounge', 'Beachfront', 'Butler Service', 'Air Conditioning'] }
           ]
         },
         'hotel-3': {
           name: 'Manni Heights Boutique',
           desc: 'Modern boutique hotel situated in the heart of the city with artisan coffee bars and fast connectivity.',
           rooms: [
-            { id: 'rm-301', title: 'Urban Queen Studio', desc: '1 Queen Bed · City skyline views · Workstation', price: '$95 / night', img: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=300&q=80' },
-            { id: 'rm-302', title: 'Penthouse Loft', desc: '1 King Bed · Terrace lounge · Cocktail bar', price: '$190 / night', img: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=300&q=80' }
+            { id: 'rm-301', title: 'Urban Queen Studio', desc: '1 Queen Bed · City skyline views · Workstation', price: '$95 / night', img: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'City Skyline View', 'Workstation', 'Air Conditioning'] },
+            { id: 'rm-302', title: 'Penthouse Loft', desc: '1 King Bed · Terrace lounge · Cocktail bar', price: '$190 / night', img: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=300&q=80', images: ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80'], amenities: ['Free WiFi', 'Terrace Lounge', 'Cocktail Bar', 'Air Conditioning', 'Skyline View'] }
           ]
         }
       };
 
-      let activeHotelView = 'list'; // 'list' or 'detail'
+      let activeHotelView = 'list'; // 'list', 'rooms' or 'roomDetail'
+      let currentHotelId = null;
 
       if (hotelsCardTrigger) {
         hotelsCardTrigger.addEventListener('click', () => {
@@ -2674,7 +3247,9 @@
 
       if (hotelsBackBtn) {
         hotelsBackBtn.addEventListener('click', () => {
-          if (activeHotelView === 'detail') {
+          if (activeHotelView === 'roomDetail') {
+            openHotelDetail(currentHotelId);
+          } else if (activeHotelView === 'rooms') {
             showHotelsList();
           } else {
             switchMainPage('homePage');
@@ -2687,13 +3262,84 @@
         hotelsPageTitle.innerText = 'Hotels & Stays';
         hotelsListView.style.display = 'flex';
         hotelDetailView.style.display = 'none';
+        roomDetailView.style.display = 'none';
+      }
+
+      function bookRoom(room, hotel) {
+        alert(`Room "${room.title}" at ${hotel.name} booked successfully!`);
+        const orderNum = Math.floor(1000 + Math.random() * 9000);
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
+        orderCard.innerHTML = `
+          <div class="order-img" style="background-image: url('${room.img}');"></div>
+          <div class="order-body">
+            <div class="order-header">
+              <span class="order-title">${hotel.name}</span>
+              <span class="order-status status-active">Reserved</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-${orderNum}</span>
+              <span>${room.title}</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">${room.price}</span>
+              <button class="action-btn-sm">View Pass</button>
+            </div>
+          </div>
+        `;
+        ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+      }
+
+      function setRoomGalleryImage(images, index) {
+        roomGalleryMain.style.backgroundImage = `url('${images[index]}')`;
+        roomGalleryThumbs.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+
+      function openRoomDetail(hotelId, roomId) {
+        const hotel = hotelDatabase[hotelId];
+        const room = hotel && hotel.rooms.find(r => r.id === roomId);
+        if (!hotel || !room) return;
+
+        activeHotelView = 'roomDetail';
+        currentHotelId = hotelId;
+        hotelsPageTitle.innerText = room.title;
+        detailRoomTitle.innerText = room.title;
+        detailRoomPrice.innerText = room.price;
+        detailRoomDesc.innerText = `${room.desc} at ${hotel.name}.`;
+
+        roomGalleryThumbs.innerHTML = '';
+        room.images.forEach((img, index) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'gallery-thumb' + (index === 0 ? ' active' : '');
+          thumb.style.backgroundImage = `url('${img}')`;
+          thumb.addEventListener('click', () => setRoomGalleryImage(room.images, index));
+          roomGalleryThumbs.appendChild(thumb);
+        });
+        setRoomGalleryImage(room.images, 0);
+
+        roomAmenitiesContainer.innerHTML = '';
+        room.amenities.forEach(amenity => {
+          const tag = document.createElement('div');
+          tag.className = 'amenity-tag';
+          tag.innerHTML = `<i class="fas fa-check"></i> ${amenity}`;
+          roomAmenitiesContainer.appendChild(tag);
+        });
+
+        bookRoomDetailBtn.onclick = () => bookRoom(room, hotel);
+
+        hotelsListView.style.display = 'none';
+        hotelDetailView.style.display = 'none';
+        roomDetailView.style.display = 'flex';
       }
 
       function openHotelDetail(hotelId) {
         const hotel = hotelDatabase[hotelId];
         if (!hotel) return;
 
-        activeHotelView = 'detail';
+        activeHotelView = 'rooms';
+        currentHotelId = hotelId;
         hotelsPageTitle.innerText = 'Hotel Rooms';
         detailHotelName.innerText = hotel.name;
         detailHotelDesc.innerText = hotel.desc;
@@ -2714,30 +3360,13 @@
             </div>
           `;
 
-          roomCard.querySelector('.book-room-btn').addEventListener('click', () => {
-            alert(`Room "${room.title}" at ${hotel.name} booked successfully!`);
-            // Optionally add booking to Orders tab
-            const orderNum = Math.floor(1000 + Math.random() * 9000);
-            const orderCard = document.createElement('div');
-            orderCard.className = 'order-card';
-            orderCard.innerHTML = `
-              <div class="order-img" style="background-image: url('${room.img}');"></div>
-              <div class="order-body">
-                <div class="order-header">
-                  <span class="order-title">${hotel.name}</span>
-                  <span class="order-status status-active">Reserved</span>
-                </div>
-                <div class="order-details">
-                  <span>Order #MN-${orderNum}</span>
-                  <span>${room.title}</span>
-                </div>
-                <div class="order-footer">
-                  <span class="order-price">${room.price}</span>
-                  <button class="action-btn-sm">View Pass</button>
-                </div>
-              </div>
-            `;
-            ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+          roomCard.addEventListener('click', () => {
+            openRoomDetail(hotelId, room.id);
+          });
+
+          roomCard.querySelector('.book-room-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            bookRoom(room, hotel);
           });
 
           roomsListContainer.appendChild(roomCard);
@@ -2745,6 +3374,7 @@
 
         hotelsListView.style.display = 'none';
         hotelDetailView.style.display = 'flex';
+        roomDetailView.style.display = 'none';
       }
 
       document.querySelectorAll('.hotel-card').forEach(card => {
@@ -2754,85 +3384,98 @@
         });
       });
 
-      // --- Shop Page Navigation & Product Details Logic ---
+      // --- Shop Page Navigation, Sub-Tabs & Product Detail Logic ---
       const shopCardTrigger = document.getElementById('shopCardTrigger');
       const shopBackBtn = document.getElementById('shopBackBtn');
       const shopChips = document.querySelectorAll('.shop-cat-chip');
       const shopPageTitle = document.getElementById('shopPageTitle');
-      const shopProductsView = document.getElementById('shopProductsView');
-      const productDetailView = document.getElementById('productDetailView');
+      const shopListView = document.getElementById('shopListView');
+      const shopDetailView = document.getElementById('shopDetailView');
+      const productGalleryMain = document.getElementById('productGalleryMain');
+      const productGalleryThumbs = document.getElementById('productGalleryThumbs');
+      const detailProductTitle = document.getElementById('detailProductTitle');
+      const detailProductRating = document.getElementById('detailProductRating');
+      const detailProductPrice = document.getElementById('detailProductPrice');
+      const detailProductDesc = document.getElementById('detailProductDesc');
+      const detailSpecsContainer = document.getElementById('detailSpecsContainer');
+      const qtyValueEl = document.getElementById('qtyValue');
+      const qtyDecreaseBtn = document.getElementById('qtyDecreaseBtn');
+      const qtyIncreaseBtn = document.getElementById('qtyIncreaseBtn');
+      const addToCartDetailBtn = document.getElementById('addToCartDetailBtn');
 
-      const productMainImg = document.getElementById('productMainImg');
-      const productThumbnails = document.getElementById('productThumbnails');
-      const productDetailTitle = document.getElementById('productDetailTitle');
-      const productDetailPrice = document.getElementById('productDetailPrice');
-      const productDetailRating = document.getElementById('productDetailRating');
-      const productDetailDesc = document.getElementById('productDetailDesc');
-      const colorOptions = document.getElementById('colorOptions');
-      const sizeOptions = document.getElementById('sizeOptions');
-      const buyProductBtn = document.getElementById('buyProductBtn');
-
-      let activeShopView = 'list'; // 'list' or 'detail'
-      let currentSelectedProduct = null;
-      let selectedColor = '';
-      let selectedSize = '';
+      const colorSwatchMap = {
+        'Black': '#1a1a1a', 'White': '#f5f5f5', 'Blue': '#2563eb',
+        'Silver': '#c0c0c0', 'Rose Gold': '#b76e79', 'Red': '#dc2626',
+        'Brown': '#7b4a24', 'Tan': '#d2b48c'
+      };
 
       const productDatabase = {
         'prod-1': {
-          id: 'prod-1',
           title: 'Wireless Headphones',
           price: '$89.99',
-          rating: '★ 4.8 (120 reviews)',
-          desc: 'High-fidelity audio with active noise cancellation, deep bass, and comfortable memory-foam earcups. Up to 40 hours battery life.',
+          rating: '★ 4.8 (120)',
+          desc: 'Premium over-ear wireless headphones with active noise cancellation, 30-hour battery life and plush memory-foam ear cushions for all-day comfort.',
           images: [
             'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80'
+            'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=600&q=80'
           ],
-          colors: ['Black', 'Silver', 'Volcanic Orange'],
-          sizes: ['Standard']
+          specs: [
+            { label: 'Color', type: 'color', options: ['Black', 'White', 'Blue'] },
+            { label: 'Connectivity', type: 'text', options: ['Bluetooth 5.0', 'Wired 3.5mm'] }
+          ]
         },
         'prod-2': {
-          id: 'prod-2',
           title: 'Smart Watch Pro',
           price: '$149.00',
-          rating: '★ 4.7 (85 reviews)',
-          desc: 'Track heart rate, GPS routes, sleep quality, and daily activities. AMOLED display with customized titanium watch casing.',
+          rating: '★ 4.7 (85)',
+          desc: 'Track your fitness goals in style. Features heart-rate monitoring, GPS, sleep tracking and up to 7 days of battery life.',
           images: [
             'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80'
+            'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80'
           ],
-          colors: ['Matte Black', 'Space Gray'],
-          sizes: ['40mm', '44mm']
+          specs: [
+            { label: 'Color', type: 'color', options: ['Black', 'Silver', 'Rose Gold'] },
+            { label: 'Band Size', type: 'text', options: ['38mm', '42mm'] }
+          ]
         },
         'prod-3': {
-          id: 'prod-3',
           title: 'Urban Sneakers',
           price: '$110.00',
-          rating: '★ 4.9 (210 reviews)',
-          desc: 'Engineered for extreme comfort and urban mobility. Features lightweight breathable mesh and durable rubber outsoles.',
+          rating: '★ 4.9 (210)',
+          desc: 'Lightweight everyday sneakers with breathable knit uppers and cushioned soles built for all-day city wear.',
           images: [
             'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80',
-            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80'
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80'
           ],
-          colors: ['Red/White', 'All Black', 'Grey'],
-          sizes: ['EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44']
+          specs: [
+            { label: 'Color', type: 'color', options: ['White', 'Black', 'Red'] },
+            { label: 'Size', type: 'text', options: ['40', '41', '42', '43', '44'] }
+          ]
         },
         'prod-4': {
-          id: 'prod-4',
           title: 'Leather Bag',
           price: '$65.50',
-          rating: '★ 4.6 (64 reviews)',
-          desc: 'Handcrafted genuine leather shoulder bag. Includes laptop sleeve, waterproof lining, and heavy-duty steel zippers.',
+          rating: '★ 4.6 (64)',
+          desc: 'Handcrafted genuine leather bag with reinforced stitching, spacious interior and adjustable strap for everyday carry.',
           images: [
             'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80',
             'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80'
           ],
-          colors: ['Tan Brown', 'Dark Charcoal'],
-          sizes: ['Medium', 'Large']
+          specs: [
+            { label: 'Color', type: 'color', options: ['Brown', 'Black', 'Tan'] },
+            { label: 'Size', type: 'text', options: ['Small', 'Medium', 'Large'] }
+          ]
         }
       };
+
+      let activeShopView = 'list'; // 'list' or 'detail'
+      let currentProductId = null;
+      let currentQty = 1;
+      let currentSelections = {};
 
       if (shopCardTrigger) {
         shopCardTrigger.addEventListener('click', () => {
@@ -2851,121 +3494,6 @@
         });
       }
 
-      function showShopList() {
-        activeShopView = 'list';
-        shopPageTitle.innerText = 'Manni Store';
-        shopProductsView.style.display = 'flex';
-        productDetailView.style.display = 'none';
-      }
-
-      function openProductDetail(productId) {
-        const prod = productDatabase[productId];
-        if (!prod) return;
-
-        currentSelectedProduct = prod;
-        activeShopView = 'detail';
-        shopPageTitle.innerText = 'Product Details';
-
-        productDetailTitle.innerText = prod.title;
-        productDetailPrice.innerText = prod.price;
-        productDetailRating.innerText = prod.rating;
-        productDetailDesc.innerText = prod.desc;
-
-        // Render main image & thumbnails
-        productMainImg.style.backgroundImage = `url('${prod.images[0]}')`;
-        productThumbnails.innerHTML = '';
-        prod.images.forEach((imgUrl, index) => {
-          const thumb = document.createElement('div');
-          thumb.className = `thumb-img ${index === 0 ? 'active' : ''}`;
-          thumb.style.backgroundImage = `url('${imgUrl}')`;
-          thumb.addEventListener('click', () => {
-            productMainImg.style.backgroundImage = `url('${imgUrl}')`;
-            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-          });
-          productThumbnails.appendChild(thumb);
-        });
-
-        // Color specifications
-        colorOptions.innerHTML = '';
-        selectedColor = prod.colors[0] || '';
-        prod.colors.forEach((col, index) => {
-          const colBtn = document.createElement('button');
-          colBtn.className = `spec-btn ${index === 0 ? 'active' : ''}`;
-          colBtn.innerText = col;
-          colBtn.addEventListener('click', () => {
-            colorOptions.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
-            colBtn.classList.add('active');
-            selectedColor = col;
-          });
-          colorOptions.appendChild(colBtn);
-        });
-
-        // Size specifications
-        sizeOptions.innerHTML = '';
-        selectedSize = prod.sizes[0] || '';
-        prod.sizes.forEach((sz, index) => {
-          const szBtn = document.createElement('button');
-          szBtn.className = `spec-btn ${index === 0 ? 'active' : ''}`;
-          szBtn.innerText = sz;
-          szBtn.addEventListener('click', () => {
-            sizeOptions.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
-            szBtn.classList.add('active');
-            selectedSize = sz;
-          });
-          sizeOptions.appendChild(szBtn);
-        });
-
-        shopProductsView.style.display = 'none';
-        productDetailView.style.display = 'flex';
-      }
-
-      document.querySelectorAll('.shop-product-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          // If user clicked the plus button, handle quick add without taking over full detail view
-          if (e.target.closest('.shop-add-btn')) {
-            e.stopPropagation();
-            const prodId = this.getAttribute('data-product-id');
-            const prod = productDatabase[prodId];
-            if (prod) {
-              alert(`Added ${prod.title} to your order!`);
-            }
-            return;
-          }
-          const productId = this.getAttribute('data-product-id');
-          openProductDetail(productId);
-        });
-      });
-
-      if (buyProductBtn) {
-        buyProductBtn.addEventListener('click', () => {
-          if (!currentSelectedProduct) return;
-          alert(`Ordered "${currentSelectedProduct.title}" [Color: ${selectedColor}, Size: ${selectedSize}] successfully!`);
-
-          const orderNum = Math.floor(1000 + Math.random() * 9000);
-          const orderCard = document.createElement('div');
-          orderCard.className = 'order-card';
-          orderCard.innerHTML = `
-            <div class="order-img" style="background-image: url('${currentSelectedProduct.images[0]}');"></div>
-            <div class="order-body">
-              <div class="order-header">
-                <span class="order-title">${currentSelectedProduct.title}</span>
-                <span class="order-status status-active">Processing</span>
-              </div>
-              <div class="order-details">
-                <span>Order #MN-${orderNum}</span>
-                <span>${selectedColor} · ${selectedSize}</span>
-              </div>
-              <div class="order-footer">
-                <span class="order-price">${currentSelectedProduct.price}</span>
-                <button class="action-btn-sm">Track Package</button>
-              </div>
-            </div>
-          `;
-          ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
-        });
-      }
-
       shopChips.forEach(chip => {
         chip.addEventListener('click', function() {
           shopChips.forEach(c => c.classList.remove('active'));
@@ -2973,13 +3501,273 @@
         });
       });
 
-      // --- Food Page Navigation & Sub-Tabs ---
+      function showShopList() {
+        activeShopView = 'list';
+        shopPageTitle.innerText = 'Manni Store';
+        shopListView.style.display = 'flex';
+        shopDetailView.style.display = 'none';
+      }
+
+      function setGalleryImage(images, index) {
+        productGalleryMain.style.backgroundImage = `url('${images[index]}')`;
+        productGalleryThumbs.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+
+      function openProductDetail(productId) {
+        const product = productDatabase[productId];
+        if (!product) return;
+
+        activeShopView = 'detail';
+        currentProductId = productId;
+        currentQty = 1;
+        currentSelections = {};
+
+        shopPageTitle.innerText = product.title;
+        detailProductTitle.innerText = product.title;
+        detailProductRating.innerText = product.rating;
+        detailProductPrice.innerText = product.price;
+        detailProductDesc.innerText = product.desc;
+        qtyValueEl.innerText = currentQty;
+
+        // Render gallery
+        productGalleryThumbs.innerHTML = '';
+        product.images.forEach((img, index) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'gallery-thumb' + (index === 0 ? ' active' : '');
+          thumb.style.backgroundImage = `url('${img}')`;
+          thumb.addEventListener('click', () => setGalleryImage(product.images, index));
+          productGalleryThumbs.appendChild(thumb);
+        });
+        setGalleryImage(product.images, 0);
+
+        // Render specification groups
+        detailSpecsContainer.innerHTML = '';
+        product.specs.forEach(spec => {
+          currentSelections[spec.label] = spec.options[0];
+
+          const group = document.createElement('div');
+          group.className = 'spec-group';
+
+          const label = document.createElement('span');
+          label.className = 'spec-label';
+          label.innerText = spec.label;
+          group.appendChild(label);
+
+          const optionsRow = document.createElement('div');
+          optionsRow.className = 'spec-options';
+
+          spec.options.forEach((option, index) => {
+            const optionEl = document.createElement('div');
+            optionEl.title = option;
+
+            if (spec.type === 'color') {
+              optionEl.className = 'color-swatch' + (index === 0 ? ' active' : '');
+              optionEl.style.background = colorSwatchMap[option] || '#888888';
+            } else {
+              optionEl.className = 'spec-chip' + (index === 0 ? ' active' : '');
+              optionEl.innerText = option;
+            }
+
+            optionEl.addEventListener('click', () => {
+              optionsRow.querySelectorAll('.color-swatch, .spec-chip').forEach(el => el.classList.remove('active'));
+              optionEl.classList.add('active');
+              currentSelections[spec.label] = option;
+            });
+
+            optionsRow.appendChild(optionEl);
+          });
+
+          group.appendChild(optionsRow);
+          detailSpecsContainer.appendChild(group);
+        });
+
+        shopListView.style.display = 'none';
+        shopDetailView.style.display = 'flex';
+      }
+
+      document.querySelectorAll('.shop-product-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const productId = this.getAttribute('data-product-id');
+          openProductDetail(productId);
+        });
+      });
+
+      document.querySelectorAll('.shop-add-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      });
+
+      if (qtyDecreaseBtn) {
+        qtyDecreaseBtn.addEventListener('click', () => {
+          if (currentQty > 1) {
+            currentQty--;
+            qtyValueEl.innerText = currentQty;
+          }
+        });
+      }
+
+      if (qtyIncreaseBtn) {
+        qtyIncreaseBtn.addEventListener('click', () => {
+          currentQty++;
+          qtyValueEl.innerText = currentQty;
+        });
+      }
+
+      if (addToCartDetailBtn) {
+        addToCartDetailBtn.addEventListener('click', () => {
+          const product = productDatabase[currentProductId];
+          if (!product) return;
+
+          const specSummary = Object.keys(currentSelections)
+            .map(key => `${key}: ${currentSelections[key]}`)
+            .join(', ');
+
+          alert(`Added to cart: ${currentQty} × ${product.title}\n${specSummary}\n${product.price} each`);
+        });
+      }
+
+      // --- Food Page Navigation, Sub-Tabs & Restaurant Menu Logic ---
       const foodCardTrigger = document.getElementById('foodCardTrigger');
       const foodBackBtn = document.getElementById('foodBackBtn');
       const foodSubTabItems = document.getElementById('foodSubTabItems');
       const foodSubTabRestaurants = document.getElementById('foodSubTabRestaurants');
       const foodItemsView = document.getElementById('foodItemsView');
       const restaurantsView = document.getElementById('restaurantsView');
+      const foodFilterBanner = document.getElementById('foodFilterBanner');
+      const foodFilterBannerText = document.getElementById('foodFilterBannerText');
+      const clearFoodFilterBtn = document.getElementById('clearFoodFilterBtn');
+      const foodCardsContainer = document.getElementById('foodCardsContainer');
+
+      const restaurantDatabase = {
+        'rest-1': {
+          name: 'Lava Grill & Bar',
+          rating: '★ 4.9',
+          cuisine: 'African · Continental',
+          delivery: '$2.50 Delivery'
+        },
+        'rest-2': {
+          name: 'Metro Bistro',
+          rating: '★ 4.7',
+          cuisine: 'Burgers · Fast Food',
+          delivery: 'Free Delivery'
+        }
+      };
+
+      const foodDatabase = [
+        {
+          id: 'food-1',
+          restaurantId: 'rest-1',
+          title: 'Assorted Jollof',
+          desc: 'Served with grilled chicken, kelewele & fried plantain.',
+          price: '$12.50',
+          img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80'
+        },
+        {
+          id: 'food-2',
+          restaurantId: 'rest-2',
+          title: 'Smokey Burger',
+          desc: 'Double beef patty, cheddar, bacon jam & crisp fries.',
+          price: '$15.00',
+          img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80'
+        },
+        {
+          id: 'food-3',
+          restaurantId: 'rest-2',
+          title: 'Pepperoni Pizza',
+          desc: 'Wood-fired crust with spicy pepperoni & mozzarella.',
+          price: '$18.00',
+          img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80'
+        }
+      ];
+
+      function getFoodServed(food, restaurant) {
+        const orderNum = Math.floor(1000 + Math.random() * 9000);
+        alert(`You'll be served: ${food.title} from ${restaurant.name}!`);
+
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
+        orderCard.innerHTML = `
+          <div class="order-img" style="background-image: url('${food.img}');"></div>
+          <div class="order-body">
+            <div class="order-header">
+              <span class="order-title">${food.title}</span>
+              <span class="order-status status-active">Preparing</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-${orderNum}</span>
+              <span>${restaurant.name}</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">${food.price}</span>
+              <button class="action-btn-sm">Track Order</button>
+            </div>
+          </div>
+        `;
+        ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+      }
+
+      function renderFoodItems(filterRestaurantId) {
+        const items = filterRestaurantId
+          ? foodDatabase.filter(f => f.restaurantId === filterRestaurantId)
+          : foodDatabase;
+
+        if (filterRestaurantId) {
+          const rest = restaurantDatabase[filterRestaurantId];
+          foodFilterBannerText.innerText = `Menu · ${rest.name}`;
+          foodFilterBanner.style.display = 'flex';
+        } else {
+          foodFilterBanner.style.display = 'none';
+        }
+
+        foodCardsContainer.innerHTML = '';
+        items.forEach(food => {
+          const restaurant = restaurantDatabase[food.restaurantId];
+          const card = document.createElement('div');
+          card.className = 'food-item-card';
+          card.innerHTML = `
+            <div class="food-item-img" style="background-image: url('${food.img}');"></div>
+            <div class="food-item-details">
+              <span class="food-item-title">${food.title}</span>
+              <span class="food-item-restaurant"><i class="fas fa-store"></i> ${restaurant.name}</span>
+              <span class="food-item-desc">${food.desc}</span>
+              <div class="food-item-bottom">
+                <span class="food-item-price">${food.price}</span>
+                <button class="add-cart-btn">Get Served</button>
+              </div>
+            </div>
+          `;
+
+          card.querySelector('.add-cart-btn').addEventListener('click', () => {
+            getFoodServed(food, restaurant);
+          });
+
+          foodCardsContainer.appendChild(card);
+        });
+      }
+
+      function showFoodSubTab() {
+        foodSubTabItems.classList.add('active');
+        foodSubTabRestaurants.classList.remove('active');
+        foodItemsView.style.display = 'flex';
+        restaurantsView.style.display = 'none';
+      }
+
+      function showRestaurantsSubTab() {
+        foodSubTabRestaurants.classList.add('active');
+        foodSubTabItems.classList.remove('active');
+        foodItemsView.style.display = 'none';
+        restaurantsView.style.display = 'flex';
+      }
+
+      function openRestaurantMenu(restaurantId) {
+        renderFoodItems(restaurantId);
+        showFoodSubTab();
+      }
+
+      renderFoodItems(null);
 
       if (foodCardTrigger) {
         foodCardTrigger.addEventListener('click', () => switchMainPage('foodPage'));
@@ -2990,17 +3778,21 @@
       }
 
       foodSubTabItems.addEventListener('click', () => {
-        foodSubTabItems.classList.add('active');
-        foodSubTabRestaurants.classList.remove('active');
-        foodItemsView.style.display = 'flex';
-        restaurantsView.style.display = 'none';
+        renderFoodItems(null);
+        showFoodSubTab();
       });
 
-      foodSubTabRestaurants.addEventListener('click', () => {
-        foodSubTabRestaurants.classList.add('active');
-        foodSubTabItems.classList.remove('active');
-        foodItemsView.style.display = 'none';
-        restaurantsView.style.display = 'flex';
+      foodSubTabRestaurants.addEventListener('click', showRestaurantsSubTab);
+
+      if (clearFoodFilterBtn) {
+        clearFoodFilterBtn.addEventListener('click', () => renderFoodItems(null));
+      }
+
+      document.querySelectorAll('.restaurant-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const restaurantId = this.getAttribute('data-restaurant-id');
+          openRestaurantMenu(restaurantId);
+        });
       });
 
       // --- RIDE PAGE & PERSISTENT CHAT LOGIC ---
@@ -3019,6 +3811,7 @@
       const closeChatBtn = document.getElementById('closeChatBtn');
       const chatDriverAvatar = document.getElementById('chatDriverAvatar');
       const chatDriverName = document.getElementById('chatDriverName');
+      const chatDriverStatus = document.getElementById('chatDriverStatus');
       const chatBody = document.getElementById('chatBody');
       const chatMsgInput = document.getElementById('chatMsgInput');
       const chatSendBtn = document.getElementById('chatSendBtn');
@@ -3085,7 +3878,11 @@
 
             card.querySelector('.send-req-btn').addEventListener('click', () => {
               addBookingToOrders(driver, dest);
-              openDriverChat(driver);
+              openChat(
+                { id: driver.id, name: driver.name, img: driver.img },
+                `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.`,
+                '<i class="fas fa-check-circle"></i> Booking Accepted'
+              );
             });
 
             ridersList.appendChild(card);
@@ -3122,20 +3919,25 @@
         `;
 
         newOrderCard.querySelector('.open-chat-from-orders-btn').addEventListener('click', () => {
-          openDriverChat(driver);
+          openChat(
+            { id: driver.id, name: driver.name, img: driver.img },
+            `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.`,
+            '<i class="fas fa-check-circle"></i> Booking Accepted'
+          );
         });
 
         ordersListContainer.insertBefore(newOrderCard, ordersListContainer.firstChild);
       }
 
-      function openDriverChat(driver) {
-        currentDriverId = driver.id;
-        chatDriverName.innerText = driver.name;
-        chatDriverAvatar.style.backgroundImage = `url('${driver.img}')`;
+      function openChat(contact, greetingText, statusHTML) {
+        currentChatId = contact.id;
+        chatDriverName.innerText = contact.name;
+        chatDriverAvatar.style.backgroundImage = `url('${contact.img}')`;
+        chatDriverStatus.innerHTML = statusHTML || '<i class="fas fa-check-circle"></i> Booking Accepted';
 
-        if (!chatHistories[driver.id]) {
-          chatHistories[driver.id] = [
-            { sender: 'driver', text: `Hello! Request accepted. I am driving a ${driver.vehicle} and will arrive in approx ${driver.dist}.` }
+        if (!chatHistories[contact.id]) {
+          chatHistories[contact.id] = [
+            { sender: 'driver', text: greetingText }
           ];
         }
 
@@ -3145,7 +3947,7 @@
 
       function renderChatMessages() {
         chatBody.innerHTML = '';
-        const messages = chatHistories[currentDriverId] || [];
+        const messages = chatHistories[currentChatId] || [];
 
         messages.forEach(msg => {
           const bubble = document.createElement('div');
@@ -3159,15 +3961,15 @@
 
       function sendUserMessage() {
         const text = chatMsgInput.value.trim();
-        if (!text || !currentDriverId) return;
+        if (!text || !currentChatId) return;
 
-        chatHistories[currentDriverId].push({ sender: 'user', text: text });
+        chatHistories[currentChatId].push({ sender: 'user', text: text });
         chatMsgInput.value = '';
         renderChatMessages();
 
         setTimeout(() => {
-          if (chatHistories[currentDriverId]) {
-            chatHistories[currentDriverId].push({ sender: 'driver', text: `Got it, thanks for the update! See you shortly.` });
+          if (chatHistories[currentChatId]) {
+            chatHistories[currentChatId].push({ sender: 'driver', text: `Got it, thanks! I'll get back to you shortly.` });
             renderChatMessages();
           }
         }, 1500);
@@ -3188,6 +3990,429 @@
           chatModalOverlay.classList.remove('active');
         });
       }
+
+      // --- PROFESSIONAL SERVICES PAGE LOGIC ---
+      const professionalsBackBtn = document.getElementById('professionalsBackBtn');
+      const professionalsPageTitle = document.getElementById('professionalsPageTitle');
+      const professionalsListView = document.getElementById('professionalsListView');
+      const professionalProfileView = document.getElementById('professionalProfileView');
+      const professionalsListContainer = document.getElementById('professionalsListContainer');
+      const proCategoryChips = document.querySelectorAll('#proCategoryScroll .shop-cat-chip');
+      const proProfileAvatar = document.getElementById('proProfileAvatar');
+      const proProfileName = document.getElementById('proProfileName');
+      const proProfileTitle = document.getElementById('proProfileTitle');
+      const proProfileRating = document.getElementById('proProfileRating');
+      const proProfileReviews = document.getElementById('proProfileReviews');
+      const proProfileRate = document.getElementById('proProfileRate');
+      const proProfileExperience = document.getElementById('proProfileExperience');
+      const proProfileAvailability = document.getElementById('proProfileAvailability');
+      const proProfileBio = document.getElementById('proProfileBio');
+      const proProfileSkills = document.getElementById('proProfileSkills');
+      const talkToProBtn = document.getElementById('talkToProBtn');
+
+      const professionalDatabase = [
+        {
+          id: 'pro-1', name: 'Kwame Boateng', category: 'Plumbers', title: 'Licensed Plumber',
+          rating: '4.9', reviews: 132, rate: '$25/hr', experience: '8 yrs experience', available: true,
+          img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+          bio: 'Specialist in leak repairs, pipe installation and bathroom fittings. Fast response and clean work guaranteed.',
+          skills: ['Leak Repair', 'Pipe Installation', 'Water Heaters', 'Drain Cleaning']
+        },
+        {
+          id: 'pro-2', name: 'Ama Serwaa', category: 'Electricians', title: 'Certified Electrician',
+          rating: '4.8', reviews: 98, rate: '$30/hr', experience: '6 yrs experience', available: true,
+          img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+          bio: 'Handles wiring, circuit breaker repairs and full home rewiring with strict safety compliance.',
+          skills: ['Wiring', 'Circuit Repair', 'Lighting Installation', 'Safety Inspection']
+        },
+        {
+          id: 'pro-3', name: 'Kojo Antwi', category: 'Painters', title: 'Interior & Exterior Painter',
+          rating: '4.7', reviews: 76, rate: '$20/hr', experience: '5 yrs experience', available: false,
+          img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+          bio: 'Delivers clean, precise paint jobs for homes and offices, from color consultation to final coat.',
+          skills: ['Interior Painting', 'Exterior Painting', 'Wallpaper Removal', 'Color Consultation']
+        },
+        {
+          id: 'pro-4', name: 'Efua Mensah', category: 'Carpenters', title: 'Master Carpenter',
+          rating: '4.9', reviews: 154, rate: '$28/hr', experience: '10 yrs experience', available: true,
+          img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
+          bio: 'Custom furniture, cabinetry and structural repairs built to last with premium materials.',
+          skills: ['Custom Furniture', 'Cabinetry', 'Door & Window Repair', 'Structural Framing']
+        },
+        {
+          id: 'pro-5', name: 'Yaw Darko', category: 'Cleaners', title: 'Home Deep-Cleaning Specialist',
+          rating: '4.6', reviews: 61, rate: '$15/hr', experience: '4 yrs experience', available: true,
+          img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+          bio: 'Thorough deep-cleaning for homes and offices, including sanitization and post-construction cleanup.',
+          skills: ['Deep Cleaning', 'Sanitization', 'Post-Construction Cleanup', 'Laundry Service']
+        },
+        {
+          id: 'pro-6', name: 'Abena Owusu', category: 'Mechanics', title: 'Auto Mechanic',
+          rating: '4.8', reviews: 112, rate: '$35/hr', experience: '9 yrs experience', available: true,
+          img: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+          bio: 'Expert in engine diagnostics, brake repairs and routine maintenance for all vehicle types.',
+          skills: ['Engine Diagnostics', 'Brake Repair', 'Oil Change', 'AC Repair']
+        }
+      ];
+
+      let activeProfessionalsView = 'list'; // 'list' or 'profile'
+      let activeProCategory = 'All';
+
+      function showProfessionalsList() {
+        activeProfessionalsView = 'list';
+        professionalsPageTitle.innerText = 'Professional Services';
+        professionalsListView.style.display = 'flex';
+        professionalProfileView.style.display = 'none';
+      }
+
+      function renderProfessionalsList() {
+        const pros = activeProCategory === 'All'
+          ? professionalDatabase
+          : professionalDatabase.filter(p => p.category === activeProCategory);
+
+        professionalsListContainer.innerHTML = '';
+        pros.forEach(pro => {
+          const card = document.createElement('div');
+          card.className = 'pro-card';
+          card.innerHTML = `
+            <div class="pro-card-avatar" style="background-image: url('${pro.img}');"></div>
+            <div class="pro-card-info">
+              <div class="pro-card-top-row">
+                <span class="pro-card-name">${pro.name}</span>
+                <span class="pro-card-rating">★ ${pro.rating}</span>
+              </div>
+              <span class="pro-card-title">${pro.title} · ${pro.experience}</span>
+              <div class="pro-card-bottom-row">
+                <span class="pro-card-rate">${pro.rate}</span>
+                <span class="pro-card-badge ${pro.available ? 'available' : 'busy'}">${pro.available ? 'Available' : 'Busy'}</span>
+              </div>
+            </div>
+            <i class="fas fa-chevron-right pro-card-arrow"></i>
+          `;
+
+          card.addEventListener('click', () => openProfessionalProfile(pro.id));
+          professionalsListContainer.appendChild(card);
+        });
+      }
+
+      function openProfessionalProfile(proId) {
+        const pro = professionalDatabase.find(p => p.id === proId);
+        if (!pro) return;
+
+        activeProfessionalsView = 'profile';
+        professionalsPageTitle.innerText = pro.name;
+
+        proProfileAvatar.style.backgroundImage = `url('${pro.img}')`;
+        proProfileName.innerText = pro.name;
+        proProfileTitle.innerText = `${pro.title} · ${pro.category}`;
+        proProfileRating.innerText = `★ ${pro.rating}`;
+        proProfileReviews.innerText = `(${pro.reviews} reviews)`;
+        proProfileRate.innerText = pro.rate;
+        proProfileExperience.innerText = pro.experience.replace(' experience', '');
+        proProfileAvailability.innerText = pro.available ? 'Available' : 'Busy';
+        proProfileBio.innerText = pro.bio;
+
+        proProfileSkills.innerHTML = '';
+        pro.skills.forEach(skill => {
+          const tag = document.createElement('div');
+          tag.className = 'spec-chip';
+          tag.innerText = skill;
+          proProfileSkills.appendChild(tag);
+        });
+
+        talkToProBtn.onclick = () => {
+          openChat(
+            { id: pro.id, name: pro.name, img: pro.img },
+            `Hi, I'm ${pro.name}, your ${pro.title.toLowerCase()}. How can I help you today?`,
+            '<i class="fas fa-circle" style="color: #22c55e; font-size: 0.5rem;"></i> Online now'
+          );
+        };
+
+        professionalsListView.style.display = 'none';
+        professionalProfileView.style.display = 'flex';
+      }
+
+      if (professionalsBackBtn) {
+        professionalsBackBtn.addEventListener('click', () => {
+          if (activeProfessionalsView === 'profile') {
+            showProfessionalsList();
+          } else {
+            switchMainPage('homePage');
+          }
+        });
+      }
+
+      proCategoryChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          proCategoryChips.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          activeProCategory = this.getAttribute('data-category');
+          renderProfessionalsList();
+        });
+      });
+
+      renderProfessionalsList();
+
+      // --- BUY TICKETS PAGE LOGIC ---
+      const ticketsBackBtn = document.getElementById('ticketsBackBtn');
+      const ticketsPageTitle = document.getElementById('ticketsPageTitle');
+      const ticketsListView = document.getElementById('ticketsListView');
+      const eventDetailView = document.getElementById('eventDetailView');
+      const eventsListContainer = document.getElementById('eventsListContainer');
+      const eventCategoryChips = document.querySelectorAll('#eventCategoryScroll .shop-cat-chip');
+      const eventGalleryMain = document.getElementById('eventGalleryMain');
+      const eventGalleryThumbs = document.getElementById('eventGalleryThumbs');
+      const detailEventTitle = document.getElementById('detailEventTitle');
+      const detailEventCategory = document.getElementById('detailEventCategory');
+      const detailEventDesc = document.getElementById('detailEventDesc');
+      const detailEventDate = document.getElementById('detailEventDate');
+      const detailEventTime = document.getElementById('detailEventTime');
+      const detailEventVenue = document.getElementById('detailEventVenue');
+      const ticketTierOptions = document.getElementById('ticketTierOptions');
+      const ticketQtyValue = document.getElementById('ticketQtyValue');
+      const ticketQtyDecreaseBtn = document.getElementById('ticketQtyDecreaseBtn');
+      const ticketQtyIncreaseBtn = document.getElementById('ticketQtyIncreaseBtn');
+      const ticketTotalValue = document.getElementById('ticketTotalValue');
+      const buyTicketsBtn = document.getElementById('buyTicketsBtn');
+
+      const ticketDatabase = [
+        {
+          id: 'tix-1', title: 'Amerado Live: Abronoma Tour', category: 'Concerts',
+          venue: 'Fantasy Dome, Accra', date: '24 AUG 2026', time: '8:00 PM',
+          desc: 'Amerado brings the Abronoma concert series live with special guest performances and pyrotechnic stage effects.',
+          images: [
+            'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80'
+          ],
+          tiers: [{ name: 'Regular', price: 25 }, { name: 'VIP', price: 60 }, { name: 'VVIP', price: 120 }]
+        },
+        {
+          id: 'tix-2', title: 'Lava Street Food Festival', category: 'Festivals',
+          venue: 'Independence Square', date: '5-7 SEP 2026', time: '12:00 PM',
+          desc: 'A 3-day celebration of street food, live music and local artisans from across the region.',
+          images: [
+            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80'
+          ],
+          tiers: [{ name: 'Day Pass', price: 15 }, { name: 'Weekend Pass', price: 35 }]
+        },
+        {
+          id: 'tix-3', title: 'Comedy Nite: Laugh Riot', category: 'Comedy',
+          venue: 'Manni Heights Boutique Hall', date: '12 SEP 2026', time: '7:30 PM',
+          desc: "An evening of stand-up comedy featuring the country's top comedians.",
+          images: [
+            'https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80'
+          ],
+          tiers: [{ name: 'Regular', price: 18 }, { name: 'Front Row', price: 40 }]
+        },
+        {
+          id: 'tix-4', title: 'Volcano FC vs Metro United', category: 'Sports',
+          venue: 'City Stadium', date: '20 SEP 2026', time: '4:00 PM',
+          desc: 'A high-stakes local derby match between two rival football clubs.',
+          images: [
+            'https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80'
+          ],
+          tiers: [{ name: 'Terrace', price: 10 }, { name: 'Grandstand', price: 25 }, { name: 'VIP Box', price: 75 }]
+        },
+        {
+          id: 'tix-5', title: 'Shakespeare Under the Stars: Macbeth', category: 'Theatre',
+          venue: 'Obsidian Grand Amphitheatre', date: '28 SEP 2026', time: '6:30 PM',
+          desc: 'An open-air theatrical production of Macbeth performed by the National Theatre Company.',
+          images: [
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80'
+          ],
+          tiers: [{ name: 'General', price: 12 }, { name: 'Premium', price: 30 }]
+        }
+      ];
+
+      let activeTicketsView = 'list'; // 'list' or 'detail'
+      let activeEventCategory = 'All';
+      let currentEventId = null;
+      let currentTierIndex = 0;
+      let currentTicketQty = 1;
+
+      function showTicketsList() {
+        activeTicketsView = 'list';
+        ticketsPageTitle.innerText = 'Buy Tickets';
+        ticketsListView.style.display = 'flex';
+        eventDetailView.style.display = 'none';
+      }
+
+      function renderEventsList() {
+        const events = activeEventCategory === 'All'
+          ? ticketDatabase
+          : ticketDatabase.filter(e => e.category === activeEventCategory);
+
+        eventsListContainer.innerHTML = '';
+        events.forEach(event => {
+          const card = document.createElement('div');
+          card.className = 'event-card';
+          card.innerHTML = `
+            <div class="event-img" style="background-image: url('${event.images[0]}');">
+              <span class="event-badge">${event.date}</span>
+            </div>
+            <div class="event-info">
+              <div class="event-header-row">
+                <span class="event-name">${event.title}</span>
+                <span class="event-category-tag">${event.category}</span>
+              </div>
+              <div class="event-meta">
+                <span>${event.venue}</span>
+                <span>•</span>
+                <span>${event.time}</span>
+              </div>
+              <span class="event-price-tag">From $${Math.min(...event.tiers.map(t => t.price))}</span>
+            </div>
+          `;
+
+          card.addEventListener('click', () => openEventDetail(event.id));
+          eventsListContainer.appendChild(card);
+        });
+      }
+
+      function setEventGalleryImage(images, index) {
+        eventGalleryMain.style.backgroundImage = `url('${images[index]}')`;
+        eventGalleryThumbs.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+
+      function updateTicketTotal() {
+        const event = ticketDatabase.find(e => e.id === currentEventId);
+        if (!event) return;
+        const tier = event.tiers[currentTierIndex];
+        ticketTotalValue.innerText = `$${(tier.price * currentTicketQty).toFixed(2)}`;
+      }
+
+      function openEventDetail(eventId) {
+        const event = ticketDatabase.find(e => e.id === eventId);
+        if (!event) return;
+
+        activeTicketsView = 'detail';
+        currentEventId = eventId;
+        currentTierIndex = 0;
+        currentTicketQty = 1;
+
+        ticketsPageTitle.innerText = event.title;
+        detailEventTitle.innerText = event.title;
+        detailEventCategory.innerText = event.category;
+        detailEventDesc.innerText = event.desc;
+        detailEventDate.innerText = event.date;
+        detailEventTime.innerText = event.time;
+        detailEventVenue.innerText = event.venue;
+        ticketQtyValue.innerText = currentTicketQty;
+
+        eventGalleryThumbs.innerHTML = '';
+        event.images.forEach((img, index) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'gallery-thumb' + (index === 0 ? ' active' : '');
+          thumb.style.backgroundImage = `url('${img}')`;
+          thumb.addEventListener('click', () => setEventGalleryImage(event.images, index));
+          eventGalleryThumbs.appendChild(thumb);
+        });
+        setEventGalleryImage(event.images, 0);
+
+        ticketTierOptions.innerHTML = '';
+        event.tiers.forEach((tier, index) => {
+          const chip = document.createElement('div');
+          chip.className = 'spec-chip' + (index === 0 ? ' active' : '');
+          chip.innerText = `${tier.name} · $${tier.price}`;
+          chip.addEventListener('click', () => {
+            ticketTierOptions.querySelectorAll('.spec-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            currentTierIndex = index;
+            updateTicketTotal();
+          });
+          ticketTierOptions.appendChild(chip);
+        });
+
+        updateTicketTotal();
+
+        ticketsListView.style.display = 'none';
+        eventDetailView.style.display = 'flex';
+      }
+
+      function buyTickets(event, tier, qty) {
+        const total = (tier.price * qty).toFixed(2);
+        alert(`${qty} × ${tier.name} ticket(s) for "${event.title}" booked! Total: $${total}`);
+
+        const orderNum = Math.floor(1000 + Math.random() * 9000);
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
+        orderCard.innerHTML = `
+          <div class="order-img" style="background-image: url('${event.images[0]}');"></div>
+          <div class="order-body">
+            <div class="order-header">
+              <span class="order-title">${event.title}</span>
+              <span class="order-status status-active">Confirmed</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-${orderNum}</span>
+              <span>${qty} × ${tier.name}</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">$${total}</span>
+              <button class="action-btn-sm">View Pass</button>
+            </div>
+          </div>
+        `;
+        ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+      }
+
+      if (ticketsBackBtn) {
+        ticketsBackBtn.addEventListener('click', () => {
+          if (activeTicketsView === 'detail') {
+            showTicketsList();
+          } else {
+            switchMainPage('homePage');
+          }
+        });
+      }
+
+      eventCategoryChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          eventCategoryChips.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          activeEventCategory = this.getAttribute('data-category');
+          renderEventsList();
+        });
+      });
+
+      if (ticketQtyDecreaseBtn) {
+        ticketQtyDecreaseBtn.addEventListener('click', () => {
+          if (currentTicketQty > 1) {
+            currentTicketQty--;
+            ticketQtyValue.innerText = currentTicketQty;
+            updateTicketTotal();
+          }
+        });
+      }
+
+      if (ticketQtyIncreaseBtn) {
+        ticketQtyIncreaseBtn.addEventListener('click', () => {
+          currentTicketQty++;
+          ticketQtyValue.innerText = currentTicketQty;
+          updateTicketTotal();
+        });
+      }
+
+      if (buyTicketsBtn) {
+        buyTicketsBtn.addEventListener('click', () => {
+          const event = ticketDatabase.find(e => e.id === currentEventId);
+          if (!event) return;
+          buyTickets(event, event.tiers[currentTierIndex], currentTicketQty);
+        });
+      }
+
+      renderEventsList();
 
       // --- Auth Modal Logic ---
       const authOverlay = document.getElementById('authModalOverlay');
@@ -3257,7 +4482,8 @@
       const professionalService = document.querySelector('.professional-service');
       if (professionalService) {
         professionalService.addEventListener('click', () => {
-          console.log('🔧 Professional Services – plumbers, painters, electricians');
+          showProfessionalsList();
+          switchMainPage('professionalsPage');
         });
       }
 
@@ -3265,7 +4491,8 @@
       const ticketCard = document.querySelector('.ticket-highlight');
       if (ticketCard) {
         ticketCard.addEventListener('click', () => {
-          console.log('🎟️ Buy tickets – event timing & availability');
+          showTicketsList();
+          switchMainPage('ticketsPage');
         });
       }
 
