@@ -1606,6 +1606,208 @@
       font-size: 1.2rem;
     }
 
+    /* --- FLOATING CART BAG --- */
+    .cart-fab {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      color: #ff6b00;
+      border: 2px solid rgba(255, 107, 0, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 90;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .cart-fab:hover {
+      transform: translateY(-2px);
+      border-color: #ff6b00;
+    }
+
+    .cart-fab-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ff4500;
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 900;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid #121212;
+    }
+
+    @keyframes cartShake {
+      0%, 100% { transform: rotate(0) scale(1); }
+      20% { transform: rotate(-15deg) scale(1.1); }
+      40% { transform: rotate(12deg) scale(1.1); }
+      60% { transform: rotate(-10deg) scale(1.05); }
+      80% { transform: rotate(6deg) scale(1.05); }
+    }
+
+    .cart-fab.shaking {
+      animation: cartShake 0.5s ease;
+    }
+
+    /* --- CART MODAL CONTENTS --- */
+    .cart-item {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 0.8rem;
+    }
+
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 0;
+    }
+
+    .cart-item-title {
+      font-weight: 900;
+      font-size: 0.85rem;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .cart-item-specs {
+      font-size: 0.68rem;
+      color: #a3a3a3;
+      font-weight: 600;
+    }
+
+    .cart-item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    .cart-item-qty {
+      font-size: 0.72rem;
+      color: #e5e5e5;
+      font-weight: 700;
+    }
+
+    .cart-item-price {
+      font-weight: 900;
+      color: #ff7b00;
+      font-size: 0.85rem;
+    }
+
+    .cart-remove-btn {
+      background: rgba(210, 0, 0, 0.15);
+      color: #ff6b6b;
+      border: 1px solid rgba(210, 0, 0, 0.4);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      transition: 0.2s;
+    }
+
+    .cart-remove-btn:hover {
+      background: #d00000;
+      color: #ffffff;
+    }
+
+    .cart-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 2.5rem 1rem;
+      color: #737373;
+      text-align: center;
+      flex: 1;
+    }
+
+    .cart-empty-state i {
+      font-size: 2rem;
+      color: #4a4a4a;
+    }
+
+    /* --- ROOM BOOKING MODAL --- */
+    .booking-room-summary {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 0.8rem;
+    }
+
+    .booking-room-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+    }
+
+    .booking-room-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+
+    .booking-room-title {
+      font-weight: 900;
+      font-size: 0.88rem;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .booking-room-hotel {
+      font-size: 0.7rem;
+      color: #a3a3a3;
+      font-weight: 600;
+    }
+
+    .booking-room-price {
+      font-weight: 900;
+      color: #ff7b00;
+      font-size: 0.82rem;
+      margin-top: 0.1rem;
+    }
+
     /* --- CHAT / FEEDBACK MODAL OVERLAY --- */
     .chat-modal-overlay {
       position: absolute;
@@ -2548,6 +2750,12 @@
 
             <button class="add-to-cart-detail-btn" id="addToCartDetailBtn">Add to Cart</button>
           </div>
+
+          <!-- Floating Cart Bag -->
+          <button class="cart-fab" id="cartFabBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-fab-badge" id="cartFabBadge" style="display: none;">0</span>
+          </button>
         </div>
 
         <!-- ================= FOOD PAGE ================= -->
@@ -3092,6 +3300,72 @@
         </div>
       </div>
 
+      <!-- ================= CART MODAL ================= -->
+      <div id="cartModalOverlay" class="chat-modal-overlay">
+        <div class="chat-modal">
+          <div class="auth-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <button class="close-auth-btn" id="closeCartBtn"><i class="fas fa-times"></i></button>
+          </div>
+
+          <div class="chat-body" id="cartItemsList">
+            <!-- Dynamic cart items or empty state rendered here -->
+          </div>
+
+          <div class="ticket-total-row">
+            <span class="ticket-total-label">Total</span>
+            <span class="ticket-total-value" id="cartTotalValue">$0.00</span>
+          </div>
+
+          <button class="add-to-cart-detail-btn" id="checkoutCartBtn">Checkout</button>
+        </div>
+      </div>
+
+      <!-- ================= ROOM BOOKING MODAL ================= -->
+      <div id="bookingModalOverlay" class="chat-modal-overlay">
+        <div class="chat-modal">
+          <div class="auth-header">
+            <h3><i class="fas fa-bed"></i> Confirm Booking</h3>
+            <button class="close-auth-btn" id="closeBookingBtn"><i class="fas fa-times"></i></button>
+          </div>
+
+          <div class="booking-room-summary">
+            <div class="booking-room-img" id="bookingRoomImg"></div>
+            <div class="booking-room-info">
+              <span class="booking-room-title" id="bookingRoomTitle">Room Name</span>
+              <span class="booking-room-hotel" id="bookingRoomHotel">Hotel Name</span>
+              <span class="booking-room-price" id="bookingRoomPrice">$0 / night</span>
+            </div>
+          </div>
+
+          <div class="auth-input-group">
+            <label>Check-in</label>
+            <input type="date" id="bookingCheckIn">
+          </div>
+
+          <div class="auth-input-group">
+            <label>Check-out</label>
+            <input type="date" id="bookingCheckOut">
+          </div>
+
+          <div class="qty-selector-row">
+            <span class="qty-label">Guests</span>
+            <div class="qty-selector">
+              <button class="qty-btn" id="bookingGuestsDecreaseBtn"><i class="fas fa-minus"></i></button>
+              <span class="qty-value" id="bookingGuestsValue">1</span>
+              <button class="qty-btn" id="bookingGuestsIncreaseBtn"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+
+          <div class="ticket-total-row">
+            <span class="ticket-total-label" id="bookingNightsLabel">1 Night · Total</span>
+            <span class="ticket-total-value" id="bookingTotalValue">$0.00</span>
+          </div>
+
+          <button class="add-to-cart-detail-btn" id="confirmBookingBtn">Confirm Booking</button>
+        </div>
+      </div>
+
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-item active" data-target="homePage">
@@ -3268,8 +3542,8 @@
         roomDetailView.style.display = 'none';
       }
 
-      function bookRoom(room, hotel) {
-        alert(`Room "${room.title}" at ${hotel.name} booked successfully!`);
+      function bookRoom(room, hotel, booking) {
+        alert(`Room "${room.title}" at ${hotel.name} booked successfully!\n${booking.checkIn} → ${booking.checkOut} · ${booking.guests} guest(s)\nTotal: $${booking.total.toFixed(2)}`);
         const orderNum = Math.floor(1000 + Math.random() * 9000);
         const orderCard = document.createElement('div');
         orderCard.className = 'order-card';
@@ -3282,15 +3556,147 @@
             </div>
             <div class="order-details">
               <span>Order #MN-${orderNum}</span>
-              <span>${room.title}</span>
+              <span>${room.title} · ${booking.checkIn} → ${booking.checkOut}</span>
             </div>
             <div class="order-footer">
-              <span class="order-price">${room.price}</span>
+              <span class="order-price">$${booking.total.toFixed(2)}</span>
               <button class="action-btn-sm">View Pass</button>
             </div>
           </div>
         `;
         ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+      }
+
+      // --- ROOM BOOKING MODAL LOGIC ---
+      const bookingModalOverlay = document.getElementById('bookingModalOverlay');
+      const closeBookingBtn = document.getElementById('closeBookingBtn');
+      const bookingRoomImg = document.getElementById('bookingRoomImg');
+      const bookingRoomTitle = document.getElementById('bookingRoomTitle');
+      const bookingRoomHotel = document.getElementById('bookingRoomHotel');
+      const bookingRoomPrice = document.getElementById('bookingRoomPrice');
+      const bookingCheckIn = document.getElementById('bookingCheckIn');
+      const bookingCheckOut = document.getElementById('bookingCheckOut');
+      const bookingGuestsValue = document.getElementById('bookingGuestsValue');
+      const bookingGuestsDecreaseBtn = document.getElementById('bookingGuestsDecreaseBtn');
+      const bookingGuestsIncreaseBtn = document.getElementById('bookingGuestsIncreaseBtn');
+      const bookingNightsLabel = document.getElementById('bookingNightsLabel');
+      const bookingTotalValue = document.getElementById('bookingTotalValue');
+      const confirmBookingBtn = document.getElementById('confirmBookingBtn');
+
+      let bookingRoom = null;
+      let bookingHotel = null;
+      let bookingGuests = 1;
+
+      function formatDateInput(date) {
+        return date.toISOString().split('T')[0];
+      }
+
+      function getBookingNights() {
+        const checkIn = new Date(bookingCheckIn.value);
+        const checkOut = new Date(bookingCheckOut.value);
+        const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+        return nights > 0 ? nights : 0;
+      }
+
+      function updateBookingTotal() {
+        if (!bookingRoom) return;
+        const nights = getBookingNights();
+        const unitPrice = parseFloat(String(bookingRoom.price).replace(/[^0-9.]/g, '')) || 0;
+        const total = unitPrice * Math.max(nights, 1);
+
+        bookingNightsLabel.innerText = `${Math.max(nights, 1)} Night${nights === 1 ? '' : 's'} · Total`;
+        bookingTotalValue.innerText = `$${total.toFixed(2)}`;
+      }
+
+      function openBookingModal(room, hotel) {
+        bookingRoom = room;
+        bookingHotel = hotel;
+        bookingGuests = 1;
+
+        bookingRoomImg.style.backgroundImage = `url('${room.img}')`;
+        bookingRoomTitle.innerText = room.title;
+        bookingRoomHotel.innerText = hotel.name;
+        bookingRoomPrice.innerText = room.price;
+        bookingGuestsValue.innerText = bookingGuests;
+
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        bookingCheckIn.value = formatDateInput(today);
+        bookingCheckOut.value = formatDateInput(tomorrow);
+        bookingCheckIn.min = formatDateInput(today);
+        bookingCheckOut.min = formatDateInput(tomorrow);
+
+        updateBookingTotal();
+        bookingModalOverlay.classList.add('active');
+      }
+
+      if (bookingCheckIn) {
+        bookingCheckIn.addEventListener('change', () => {
+          const nextDay = new Date(bookingCheckIn.value);
+          nextDay.setDate(nextDay.getDate() + 1);
+          bookingCheckOut.min = formatDateInput(nextDay);
+          if (new Date(bookingCheckOut.value) <= new Date(bookingCheckIn.value)) {
+            bookingCheckOut.value = formatDateInput(nextDay);
+          }
+          updateBookingTotal();
+        });
+      }
+
+      if (bookingCheckOut) {
+        bookingCheckOut.addEventListener('change', updateBookingTotal);
+      }
+
+      if (bookingGuestsDecreaseBtn) {
+        bookingGuestsDecreaseBtn.addEventListener('click', () => {
+          if (bookingGuests > 1) {
+            bookingGuests--;
+            bookingGuestsValue.innerText = bookingGuests;
+          }
+        });
+      }
+
+      if (bookingGuestsIncreaseBtn) {
+        bookingGuestsIncreaseBtn.addEventListener('click', () => {
+          bookingGuests++;
+          bookingGuestsValue.innerText = bookingGuests;
+        });
+      }
+
+      if (closeBookingBtn) {
+        closeBookingBtn.addEventListener('click', () => {
+          bookingModalOverlay.classList.remove('active');
+        });
+      }
+
+      if (bookingModalOverlay) {
+        bookingModalOverlay.addEventListener('click', (e) => {
+          if (e.target === bookingModalOverlay) bookingModalOverlay.classList.remove('active');
+        });
+      }
+
+      if (confirmBookingBtn) {
+        confirmBookingBtn.addEventListener('click', () => {
+          if (!bookingRoom || !bookingHotel) return;
+
+          if (!bookingCheckIn.value || !bookingCheckOut.value || getBookingNights() < 1) {
+            alert('Please select a valid check-out date after your check-in date.');
+            return;
+          }
+
+          const nights = getBookingNights();
+          const unitPrice = parseFloat(String(bookingRoom.price).replace(/[^0-9.]/g, '')) || 0;
+
+          bookRoom(bookingRoom, bookingHotel, {
+            checkIn: bookingCheckIn.value,
+            checkOut: bookingCheckOut.value,
+            guests: bookingGuests,
+            nights,
+            total: unitPrice * nights
+          });
+
+          bookingModalOverlay.classList.remove('active');
+        });
       }
 
       function setRoomGalleryImage(images, index) {
@@ -3307,7 +3713,6 @@
 
         activeHotelView = 'roomDetail';
         currentHotelId = hotelId;
-        hotelsPageTitle.innerText = room.title;
         detailRoomTitle.innerText = room.title;
         detailRoomPrice.innerText = room.price;
         detailRoomDesc.innerText = `${room.desc} at ${hotel.name}.`;
@@ -3330,7 +3735,7 @@
           roomAmenitiesContainer.appendChild(tag);
         });
 
-        bookRoomDetailBtn.onclick = () => bookRoom(room, hotel);
+        bookRoomDetailBtn.onclick = () => openBookingModal(room, hotel);
 
         hotelsListView.style.display = 'none';
         hotelDetailView.style.display = 'none';
@@ -3369,7 +3774,7 @@
 
           roomCard.querySelector('.book-room-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            bookRoom(room, hotel);
+            openBookingModal(room, hotel);
           });
 
           roomsListContainer.appendChild(roomCard);
@@ -3527,7 +3932,6 @@
         currentQty = 1;
         currentSelections = {};
 
-        shopPageTitle.innerText = product.title;
         detailProductTitle.innerText = product.title;
         detailProductRating.innerText = product.rating;
         detailProductPrice.innerText = product.price;
@@ -3600,6 +4004,17 @@
       document.querySelectorAll('.shop-add-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
+          const card = btn.closest('.shop-product-card');
+          const productId = card.getAttribute('data-product-id');
+          const product = productDatabase[productId];
+          if (!product) return;
+
+          const defaultSelections = {};
+          product.specs.forEach(spec => {
+            defaultSelections[spec.label] = spec.options[0];
+          });
+
+          addToCart(productId, product, defaultSelections, 1);
         });
       });
 
@@ -3624,11 +4039,156 @@
           const product = productDatabase[currentProductId];
           if (!product) return;
 
-          const specSummary = Object.keys(currentSelections)
-            .map(key => `${key}: ${currentSelections[key]}`)
-            .join(', ');
+          addToCart(currentProductId, product, currentSelections, currentQty);
+        });
+      }
 
-          alert(`Added to cart: ${currentQty} × ${product.title}\n${specSummary}\n${product.price} each`);
+      // --- FLOATING CART BAG LOGIC ---
+      const cartFabBtn = document.getElementById('cartFabBtn');
+      const cartFabBadge = document.getElementById('cartFabBadge');
+      const cartModalOverlay = document.getElementById('cartModalOverlay');
+      const closeCartBtn = document.getElementById('closeCartBtn');
+      const cartItemsList = document.getElementById('cartItemsList');
+      const cartTotalValue = document.getElementById('cartTotalValue');
+      const checkoutCartBtn = document.getElementById('checkoutCartBtn');
+
+      let cartItems = [];
+
+      function parsePrice(priceStr) {
+        return parseFloat(String(priceStr).replace(/[^0-9.]/g, '')) || 0;
+      }
+
+      function shakeCartFab() {
+        cartFabBtn.classList.remove('shaking');
+        void cartFabBtn.offsetWidth; // restart the animation even on rapid repeat adds
+        cartFabBtn.classList.add('shaking');
+      }
+
+      function updateCartBadge() {
+        const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+        cartFabBadge.innerText = totalQty;
+        cartFabBadge.style.display = totalQty > 0 ? 'flex' : 'none';
+      }
+
+      function addToCart(productId, product, selections, qty) {
+        const specsSummary = Object.keys(selections).map(key => `${key}: ${selections[key]}`).join(' · ');
+        const existing = cartItems.find(item => item.productId === productId && item.specsSummary === specsSummary);
+
+        if (existing) {
+          existing.qty += qty;
+        } else {
+          cartItems.push({
+            id: `cart-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+            productId,
+            title: product.title,
+            img: product.images[0],
+            unitPrice: parsePrice(product.price),
+            specsSummary,
+            qty
+          });
+        }
+
+        updateCartBadge();
+        shakeCartFab();
+      }
+
+      function renderCartItems() {
+        if (cartItems.length === 0) {
+          cartItemsList.innerHTML = `
+            <div class="cart-empty-state">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Your cart is empty</span>
+            </div>
+          `;
+          cartTotalValue.innerText = '$0.00';
+          return;
+        }
+
+        cartItemsList.innerHTML = '';
+        let total = 0;
+        cartItems.forEach(item => {
+          total += item.unitPrice * item.qty;
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+          row.innerHTML = `
+            <div class="cart-item-img" style="background-image: url('${item.img}');"></div>
+            <div class="cart-item-info">
+              <span class="cart-item-title">${item.title}</span>
+              ${item.specsSummary ? `<span class="cart-item-specs">${item.specsSummary}</span>` : ''}
+              <div class="cart-item-footer">
+                <span class="cart-item-qty">Qty: ${item.qty}</span>
+                <span class="cart-item-price">$${(item.unitPrice * item.qty).toFixed(2)}</span>
+              </div>
+            </div>
+            <button class="cart-remove-btn"><i class="fas fa-trash"></i></button>
+          `;
+          row.querySelector('.cart-remove-btn').addEventListener('click', () => removeCartItem(item.id));
+          cartItemsList.appendChild(row);
+        });
+
+        cartTotalValue.innerText = `$${total.toFixed(2)}`;
+      }
+
+      function removeCartItem(itemId) {
+        cartItems = cartItems.filter(item => item.id !== itemId);
+        renderCartItems();
+        updateCartBadge();
+      }
+
+      if (cartFabBtn) {
+        cartFabBtn.addEventListener('click', () => {
+          renderCartItems();
+          cartModalOverlay.classList.add('active');
+        });
+      }
+
+      if (closeCartBtn) {
+        closeCartBtn.addEventListener('click', () => {
+          cartModalOverlay.classList.remove('active');
+        });
+      }
+
+      if (cartModalOverlay) {
+        cartModalOverlay.addEventListener('click', (e) => {
+          if (e.target === cartModalOverlay) cartModalOverlay.classList.remove('active');
+        });
+      }
+
+      if (checkoutCartBtn) {
+        checkoutCartBtn.addEventListener('click', () => {
+          if (cartItems.length === 0) return;
+
+          const total = cartItems.reduce((sum, item) => sum + item.unitPrice * item.qty, 0);
+          const itemCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
+
+          alert(`Order placed! ${itemCount} item(s) — Total: $${total.toFixed(2)}`);
+
+          const orderNum = Math.floor(1000 + Math.random() * 9000);
+          const orderCard = document.createElement('div');
+          orderCard.className = 'order-card';
+          orderCard.innerHTML = `
+            <div class="order-img" style="background-image: url('${cartItems[0].img}');"></div>
+            <div class="order-body">
+              <div class="order-header">
+                <span class="order-title">Manni Store Order</span>
+                <span class="order-status status-active">Processing</span>
+              </div>
+              <div class="order-details">
+                <span>Order #MN-${orderNum}</span>
+                <span>${itemCount} item(s)</span>
+              </div>
+              <div class="order-footer">
+                <span class="order-price">$${total.toFixed(2)}</span>
+                <button class="action-btn-sm">Track Order</button>
+              </div>
+            </div>
+          `;
+          ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+
+          cartItems = [];
+          renderCartItems();
+          updateCartBadge();
+          cartModalOverlay.classList.remove('active');
         });
       }
 
@@ -4103,7 +4663,6 @@
         if (!pro) return;
 
         activeProfessionalsView = 'profile';
-        professionalsPageTitle.innerText = pro.name;
 
         proProfileAvatar.style.backgroundImage = `url('${pro.img}')`;
         proProfileName.innerText = pro.name;
@@ -4304,7 +4863,6 @@
         currentTierIndex = 0;
         currentTicketQty = 1;
 
-        ticketsPageTitle.innerText = event.title;
         detailEventTitle.innerText = event.title;
         detailEventCategory.innerText = event.category;
         detailEventDesc.innerText = event.desc;
