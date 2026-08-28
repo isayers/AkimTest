@@ -905,77 +905,137 @@
       color: #ffffff;
     }
 
-    /* Product Detail Container within Shop Page */
-    .shop-product-detail-card {
-      background: #e8e8e8;
-      border-radius: 12px;
-      border: 2px solid #1a1a1a;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    /* --- PRODUCT DETAIL PAGE STYLES --- */
+    .product-gallery {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
+      gap: 0.6rem;
     }
 
-    .shop-detail-img {
+    .product-main-img {
       width: 100%;
-      height: 200px;
-      border-radius: 10px;
+      height: 220px;
+      border-radius: 12px;
       background-size: cover;
       background-position: center;
-      border: 1.5px solid #1a1a1a;
-      position: relative;
+      border: 2px solid #1a1a1a;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
     }
 
-    .shop-detail-info {
+    .product-thumbnails {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .product-thumbnails::-webkit-scrollbar {
+      display: none;
+    }
+
+    .thumb-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: 0.2s;
+    }
+
+    .thumb-img.active {
+      border-color: #ff4500;
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    }
+
+    .product-meta-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.8rem;
     }
 
-    .shop-detail-title {
+    .product-meta-title {
+      color: #ffffff;
+      font-size: 1.2rem;
       font-weight: 900;
-      font-size: 1.3rem;
-      color: #121212;
       text-transform: uppercase;
     }
 
-    .shop-detail-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .shop-detail-price {
-      font-weight: 900;
-      color: #d00000;
+    .product-meta-price {
       font-size: 1.3rem;
+      font-weight: 900;
+      color: #ff6b00;
     }
 
-    .shop-detail-desc {
+    .product-meta-desc {
+      color: #a3a3a3;
       font-size: 0.8rem;
-      color: #4a4a4a;
-      font-weight: 600;
       line-height: 1.4;
+      font-weight: 500;
     }
 
-    .buy-product-btn {
+    .spec-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .spec-label {
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .spec-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .spec-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .spec-btn.active {
+      background: #ff4500;
+      border-color: #ff6b00;
+      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+    }
+
+    .buy-now-btn {
       background: linear-gradient(135deg, #ff6b00 0%, #d00000 100%);
       color: #ffffff;
       border: none;
-      padding: 0.8rem;
-      border-radius: 8px;
+      padding: 0.9rem;
+      border-radius: 10px;
       font-weight: 900;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
       transition: 0.2s;
+      width: 100%;
+      margin-top: 0.4rem;
     }
 
-    .buy-product-btn:hover {
+    .buy-now-btn:hover {
       transform: translateY(-1px);
     }
 
@@ -1953,8 +2013,8 @@
             </div>
           </div>
 
-          <!-- SHOP GRID VIEW -->
-          <div id="shopMainView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+          <!-- PRODUCTS LIST CONTAINER -->
+          <div id="shopProductsView" style="display: flex; flex-direction: column; gap: 1.2rem;">
             <!-- Category Chips -->
             <div class="shop-categories-scroll">
               <div class="shop-cat-chip active">All Products</div>
@@ -2022,21 +2082,40 @@
             </div>
           </div>
 
-          <!-- SHOP PRODUCT DETAILS VIEW -->
-          <div id="shopProductDetailView" style="display: none; flex-direction: column; gap: 0.9rem;">
-            <div class="shop-product-detail-card">
-              <div class="shop-detail-img" id="shopDetailImg">
-                <span class="product-badge" id="shopDetailBadge" style="display: none;">Hot</span>
+          <!-- PRODUCT DETAILS VIEW (DYNAMIC) -->
+          <div id="productDetailView" style="display: none; flex-direction: column; gap: 1rem;">
+            <div class="product-gallery">
+              <div class="product-main-img" id="productMainImg"></div>
+              <div class="product-thumbnails" id="productThumbnails">
+                <!-- Dynamic thumbnails -->
               </div>
-              <div class="shop-detail-info">
-                <h3 class="shop-detail-title" id="shopDetailTitle">Product Name</h3>
-                <div class="shop-detail-meta">
-                  <span class="product-rating" id="shopDetailRating" style="font-size: 0.9rem;">★ 4.8</span>
-                  <span class="shop-detail-price" id="shopDetailPrice">$0.00</span>
+            </div>
+
+            <div class="product-meta-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3 class="product-meta-title" id="productDetailTitle">Product Title</h3>
+                <span class="product-meta-price" id="productDetailPrice">$0.00</span>
+              </div>
+              <span class="product-rating" id="productDetailRating">★ 5.0 (0)</span>
+              <p class="product-meta-desc" id="productDetailDesc">Product description here.</p>
+
+              <!-- Color Specs -->
+              <div class="spec-group">
+                <span class="spec-label">Select Color</span>
+                <div class="spec-options" id="colorOptions">
+                  <!-- Dynamic color buttons -->
                 </div>
-                <p class="shop-detail-desc" id="shopDetailDesc">Detailed description here.</p>
-                <button class="buy-product-btn" id="buyProductBtn">Order Now</button>
               </div>
+
+              <!-- Size Specs -->
+              <div class="spec-group">
+                <span class="spec-label">Select Size</span>
+                <div class="spec-options" id="sizeOptions">
+                  <!-- Dynamic size buttons -->
+                </div>
+              </div>
+
+              <button class="buy-now-btn" id="buyProductBtn">Add To Order / Buy Now</button>
             </div>
           </div>
         </div>
@@ -2675,57 +2754,83 @@
         });
       });
 
-      // --- Shop Page Navigation & Sub-Tabs ---
+      // --- Shop Page Navigation & Product Details Logic ---
       const shopCardTrigger = document.getElementById('shopCardTrigger');
       const shopBackBtn = document.getElementById('shopBackBtn');
       const shopChips = document.querySelectorAll('.shop-cat-chip');
-      const shopMainView = document.getElementById('shopMainView');
-      const shopProductDetailView = document.getElementById('shopProductDetailView');
       const shopPageTitle = document.getElementById('shopPageTitle');
+      const shopProductsView = document.getElementById('shopProductsView');
+      const productDetailView = document.getElementById('productDetailView');
 
-      const shopDetailImg = document.getElementById('shopDetailImg');
-      const shopDetailBadge = document.getElementById('shopDetailBadge');
-      const shopDetailTitle = document.getElementById('shopDetailTitle');
-      const shopDetailRating = document.getElementById('shopDetailRating');
-      const shopDetailPrice = document.getElementById('shopDetailPrice');
-      const shopDetailDesc = document.getElementById('shopDetailDesc');
+      const productMainImg = document.getElementById('productMainImg');
+      const productThumbnails = document.getElementById('productThumbnails');
+      const productDetailTitle = document.getElementById('productDetailTitle');
+      const productDetailPrice = document.getElementById('productDetailPrice');
+      const productDetailRating = document.getElementById('productDetailRating');
+      const productDetailDesc = document.getElementById('productDetailDesc');
+      const colorOptions = document.getElementById('colorOptions');
+      const sizeOptions = document.getElementById('sizeOptions');
       const buyProductBtn = document.getElementById('buyProductBtn');
 
       let activeShopView = 'list'; // 'list' or 'detail'
       let currentSelectedProduct = null;
+      let selectedColor = '';
+      let selectedSize = '';
 
-      const shopProductDatabase = {
+      const productDatabase = {
         'prod-1': {
-          name: 'Wireless Headphones',
-          badge: 'Hot',
-          rating: '★ 4.8 (120 reviews)',
+          id: 'prod-1',
+          title: 'Wireless Headphones',
           price: '$89.99',
-          img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
-          desc: 'High-fidelity active noise-canceling wireless headphones with 30-hour battery life, immersive bass, and ultra-comfortable ear cushions.'
+          rating: '★ 4.8 (120 reviews)',
+          desc: 'High-fidelity audio with active noise cancellation, deep bass, and comfortable memory-foam earcups. Up to 40 hours battery life.',
+          images: [
+            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80'
+          ],
+          colors: ['Black', 'Silver', 'Volcanic Orange'],
+          sizes: ['Standard']
         },
         'prod-2': {
-          name: 'Smart Watch Pro',
-          badge: null,
-          rating: '★ 4.7 (85 reviews)',
+          id: 'prod-2',
+          title: 'Smart Watch Pro',
           price: '$149.00',
-          img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
-          desc: 'Advanced smartwatch featuring heart rate tracking, GPS location logging, waterproof design up to 50m, and seamless mobile notifications.'
+          rating: '★ 4.7 (85 reviews)',
+          desc: 'Track heart rate, GPS routes, sleep quality, and daily activities. AMOLED display with customized titanium watch casing.',
+          images: [
+            'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80'
+          ],
+          colors: ['Matte Black', 'Space Gray'],
+          sizes: ['40mm', '44mm']
         },
         'prod-3': {
-          name: 'Urban Sneakers',
-          badge: 'New',
-          rating: '★ 4.9 (210 reviews)',
+          id: 'prod-3',
+          title: 'Urban Sneakers',
           price: '$110.00',
-          img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
-          desc: 'Lightweight, durable street-style sneakers designed for all-day comfort, breathability, and superior traction on any terrain.'
+          rating: '★ 4.9 (210 reviews)',
+          desc: 'Engineered for extreme comfort and urban mobility. Features lightweight breathable mesh and durable rubber outsoles.',
+          images: [
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80'
+          ],
+          colors: ['Red/White', 'All Black', 'Grey'],
+          sizes: ['EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44']
         },
         'prod-4': {
-          name: 'Leather Bag',
-          badge: null,
-          rating: '★ 4.6 (64 reviews)',
+          id: 'prod-4',
+          title: 'Leather Bag',
           price: '$65.50',
-          img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80',
-          desc: 'Handcrafted premium leather messenger bag with multi-compartment storage, padded laptop sleeve, and adjustable shoulder straps.'
+          rating: '★ 4.6 (64 reviews)',
+          desc: 'Handcrafted genuine leather shoulder bag. Includes laptop sleeve, waterproof lining, and heavy-duty steel zippers.',
+          images: [
+            'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80',
+            'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80'
+          ],
+          colors: ['Tan Brown', 'Dark Charcoal'],
+          sizes: ['Medium', 'Large']
         }
       };
 
@@ -2749,81 +2854,116 @@
       function showShopList() {
         activeShopView = 'list';
         shopPageTitle.innerText = 'Manni Store';
-        shopMainView.style.display = 'flex';
-        shopProductDetailView.style.display = 'none';
+        shopProductsView.style.display = 'flex';
+        productDetailView.style.display = 'none';
       }
 
       function openProductDetail(productId) {
-        const prod = shopProductDatabase[productId];
+        const prod = productDatabase[productId];
         if (!prod) return;
 
         currentSelectedProduct = prod;
         activeShopView = 'detail';
         shopPageTitle.innerText = 'Product Details';
 
-        shopDetailImg.style.backgroundImage = `url('${prod.img}')`;
-        if (prod.badge) {
-          shopDetailBadge.innerText = prod.badge;
-          shopDetailBadge.style.display = 'inline-block';
-        } else {
-          shopDetailBadge.style.display = 'none';
-        }
-        shopDetailTitle.innerText = prod.name;
-        shopDetailRating.innerText = prod.rating;
-        shopDetailPrice.innerText = prod.price;
-        shopDetailDesc.innerText = prod.desc;
+        productDetailTitle.innerText = prod.title;
+        productDetailPrice.innerText = prod.price;
+        productDetailRating.innerText = prod.rating;
+        productDetailDesc.innerText = prod.desc;
 
-        shopMainView.style.display = 'none';
-        shopProductDetailView.style.display = 'flex';
+        // Render main image & thumbnails
+        productMainImg.style.backgroundImage = `url('${prod.images[0]}')`;
+        productThumbnails.innerHTML = '';
+        prod.images.forEach((imgUrl, index) => {
+          const thumb = document.createElement('div');
+          thumb.className = `thumb-img ${index === 0 ? 'active' : ''}`;
+          thumb.style.backgroundImage = `url('${imgUrl}')`;
+          thumb.addEventListener('click', () => {
+            productMainImg.style.backgroundImage = `url('${imgUrl}')`;
+            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          });
+          productThumbnails.appendChild(thumb);
+        });
+
+        // Color specifications
+        colorOptions.innerHTML = '';
+        selectedColor = prod.colors[0] || '';
+        prod.colors.forEach((col, index) => {
+          const colBtn = document.createElement('button');
+          colBtn.className = `spec-btn ${index === 0 ? 'active' : ''}`;
+          colBtn.innerText = col;
+          colBtn.addEventListener('click', () => {
+            colorOptions.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
+            colBtn.classList.add('active');
+            selectedColor = col;
+          });
+          colorOptions.appendChild(colBtn);
+        });
+
+        // Size specifications
+        sizeOptions.innerHTML = '';
+        selectedSize = prod.sizes[0] || '';
+        prod.sizes.forEach((sz, index) => {
+          const szBtn = document.createElement('button');
+          szBtn.className = `spec-btn ${index === 0 ? 'active' : ''}`;
+          szBtn.innerText = sz;
+          szBtn.addEventListener('click', () => {
+            sizeOptions.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
+            szBtn.classList.add('active');
+            selectedSize = sz;
+          });
+          sizeOptions.appendChild(szBtn);
+        });
+
+        shopProductsView.style.display = 'none';
+        productDetailView.style.display = 'flex';
       }
 
       document.querySelectorAll('.shop-product-card').forEach(card => {
         card.addEventListener('click', function(e) {
-          // Prevent triggering item selection twice if clicking on "+ add" directly
-          const isAddBtn = e.target.closest('.shop-add-btn');
-          const productId = this.getAttribute('data-product-id');
-          
-          if (isAddBtn) {
+          // If user clicked the plus button, handle quick add without taking over full detail view
+          if (e.target.closest('.shop-add-btn')) {
             e.stopPropagation();
-            const prod = shopProductDatabase[productId];
-            if (prod) addProductOrder(prod);
-          } else {
-            openProductDetail(productId);
+            const prodId = this.getAttribute('data-product-id');
+            const prod = productDatabase[prodId];
+            if (prod) {
+              alert(`Added ${prod.title} to your order!`);
+            }
+            return;
           }
+          const productId = this.getAttribute('data-product-id');
+          openProductDetail(productId);
         });
       });
 
       if (buyProductBtn) {
         buyProductBtn.addEventListener('click', () => {
-          if (currentSelectedProduct) {
-            addProductOrder(currentSelectedProduct);
-          }
-        });
-      }
+          if (!currentSelectedProduct) return;
+          alert(`Ordered "${currentSelectedProduct.title}" [Color: ${selectedColor}, Size: ${selectedSize}] successfully!`);
 
-      function addProductOrder(prod) {
-        alert(`"${prod.name}" has been added to your order!`);
-        const orderNum = Math.floor(1000 + Math.random() * 9000);
-        const orderCard = document.createElement('div');
-        orderCard.className = 'order-card';
-        orderCard.innerHTML = `
-          <div class="order-img" style="background-image: url('${prod.img}');"></div>
-          <div class="order-body">
-            <div class="order-header">
-              <span class="order-title">${prod.name}</span>
-              <span class="order-status status-active">Processing</span>
+          const orderNum = Math.floor(1000 + Math.random() * 9000);
+          const orderCard = document.createElement('div');
+          orderCard.className = 'order-card';
+          orderCard.innerHTML = `
+            <div class="order-img" style="background-image: url('${currentSelectedProduct.images[0]}');"></div>
+            <div class="order-body">
+              <div class="order-header">
+                <span class="order-title">${currentSelectedProduct.title}</span>
+                <span class="order-status status-active">Processing</span>
+              </div>
+              <div class="order-details">
+                <span>Order #MN-${orderNum}</span>
+                <span>${selectedColor} · ${selectedSize}</span>
+              </div>
+              <div class="order-footer">
+                <span class="order-price">${currentSelectedProduct.price}</span>
+                <button class="action-btn-sm">Track Package</button>
+              </div>
             </div>
-            <div class="order-details">
-              <span>Order #MN-${orderNum}</span>
-              <span>Express Delivery</span>
-            </div>
-            <div class="order-footer">
-              <span class="order-price">${prod.price}</span>
-              <button class="action-btn-sm">Track Package</button>
-            </div>
-          </div>
-        `;
-        ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+          `;
+          ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
+        });
       }
 
       shopChips.forEach(chip => {
