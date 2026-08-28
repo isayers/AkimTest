@@ -820,6 +820,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .shop-product-card:hover {
+      transform: translateY(-2px);
+      border-color: #ff4500;
     }
 
     .shop-product-img {
@@ -896,6 +903,80 @@
     .shop-add-btn:hover {
       background: #ff4500;
       color: #ffffff;
+    }
+
+    /* Product Detail Container within Shop Page */
+    .shop-product-detail-card {
+      background: #e8e8e8;
+      border-radius: 12px;
+      border: 2px solid #1a1a1a;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .shop-detail-img {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      border: 1.5px solid #1a1a1a;
+      position: relative;
+    }
+
+    .shop-detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .shop-detail-title {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #121212;
+      text-transform: uppercase;
+    }
+
+    .shop-detail-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .shop-detail-price {
+      font-weight: 900;
+      color: #d00000;
+      font-size: 1.3rem;
+    }
+
+    .shop-detail-desc {
+      font-size: 0.8rem;
+      color: #4a4a4a;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .buy-product-btn {
+      background: linear-gradient(135deg, #ff6b00 0%, #d00000 100%);
+      color: #ffffff;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+      transition: 0.2s;
+    }
+
+    .buy-product-btn:hover {
+      transform: translateY(-1px);
     }
 
     /* --- RIDE PAGE STYLES --- */
@@ -1857,7 +1938,7 @@
           <div class="section-header">
             <div style="display: flex; align-items: center; gap: 0.8rem;">
               <button class="back-btn" id="shopBackBtn"><i class="fas fa-arrow-left"></i></button>
-              <h2>Manni Store</h2>
+              <h2 id="shopPageTitle">Manni Store</h2>
             </div>
             <div class="header-actions">
               <div class="search-btn headerSearchBtn">
@@ -1872,68 +1953,89 @@
             </div>
           </div>
 
-          <!-- Category Chips -->
-          <div class="shop-categories-scroll">
-            <div class="shop-cat-chip active">All Products</div>
-            <div class="shop-cat-chip">Gadgets</div>
-            <div class="shop-cat-chip">Fashion</div>
-            <div class="shop-cat-chip">Home & Living</div>
-            <div class="shop-cat-chip">Accessories</div>
+          <!-- SHOP GRID VIEW -->
+          <div id="shopMainView" style="display: flex; flex-direction: column; gap: 1.2rem;">
+            <!-- Category Chips -->
+            <div class="shop-categories-scroll">
+              <div class="shop-cat-chip active">All Products</div>
+              <div class="shop-cat-chip">Gadgets</div>
+              <div class="shop-cat-chip">Fashion</div>
+              <div class="shop-cat-chip">Home & Living</div>
+              <div class="shop-cat-chip">Accessories</div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="shop-products-grid">
+              <div class="shop-product-card" data-product-id="prod-1">
+                <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80');">
+                  <span class="product-badge">Hot</span>
+                </div>
+                <div class="shop-product-info">
+                  <span class="product-title">Wireless Headphones</span>
+                  <span class="product-rating">★ 4.8 (120)</span>
+                  <div class="product-price-row">
+                    <span class="product-price">$89.99</span>
+                    <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="shop-product-card" data-product-id="prod-2">
+                <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80');">
+                </div>
+                <div class="shop-product-info">
+                  <span class="product-title">Smart Watch Pro</span>
+                  <span class="product-rating">★ 4.7 (85)</span>
+                  <div class="product-price-row">
+                    <span class="product-price">$149.00</span>
+                    <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="shop-product-card" data-product-id="prod-3">
+                <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80');">
+                  <span class="product-badge">New</span>
+                </div>
+                <div class="shop-product-info">
+                  <span class="product-title">Urban Sneakers</span>
+                  <span class="product-rating">★ 4.9 (210)</span>
+                  <div class="product-price-row">
+                    <span class="product-price">$110.00</span>
+                    <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="shop-product-card" data-product-id="prod-4">
+                <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=300&q=80');">
+                </div>
+                <div class="shop-product-info">
+                  <span class="product-title">Leather Bag</span>
+                  <span class="product-rating">★ 4.6 (64)</span>
+                  <div class="product-price-row">
+                    <span class="product-price">$65.50</span>
+                    <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- Product Grid -->
-          <div class="shop-products-grid">
-            <div class="shop-product-card">
-              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80');">
-                <span class="product-badge">Hot</span>
+          <!-- SHOP PRODUCT DETAILS VIEW -->
+          <div id="shopProductDetailView" style="display: none; flex-direction: column; gap: 0.9rem;">
+            <div class="shop-product-detail-card">
+              <div class="shop-detail-img" id="shopDetailImg">
+                <span class="product-badge" id="shopDetailBadge" style="display: none;">Hot</span>
               </div>
-              <div class="shop-product-info">
-                <span class="product-title">Wireless Headphones</span>
-                <span class="product-rating">★ 4.8 (120)</span>
-                <div class="product-price-row">
-                  <span class="product-price">$89.99</span>
-                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
+              <div class="shop-detail-info">
+                <h3 class="shop-detail-title" id="shopDetailTitle">Product Name</h3>
+                <div class="shop-detail-meta">
+                  <span class="product-rating" id="shopDetailRating" style="font-size: 0.9rem;">★ 4.8</span>
+                  <span class="shop-detail-price" id="shopDetailPrice">$0.00</span>
                 </div>
-              </div>
-            </div>
-
-            <div class="shop-product-card">
-              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80');">
-              </div>
-              <div class="shop-product-info">
-                <span class="product-title">Smart Watch Pro</span>
-                <span class="product-rating">★ 4.7 (85)</span>
-                <div class="product-price-row">
-                  <span class="product-price">$149.00</span>
-                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
-
-            <div class="shop-product-card">
-              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80');">
-                <span class="product-badge">New</span>
-              </div>
-              <div class="shop-product-info">
-                <span class="product-title">Urban Sneakers</span>
-                <span class="product-rating">★ 4.9 (210)</span>
-                <div class="product-price-row">
-                  <span class="product-price">$110.00</span>
-                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
-
-            <div class="shop-product-card">
-              <div class="shop-product-img" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=300&q=80');">
-              </div>
-              <div class="shop-product-info">
-                <span class="product-title">Leather Bag</span>
-                <span class="product-rating">★ 4.6 (64)</span>
-                <div class="product-price-row">
-                  <span class="product-price">$65.50</span>
-                  <button class="shop-add-btn"><i class="fas fa-plus"></i></button>
-                </div>
+                <p class="shop-detail-desc" id="shopDetailDesc">Detailed description here.</p>
+                <button class="buy-product-btn" id="buyProductBtn">Order Now</button>
               </div>
             </div>
           </div>
@@ -2577,13 +2679,151 @@
       const shopCardTrigger = document.getElementById('shopCardTrigger');
       const shopBackBtn = document.getElementById('shopBackBtn');
       const shopChips = document.querySelectorAll('.shop-cat-chip');
+      const shopMainView = document.getElementById('shopMainView');
+      const shopProductDetailView = document.getElementById('shopProductDetailView');
+      const shopPageTitle = document.getElementById('shopPageTitle');
+
+      const shopDetailImg = document.getElementById('shopDetailImg');
+      const shopDetailBadge = document.getElementById('shopDetailBadge');
+      const shopDetailTitle = document.getElementById('shopDetailTitle');
+      const shopDetailRating = document.getElementById('shopDetailRating');
+      const shopDetailPrice = document.getElementById('shopDetailPrice');
+      const shopDetailDesc = document.getElementById('shopDetailDesc');
+      const buyProductBtn = document.getElementById('buyProductBtn');
+
+      let activeShopView = 'list'; // 'list' or 'detail'
+      let currentSelectedProduct = null;
+
+      const shopProductDatabase = {
+        'prod-1': {
+          name: 'Wireless Headphones',
+          badge: 'Hot',
+          rating: '★ 4.8 (120 reviews)',
+          price: '$89.99',
+          img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+          desc: 'High-fidelity active noise-canceling wireless headphones with 30-hour battery life, immersive bass, and ultra-comfortable ear cushions.'
+        },
+        'prod-2': {
+          name: 'Smart Watch Pro',
+          badge: null,
+          rating: '★ 4.7 (85 reviews)',
+          price: '$149.00',
+          img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
+          desc: 'Advanced smartwatch featuring heart rate tracking, GPS location logging, waterproof design up to 50m, and seamless mobile notifications.'
+        },
+        'prod-3': {
+          name: 'Urban Sneakers',
+          badge: 'New',
+          rating: '★ 4.9 (210 reviews)',
+          price: '$110.00',
+          img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
+          desc: 'Lightweight, durable street-style sneakers designed for all-day comfort, breathability, and superior traction on any terrain.'
+        },
+        'prod-4': {
+          name: 'Leather Bag',
+          badge: null,
+          rating: '★ 4.6 (64 reviews)',
+          price: '$65.50',
+          img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80',
+          desc: 'Handcrafted premium leather messenger bag with multi-compartment storage, padded laptop sleeve, and adjustable shoulder straps.'
+        }
+      };
 
       if (shopCardTrigger) {
-        shopCardTrigger.addEventListener('click', () => switchMainPage('shopPage'));
+        shopCardTrigger.addEventListener('click', () => {
+          showShopList();
+          switchMainPage('shopPage');
+        });
       }
 
       if (shopBackBtn) {
-        shopBackBtn.addEventListener('click', () => switchMainPage('homePage'));
+        shopBackBtn.addEventListener('click', () => {
+          if (activeShopView === 'detail') {
+            showShopList();
+          } else {
+            switchMainPage('homePage');
+          }
+        });
+      }
+
+      function showShopList() {
+        activeShopView = 'list';
+        shopPageTitle.innerText = 'Manni Store';
+        shopMainView.style.display = 'flex';
+        shopProductDetailView.style.display = 'none';
+      }
+
+      function openProductDetail(productId) {
+        const prod = shopProductDatabase[productId];
+        if (!prod) return;
+
+        currentSelectedProduct = prod;
+        activeShopView = 'detail';
+        shopPageTitle.innerText = 'Product Details';
+
+        shopDetailImg.style.backgroundImage = `url('${prod.img}')`;
+        if (prod.badge) {
+          shopDetailBadge.innerText = prod.badge;
+          shopDetailBadge.style.display = 'inline-block';
+        } else {
+          shopDetailBadge.style.display = 'none';
+        }
+        shopDetailTitle.innerText = prod.name;
+        shopDetailRating.innerText = prod.rating;
+        shopDetailPrice.innerText = prod.price;
+        shopDetailDesc.innerText = prod.desc;
+
+        shopMainView.style.display = 'none';
+        shopProductDetailView.style.display = 'flex';
+      }
+
+      document.querySelectorAll('.shop-product-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          // Prevent triggering item selection twice if clicking on "+ add" directly
+          const isAddBtn = e.target.closest('.shop-add-btn');
+          const productId = this.getAttribute('data-product-id');
+          
+          if (isAddBtn) {
+            e.stopPropagation();
+            const prod = shopProductDatabase[productId];
+            if (prod) addProductOrder(prod);
+          } else {
+            openProductDetail(productId);
+          }
+        });
+      });
+
+      if (buyProductBtn) {
+        buyProductBtn.addEventListener('click', () => {
+          if (currentSelectedProduct) {
+            addProductOrder(currentSelectedProduct);
+          }
+        });
+      }
+
+      function addProductOrder(prod) {
+        alert(`"${prod.name}" has been added to your order!`);
+        const orderNum = Math.floor(1000 + Math.random() * 9000);
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
+        orderCard.innerHTML = `
+          <div class="order-img" style="background-image: url('${prod.img}');"></div>
+          <div class="order-body">
+            <div class="order-header">
+              <span class="order-title">${prod.name}</span>
+              <span class="order-status status-active">Processing</span>
+            </div>
+            <div class="order-details">
+              <span>Order #MN-${orderNum}</span>
+              <span>Express Delivery</span>
+            </div>
+            <div class="order-footer">
+              <span class="order-price">${prod.price}</span>
+              <button class="action-btn-sm">Track Package</button>
+            </div>
+          </div>
+        `;
+        ordersListContainer.insertBefore(orderCard, ordersListContainer.firstChild);
       }
 
       shopChips.forEach(chip => {
